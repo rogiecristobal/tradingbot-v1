@@ -1,0 +1,9 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "command": {
+    "createsummary": {
+      "description": "Summarize the current session: what was done, files changed, decisions made, and the current state. Writes to session_log/LATEST.md.",
+      "template": "Summarize this entire session. Review ALL file changes (reads, writes, edits) and any bash commands executed or errors encountered. Write a comprehensive summary to session_log/LATEST.md (overwrite). Include: date, what was built/changed, every file created or modified, key decisions made, bugs fixed, errors encountered, known issues, and what to continue with next. Use markdown with sections."
+    }
+  }
+}
