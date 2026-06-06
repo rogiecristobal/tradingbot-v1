@@ -73,7 +73,7 @@ widgets/
 - **Charts panel** has 3 tabs (Equity & Drawdown, Monthly Returns, Trade Analysis). Price + Signals tab was removed.
 - **PyQtGraph symbols**: use `"t"` for triangle-up, `"t1"` for triangle-down, `"x"` for cross.
 - **Crosshair** connects deferred via QTimer; scene must be available for `sigMouseMoved`.
-- **Old Streamlit files** (`app.py`, `pages/`, `components/`) still exist on disk but are unused.
+- **`.gitignore`**: protects `config.json`, `.env`, `__pycache__/`, `cache/`, `live/logs/` from accidental git commits.
 
 ## Live bot (ATR Trend-Breakout on Bybit perp)
 
