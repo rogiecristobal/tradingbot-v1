@@ -98,12 +98,3 @@ def fetch_ohlcv(
     end_ts = pd.Timestamp(end_date, tz=pytz.UTC) + timedelta(days=1)
     mask = (df.index >= start_ts) & (df.index <= end_ts)
     return df[mask].copy()
-
-
-def resample_to_4h(df_5m: pd.DataFrame) -> pd.DataFrame:
-    if df_5m.empty:
-        return pd.DataFrame()
-    ohlc_dict = {"open": "first", "high": "max", "low": "min", "close": "last", "volume": "sum"}
-    df_4h = df_5m.resample("4h", offset="0min").agg(ohlc_dict)
-    df_4h.dropna(inplace=True)
-    return df_4h

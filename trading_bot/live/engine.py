@@ -1,27 +1,44 @@
 import logging
 import time
 from datetime import date, datetime, timedelta
-from typing import Optional
+from typing import Optional, Dict
 
 import pandas as pd
 import pytz
 
 from data.ohlcv import fetch_ohlcv
 from exchange.connector import build_exchange
-from live.config import load_config, save_config
+from live.config import load_config, save_config, allocate_capital
 from live.executor import build_executor
 from live.position_manager import Position, check_exit, update_trail
 
 logger = logging.getLogger(__name__)
 
 
-def _compute_quantity(equity: float, entry: float, sl: float,
-                      risk_percent: float) -> float:
+def _compute_quantity(alloc_capital: float, entry: float, sl: float,
+                      risk_percent: float, exchange=None, symbol=None) -> float:
     risk_per_unit = abs(entry - sl)
     if risk_per_unit <= 0:
         return 0
-    risk_amount = equity * (risk_percent / 100.0)
-    return risk_amount / risk_per_unit
+    risk_amount = alloc_capital * (risk_percent / 100.0)
+    qty = risk_amount / risk_per_unit
+
+    if exchange and symbol:
+        try:
+            market = exchange.market(symbol)
+            limits = market.get("limits", {})
+            min_qty = float(limits.get("amount", {}).get("min", 0) or 0)
+            min_cost = float(limits.get("cost", {}).get("min", 0) or 0)
+            notional = qty * entry
+            if (min_qty and qty < min_qty) or (min_cost and notional < min_cost):
+                logger.info(
+                    f"{symbol}: qty {qty:.6f} (${notional:.2f}) below min "
+                    f"(qty={min_qty}, cost=${min_cost}), skipping"
+                )
+                return 0
+        except Exception:
+            pass
+    return qty
 
 
 class LiveEngine:
@@ -35,20 +52,32 @@ class LiveEngine:
                 config.get("api_key", ""),
                 config.get("api_secret", ""),
             )
-        pos_data = config.get("position")
-        self.position: Optional[Position] = (
-            Position.from_dict(pos_data) if pos_data else None
-        )
-        self.last_candle_time: Optional[pd.Timestamp] = None
-        self.peak_equity = config.get("capital", 10000.0)
+
+        self.symbols: list = config.get("symbols", [])
+        self.allocations: dict = allocate_capital(self.symbols, config.get("capital", 100.0))
+
+        self.positions: Dict[str, Optional[Position]] = {}
+        self.last_candle_times: Dict[str, Optional[pd.Timestamp]] = {}
+        positions_raw = config.get("positions", {})
+
+        for sym in self.symbols:
+            raw = positions_raw.get(sym) if isinstance(positions_raw, dict) else None
+            self.positions[sym] = Position.from_dict(raw) if raw else None
+            self.last_candle_times[sym] = None
+
+        restored = sum(1 for p in self.positions.values() if p is not None)
+        self.peak_equity = config.get("capital", 100.0)
         self.daily_start_equity = self.peak_equity
         self.last_check_date = date.today()
+        self._tick_count = 0
+        logger.info(f"Restored {restored} open position(s) across {len(self.symbols)} symbols")
 
     def start(self):
+        mode = self.config.get("mode", "paper")
         logger.info(
             f"Bot starting — {self.config['exchange_id']} "
-            f"{self.config['symbol']} "
-            f"mode={self.config['mode'].upper()}"
+            f"{len(self.symbols)} symbols "
+            f"mode={mode.upper()}"
         )
         while True:
             try:
@@ -57,30 +86,72 @@ class LiveEngine:
                 logger.exception(f"Tick error: {e}")
             time.sleep(60)
 
-    def _current_price(self) -> Optional[float]:
+    def _current_price(self, symbol: str) -> Optional[float]:
         if self.exchange:
             try:
-                ticker = self.exchange.fetch_ticker(self.config["symbol"])
+                ticker = self.exchange.fetch_ticker(symbol)
                 return ticker.get("last")
             except Exception:
                 return None
         return None
 
+    def _reconcile_position(self, symbol: str):
+        pos = self.positions.get(symbol)
+        if pos is None or self.exchange is None:
+            return
+        try:
+            positions = self.exchange.fetch_positions([symbol])
+            for p in positions:
+                if p["symbol"] == symbol:
+                    size = abs(float(p.get("size", p.get("contracts", 0)) or 0))
+                    if size == 0:
+                        logger.info(
+                            f"[LIVE] {symbol} position closed on exchange — "
+                            "clearing engine position"
+                        )
+                        self.positions[symbol] = None
+                    return
+        except Exception as e:
+            logger.warning(f"[LIVE] {symbol} reconciliation failed: {e}")
+
     def _tick(self):
-        symbol = self.config["symbol"]
-        params = self.config["params"]
         mode = self.config.get("mode", "paper")
 
-        # ── 1. Current price ──
+        # ── 1. Prices + reconcile (live mode) ──
+        prices: Dict[str, Optional[float]] = {}
         if mode == "live" and self.exchange:
-            current_price = self._current_price()
-            if current_price is None:
-                logger.warning("Could not fetch current price, skipping tick")
-                return
-        else:
-            current_price = None
+            for sym in self.symbols:
+                p = self._current_price(sym)
+                prices[sym] = p
+                if p is None:
+                    logger.warning(f"{sym}: could not fetch price")
+                self._reconcile_position(sym)
 
-        # ── 2. Fetch 4H OHLCV (no cache) ──
+        # ── 2. Heartbeat every 2 minutes ──
+        self._tick_count += 1
+        if self._tick_count % 2 == 0:
+            open_count = sum(1 for p in self.positions.values() if p is not None)
+            logger.info(
+                f"Heartbeat — {len(self.symbols)} symbols, "
+                f"{open_count} open, "
+                f"equity=${self.executor.equity:.2f}"
+            )
+
+        # ── 3. Process each symbol ──
+        for sym in self.symbols:
+            self._process_symbol(sym, prices.get(sym) if mode == "live" else None)
+
+        # ── 4. Safety checks ──
+        self._check_safety()
+
+        # ── 5. Save state ──
+        self._save_state()
+
+    def _process_symbol(self, symbol: str, current_price: Optional[float]):
+        params = self.config.get("params", {})
+        mode = self.config.get("mode", "paper")
+
+        # ── Fetch OHLCV ──
         df = fetch_ohlcv(
             exchange_id=self.config["exchange_id"],
             symbol=symbol,
@@ -90,14 +161,15 @@ class LiveEngine:
             use_cache=False,
         )
         if df.empty or len(df) < 2:
-            logger.debug("Not enough 4H data yet")
             return
 
         latest_bar = df.iloc[-1]
         latest_time = df.index[-1]
+        pos = self.positions.get(symbol)
+        candle_time = self.last_candle_times.get(symbol)
 
-        # ── 3. If in position, check SL/TP/trail ──
-        if self.position is not None:
+        # ── SL/TP/trail check on open position ──
+        if pos is not None:
             if mode == "paper":
                 high = latest_bar["high"]
                 low = latest_bar["low"]
@@ -107,57 +179,50 @@ class LiveEngine:
                 low = current_price if current_price else latest_bar["low"]
                 close = current_price if current_price else latest_bar["close"]
 
-            reason, exit_price = check_exit(self.position, high, low, close)
+            reason, exit_price = check_exit(pos, high, low, close)
             if reason is None:
-                new_sl = update_trail(
-                    self.position, high, low,
+                update_trail(
+                    pos, high, low,
                     params.get("trail_activation", 0),
                     params.get("trail_offset", 0),
                 )
 
             if reason:
-                qty = self.position.quantity
-                self.executor.place_market_close(
-                    self.position.side, qty, exit_price
-                )
-                pnl = (exit_price - self.position.entry_price) * qty * self.position.side
+                qty = pos.quantity
+                self.executor.place_market_close(symbol, pos.side, qty, exit_price)
+                pnl = (exit_price - pos.entry_price) * qty * pos.side
                 fee = exit_price * qty * 0.001
                 self.executor.equity += pnl - fee
                 logger.info(
-                    f"CLOSED {reason.upper()} "
-                    f"PNL=${pnl:.2f} "
-                    f"Equity=${self.executor.equity:.2f}"
+                    f"{symbol} CLOSED {reason.upper()} "
+                    f"PNL=${pnl:.2f} Equity=${self.executor.equity:.2f}"
                 )
-                self.position = None
-                self._save_state()
+                self.positions[symbol] = None
 
-        # ── 4. Check new 4H candle ──
-        if self.last_candle_time is None:
-            self.last_candle_time = latest_time
-            logger.info(f"First candle seen: {latest_time} — will not trade this one")
-            self._save_state()
+        # ── Candle tracking ──
+        if candle_time is None:
+            self.last_candle_times[symbol] = latest_time
+            logger.info(f"{symbol}: first candle seen {latest_time} — will not trade this one")
             return
 
-        if latest_time <= self.last_candle_time:
-            self._save_state()
+        if latest_time <= candle_time:
             return
 
-        self.last_candle_time = latest_time
-        logger.info(f"New 4H candle: {latest_time}")
+        self.last_candle_times[symbol] = latest_time
+        logger.info(f"{symbol}: new 4H candle {latest_time}")
 
-        # ── 5. Run strategy on the last completed candle ──
+        # ── Run strategy ──
         from core.strategy_atr_breakout import run_atr_breakout
-        signals_df = run_atr_breakout(df, **params)
+        sym_params = dict(params)
+        sym_params.update(self.config.get("symbol_params", {}).get(symbol, {}))
+        signals_df = run_atr_breakout(df, **sym_params)
         if signals_df.empty:
-            logger.debug("Strategy returned empty")
-            self._save_state()
             return
 
         last_signal = signals_df.iloc[-1]
         sig = last_signal.get("signal", 0)
 
-        if sig != 0 and self.position is None:
-            # Entry at the current available price
+        if sig != 0 and self.positions.get(symbol) is None:
             prev_entry = last_signal["entry_price"]
             prev_sl = last_signal["sl_price"]
             prev_tp = last_signal["tp_price"]
@@ -171,23 +236,23 @@ class LiveEngine:
             sl_price = prev_sl + diff
             tp_price = prev_tp + diff
 
-            equity = self.executor.equity
-            qty = _compute_quantity(equity, entry_price, sl_price,
-                                    params.get("risk_percent", 1.0))
+            alloc = self.allocations.get(symbol, self.config.get("capital", 100.0) / max(len(self.symbols), 1))
+            risk_pct = sym_params.get("risk_percent", 1.0)
+            qty = _compute_quantity(
+                alloc, entry_price, sl_price, risk_pct,
+                self.exchange if mode == "live" else None,
+                symbol if mode == "live" else None,
+            )
             if qty <= 0:
-                logger.warning("Computed zero quantity, skipping entry")
-                self._save_state()
                 return
 
             atr_val = last_signal.get("atr", 0)
             if pd.isna(atr_val):
                 atr_val = 0
 
-            self.executor.place_market_entry(
-                sig, qty, entry_price, sl_price, tp_price
-            )
+            self.executor.place_market_entry(symbol, sig, qty, entry_price, sl_price, tp_price)
 
-            self.position = Position(
+            self.positions[symbol] = Position(
                 side=sig,
                 entry_time=str(latest_time),
                 entry_price=entry_price,
@@ -199,45 +264,39 @@ class LiveEngine:
                 lowest_price=entry_price,
             )
             logger.info(
-                f"ENTERED {'LONG' if sig == 1 else 'SHORT'} "
+                f"{symbol} ENTERED {'LONG' if sig == 1 else 'SHORT'} "
                 f"qty={qty:.6f} @ {entry_price:.2f} "
                 f"SL={sl_price:.2f} TP={tp_price:.2f}"
             )
-
-        # ── 6. Safety checks ──
-        self._check_safety()
-
-        # ── 7. Save state ──
-        self._save_state()
 
     def _check_safety(self):
         equity = self.executor.equity
         if equity > self.peak_equity:
             self.peak_equity = equity
-
         today = date.today()
         if today != self.last_check_date:
             self.daily_start_equity = equity
             self.last_check_date = today
-
         max_daily = self.config.get("max_daily_loss_pct", 10.0)
         daily_loss = (self.daily_start_equity - equity) / self.daily_start_equity * 100
         if daily_loss >= max_daily:
-            logger.warning(
-                f"Max daily loss hit ({daily_loss:.1f}% >= {max_daily}%)"
-            )
-
+            logger.warning(f"Max daily loss hit ({daily_loss:.1f}% >= {max_daily}%)")
         max_dd = self.config.get("max_drawdown_pct", 20.0)
         dd = (self.peak_equity - equity) / self.peak_equity * 100
         if dd >= max_dd:
-            logger.warning(
-                f"Max drawdown hit ({dd:.1f}% >= {max_dd}%)"
-            )
+            logger.warning(f"Max drawdown hit ({dd:.1f}% >= {max_dd}%)")
 
     def _save_state(self):
         self.config["capital"] = round(self.executor.equity, 2)
-        if self.position is not None:
-            self.config["position"] = self.position.to_dict()
-        else:
-            self.config["position"] = None
+        positions_raw = {}
+        for sym in self.symbols:
+            pos = self.positions.get(sym)
+            positions_raw[sym] = pos.to_dict() if pos else None
+        self.config["positions"] = positions_raw
+
+        candle_times = {}
+        for sym in self.symbols:
+            t = self.last_candle_times.get(sym)
+            candle_times[sym] = str(t) if t else None
+        self.config["last_candle_times"] = candle_times
         save_config(self.config)

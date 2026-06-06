@@ -11,16 +11,17 @@ class PaperExecutor:
         self.config = config
         self.equity = config.get("capital", 10000.0)
 
-    def place_market_entry(self, side: int, qty: float,
+    def place_market_entry(self, symbol: str, side: int, qty: float,
                            entry_price: float, sl: float, tp: float) -> dict:
         fee = entry_price * qty * 0.001
         self.equity -= fee
         logger.info(
-            f"[PAPER] ENTER {'LONG' if side == 1 else 'SHORT'} "
+            f"[PAPER] {symbol} ENTER {'LONG' if side == 1 else 'SHORT'} "
             f"qty={qty:.6f} @ {entry_price:.2f} "
             f"SL={sl:.2f} TP={tp:.2f} fee=${fee:.2f}"
         )
         return {
+            "symbol": symbol,
             "side": side,
             "qty": qty,
             "price": entry_price,
@@ -29,20 +30,21 @@ class PaperExecutor:
             "fee": fee,
         }
 
-    def place_market_close(self, side: int, qty: float,
+    def place_market_close(self, symbol: str, side: int, qty: float,
                            exit_price: float) -> dict:
         fee = exit_price * qty * 0.001
         self.equity -= fee
         logger.info(
-            f"[PAPER] EXIT {'LONG' if side == 1 else 'SHORT'} "
+            f"[PAPER] {symbol} EXIT {'LONG' if side == 1 else 'SHORT'} "
             f"qty={qty:.6f} @ {exit_price:.2f} fee=${fee:.2f}"
         )
-        return {"side": side, "qty": qty, "price": exit_price, "fee": fee}
+        return {"symbol": symbol, "side": side, "qty": qty, "price": exit_price, "fee": fee}
 
 
 class LiveExecutor:
     def __init__(self, config: dict):
         self.config = config
+        self.equity = config.get("capital", 100.0)
         self.ex = build_exchange(
             config["exchange_id"],
             config.get("api_key", ""),
@@ -52,26 +54,56 @@ class LiveExecutor:
             raise RuntimeError(f"Failed to build {config['exchange_id']} exchange")
         if config.get("api_key"):
             self.ex.load_markets()
+        self._setup_derivatives()
 
-    def place_market_entry(self, side: int, qty: float,
+    def _setup_derivatives(self):
+        symbols = self.config.get("symbols", [])
+        leverage = self.config.get("leverage", 1)
+        for sym in symbols:
+            try:
+                self.ex.set_leverage(leverage, sym)
+            except Exception:
+                pass
+            try:
+                self.ex.set_margin_mode("cross", sym)
+            except Exception:
+                pass
+        logger.info(f"[LIVE] Leverage {leverage}x, cross margin set for {len(symbols)} symbols")
+
+    def place_market_entry(self, symbol: str, side: int, qty: float,
                            entry_price: float, sl: float, tp: float) -> dict:
-        symbol = self.config["symbol"]
         side_str = "buy" if side == 1 else "sell"
-        order = self.ex.create_market_order(symbol, side_str, qty)
+        params = {
+            "positionIdx": 0,
+            "stopLoss": {
+                "triggerPrice": sl,
+                "orderPrice": sl,
+                "type": "Market",
+            },
+            "takeProfit": {
+                "triggerPrice": tp,
+                "orderPrice": tp,
+                "type": "Market",
+            },
+        }
+        order = self.ex.create_order(symbol, "market", side_str, qty, None, params)
         filled_price = order.get("average", order.get("price", entry_price))
         logger.info(
-            f"[LIVE] ENTER {side_str.upper()} qty={qty:.6f} @ {filled_price:.2f} "
+            f"[LIVE] {symbol} ENTER {side_str.upper()} qty={qty:.6f} @ {filled_price:.2f} "
             f"SL={sl:.2f} TP={tp:.2f}"
         )
         return order
 
-    def place_market_close(self, side: int, qty: float,
+    def place_market_close(self, symbol: str, side: int, qty: float,
                            exit_price: float) -> dict:
-        symbol = self.config["symbol"]
         side_str = "sell" if side == 1 else "buy"
+        try:
+            self.ex.cancel_all_orders(symbol)
+        except Exception:
+            pass
         order = self.ex.create_market_order(symbol, side_str, qty)
         logger.info(
-            f"[LIVE] EXIT {side_str.upper()} qty={qty:.6f} @ "
+            f"[LIVE] {symbol} EXIT {side_str.upper()} qty={qty:.6f} @ "
             f"{order.get('average', exit_price):.2f}"
         )
         return order
