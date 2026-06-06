@@ -3,3 +3,4 @@ cache/
 config.json
 live/logs/
 .streamlit/secrets.toml
+.env

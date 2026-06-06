@@ -69,7 +69,6 @@ widgets/
 - **Fee input stores as %** in widget, converts to decimal in two places: in `settings_panel.py` for `state.fee_rate`, and in `backtest_panel.py:_on_run()` for strategy params (`params["fee_rate"] /= 100`).
 - **4H NY Range SL logic**: two-step swing filter: (1) find nearest swing, (2) if swing is beyond range midpoint (>50% from the lower boundary for shorts, <50% for longs), skip it and find the swing closest to the breakout boundary (`range_high` for shorts, `range_low` for longs). Uses `_find_swing_high_closest_to` / `_find_swing_low_closest_to`.
 - **Position sizing guard**: `run_backtest` checks `equity > 0` before computing quantity; if equity is wiped, `quantity=0`.
-- **`resample_to_4h()` in `data/ohlcv.py` is dead code** — defined but never called.
 - **CCXT exchanges** are accessed via `getattr(ccxt, exchange_id)` — any CCXT-supported ID works.
 - **Charts panel** has 3 tabs (Equity & Drawdown, Monthly Returns, Trade Analysis). Price + Signals tab was removed.
 - **PyQtGraph symbols**: use `"t"` for triangle-up, `"t1"` for triangle-down, `"x"` for cross.
@@ -80,33 +79,60 @@ widgets/
 
 ```
 live/
-├── config.py              JSON load/save (exchange, keys, params, position state)
+├── config.py              JSON load/save (symbols, params, API keys via .env, positions)
 ├── position_manager.py    SL/TP/trail math (mirrors backtest_engine.py logic)
 ├── executor.py            PaperExecutor (simulated fills) + LiveExecutor (CCXT Bybit orders)
-├── engine.py              Main loop — poll 4H OHLCV every 60s, run strategy, manage position
+├── engine.py              Main loop — poll 4H OHLCV every 60s, process all symbols, manage positions
 └── run.py                 CLI entry point
 config.json                Saved settings (gitignored — never commit API keys)
+.env                       API keys only (gitignored — optional, overrides config.json)
 ```
 
 ### Run (paper mode — default)
 
 ```powershell
 cd trading_bot
-pipenv run python live/run.py
+pipenv run python -m live.run
 ```
 
-Creates `config.json` on first run with defaults (`mode: "paper"`). Logs go to `live/logs/bot.log`.
+Use `-m live.run` (not `python live/run.py`) to keep the package import path correct.
+
+First run auto-creates `config.json` with **20 popular symbols**, equal capital allocation.
+Logs go to `live/logs/bot.log`.
 
 ### Switching to live
 
-1. Add API keys to `config.json` (`api_key`, `api_secret`)
-2. Change `"mode": "paper"` → `"mode": "live"`
-3. Verify on Bybit testnet first (config: `exchange_id: "bybit"`, use testnet keys)
+Two ways to provide API keys (pick one):
+
+**Option A — `.env` file (recommended):**
+Create `trading_bot/.env`:
+```
+BYBIT_API_KEY=your_key_here
+BYBIT_API_SECRET=your_secret_here
+```
+
+**Option B — `config.json`:**
+Set `api_key` and `api_secret` directly (never commit to git).
+
+Then:
+1. Change `"mode": "paper"` → `"mode": "live"` in `config.json`
+2. Set `"capital": 100` (or your deposit amount)
+3. Verify: `pipenv run python -c "from exchange.connector import build_exchange; ex = build_exchange('bybit', 'KEY', 'SECRET'); print(ex.fetch_balance()['USDT']['total'])"`
+
+### Multi-symbol behavior
+
+- **20 symbols** by default (BTC, ETH, SOL, ADA, etc. — all Bybit USDT perps)
+- **Equal capital split**: $100 capital = $5 per symbol
+- **Min-order filter**: symbols where computed quantity is below the exchange minimum order size are silently skipped
+- **Independent tracking**: each symbol has its own position, SL/TP, candle tracking, and strategy execution
+- **Simultaneous entries**: if multiple symbols trigger in the same 4H candle, all enter at once
 
 ### Safety
 
 - Default mode is `"paper"` — no real orders
+- **Server-side SL/TP** — in live mode, stop-loss and take-profit are conditional orders on Bybit. SL/TP execute even if the bot goes offline.
+- Position reconciliation — every tick the bot checks the exchange's actual positions; if closed by SL/TP, engine state updates
 - Max daily loss guard (`max_daily_loss_pct: 10.0`) — logs warning when hit
 - Max drawdown guard (`max_drawdown_pct: 20.0`) — logs warning when hit
 - Position persisted in `config.json` — bot survives restart
-- On first run, the bot skips the first candle (only trades new 4H candles after startup)
+- On first run, the bot skips the first candle for each symbol (only trades new 4H candles after startup)
