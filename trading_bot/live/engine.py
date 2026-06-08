@@ -45,9 +45,10 @@ def _compute_quantity(total_capital: float, entry: float, sl: float,
 
 
 class LiveEngine:
-    def __init__(self, config: dict):
+    def __init__(self, config: dict, telegram=None):
         self.config = config
         self.executor = build_executor(config)
+        self.telegram = telegram
         self.exchange = None
         if config.get("mode") == "live":
             self.exchange = build_exchange(
@@ -73,20 +74,39 @@ class LiveEngine:
         self.daily_start_equity = self.peak_equity
         self.last_check_date = date.today()
         self._tick_count = 0
+        self._paused = False
+        self._stopped = False
+        self._telegram_heartbeat_count = 0
         logger.info(f"Restored {restored} open position(s) across {len(self.symbols)} symbols")
 
     def start(self):
         mode = self.config.get("mode", "paper")
+        msg = (
+            f"🤖 Bot started\n"
+            f"Exchange: {self.config['exchange_id']}\n"
+            f"Mode: {mode.upper()}\n"
+            f"Symbols: {len(self.symbols)}\n"
+            f"Capital: ${self.config.get('capital', 0):.2f}"
+        )
         logger.info(
             f"Bot starting — {self.config['exchange_id']} "
             f"{len(self.symbols)} symbols "
             f"mode={mode.upper()}"
         )
+        if self.telegram:
+            self.telegram.send(msg)
         while True:
+            if self._stopped:
+                logger.info("Bot stopped via Telegram /stop command")
+                if self.telegram:
+                    self.telegram.send("🛑 Bot stopped.")
+                break
             try:
                 self._tick()
             except Exception as e:
                 logger.exception(f"Tick error: {e}")
+                if self.telegram:
+                    self.telegram.send(f"⚠️ Tick error: {e}")
             time.sleep(60)
 
     def _current_price(self, symbol: str) -> Optional[float]:
@@ -134,11 +154,28 @@ class LiveEngine:
         self._tick_count += 1
         if self._tick_count % 2 == 0:
             open_count = sum(1 for p in self.positions.values() if p is not None)
+            equity = self.executor.equity
             logger.info(
                 f"Heartbeat — {len(self.symbols)} symbols, "
                 f"{open_count} open, "
-                f"equity=${self.executor.equity:.2f}"
+                f"equity=${equity:.2f}"
             )
+            if self.telegram:
+                self._telegram_heartbeat_count += 1
+                if self._telegram_heartbeat_count >= 15:
+                    self._telegram_heartbeat_count = 0
+                    dd = (self.peak_equity - equity) / self.peak_equity * 100 if self.peak_equity > 0 else 0
+                    daily = (self.daily_start_equity - equity) / self.daily_start_equity * 100 if self.daily_start_equity > 0 else 0
+                    paused = " PAUSED" if self._paused else ""
+                    hb_msg = (
+                        f"📊 Heartbeat{paused}\n"
+                        f"Symbols: {len(self.symbols)} | Open: {open_count}\n"
+                        f"Equity: ${equity:.2f}\n"
+                        f"DD: {dd:.1f}% | Daily: {daily:+.1f}%"
+                    )
+                    if self._paused:
+                        hb_msg += "\n⏸ New entries paused"
+                    self.telegram.send(hb_msg)
 
         # ── 3. Process each symbol ──
         for sym in self.symbols:
@@ -200,6 +237,15 @@ class LiveEngine:
                     f"{symbol} CLOSED {reason.upper()} "
                     f"PNL=${pnl:.2f} Equity=${self.executor.equity:.2f}"
                 )
+                if self.telegram:
+                    side_str = "LONG" if pos.side == 1 else "SHORT"
+                    emoji = "🔴" if pnl < 0 else "🟢"
+                    self.telegram.send(
+                        f"{emoji} {symbol} CLOSED ({reason})\n"
+                        f"Side: {side_str}\n"
+                        f"P&L: ${pnl:.2f}\n"
+                        f"Equity: ${self.executor.equity:.2f}"
+                    )
                 self.positions[symbol] = None
 
         # ── Candle tracking ──
@@ -226,6 +272,9 @@ class LiveEngine:
         sig = last_signal.get("signal", 0)
 
         if sig != 0 and self.positions.get(symbol) is None:
+            if self._paused:
+                logger.info(f"{symbol}: paused — skipping entry")
+                return
             open_count = sum(1 for p in self.positions.values() if p is not None)
             if open_count >= self.max_open_trades:
                 logger.info(f"{symbol}: signal but open trades ({open_count}) >= max ({self.max_open_trades})")
@@ -277,6 +326,14 @@ class LiveEngine:
                 f"qty={qty:.6f} @ {entry_price:.2f} "
                 f"SL={sl_price:.2f} TP={tp_price:.2f}"
             )
+            if self.telegram:
+                side_str = "LONG" if sig == 1 else "SHORT"
+                self.telegram.send(
+                    f"🟢 {symbol} ENTER {side_str}\n"
+                    f"Entry: ${entry_price:.2f}\n"
+                    f"Qty: {qty:.6f}\n"
+                    f"SL: ${sl_price:.2f} | TP: ${tp_price:.2f}"
+                )
 
     def _check_safety(self):
         equity = self.executor.equity
@@ -290,10 +347,20 @@ class LiveEngine:
         daily_loss = (self.daily_start_equity - equity) / self.daily_start_equity * 100
         if daily_loss >= max_daily:
             logger.warning(f"Max daily loss hit ({daily_loss:.1f}% >= {max_daily}%)")
+            if self.telegram:
+                self.telegram.send(
+                    f"⚠️ Max daily loss triggered!\n"
+                    f"Daily loss: {daily_loss:.1f}% (limit: {max_daily}%)"
+                )
         max_dd = self.config.get("max_drawdown_pct", 20.0)
         dd = (self.peak_equity - equity) / self.peak_equity * 100
         if dd >= max_dd:
             logger.warning(f"Max drawdown hit ({dd:.1f}% >= {max_dd}%)")
+            if self.telegram:
+                self.telegram.send(
+                    f"⚠️ Max drawdown triggered!\n"
+                    f"Drawdown: {dd:.1f}% (limit: {max_dd}%)"
+                )
 
     def _save_state(self):
         self.config["capital"] = round(self.executor.equity, 2)

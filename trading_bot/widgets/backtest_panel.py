@@ -21,13 +21,8 @@ POPULAR_SYMBOLS = [
 STRATEGIES = [
     "4H NY Range Re-Entry",
     "5M Trend Pullback",
-    "5M Trend Pullback V2",
     "ATR Trend-Breakout",
-    "EMA Pullback Scalping",
-    "VWAP Rejection Scalping",
-    "Opening Range Breakout",
-    "RSI Mean Reversion",
-    "Bollinger Band Reversal",
+    "IBR (Institutional Breakout Retest)",
 ]
 
 
@@ -55,11 +50,16 @@ class BacktestWorker(QObject):
             end_date = datetime.now().strftime("%Y-%m-%d")
             start_date = (datetime.now() - timedelta(days=self.lookback_days)).strftime("%Y-%m-%d")
 
-            # Use 4H data for the ATR breakout, 5M for everything else
+            # Use 4H data for the ATR breakout, 5M for everything else, 15M for IBR
             is_ny_range = self.strategy_name == "4H NY Range Re-Entry"
             is_atr = self.strategy_name == "ATR Trend-Breakout"
-            tf = "4h" if is_atr else "5m"
-            tf_label = "4-hour" if is_atr else "5-minute"
+            is_ibr = self.strategy_name == "IBR (Institutional Breakout Retest)"
+            if is_atr:
+                tf, tf_label = "4h", "4-hour"
+            elif is_ibr:
+                tf, tf_label = "15m", "15-minute"
+            else:
+                tf, tf_label = "5m", "5-minute"
 
             self.status.emit(f"Fetching {self.symbol} {tf_label} data...")
             df_ohlcv = fetch_ohlcv(
@@ -103,15 +103,6 @@ class BacktestWorker(QObject):
                     rsi_buy=params["rsi_buy"], rsi_sell=params["rsi_sell"],
                     atr_period=params["atr_period"],
                 )
-            elif self.strategy_name == "5M Trend Pullback V2":
-                from core.strategy_trend_pullback_v2 import run_trend_pullback_v2
-                df_signals = run_trend_pullback_v2(
-                    df_ohlcv, rr=params["rr"], risk_percent=params["risk_percent"],
-                    ema_length=params["ema_length"], rsi_length=params["rsi_length"],
-                    rsi_buy_lower=params["rsi_buy_lower"], rsi_buy_upper=params["rsi_buy_upper"],
-                    rsi_sell_upper=params["rsi_sell_upper"], rsi_sell_lower=params["rsi_sell_lower"],
-                    atr_period=params["atr_period"], atr_sl_mult=params["atr_sl_mult"],
-                )
             elif is_atr:
                 from core.strategy_atr_breakout import run_atr_breakout
                 df_signals = run_atr_breakout(
@@ -129,54 +120,16 @@ class BacktestWorker(QObject):
                     trail_activation=params["trail_activation"],
                     trail_offset=params["trail_offset"],
                 )
-            elif self.strategy_name == "EMA Pullback Scalping":
-                from core.strategy_ema_pullback import run_ema_pullback
-                df_signals = run_ema_pullback(
+            elif is_ibr:
+                from core.strategy_ibr import run_ibr
+                df_signals = run_ibr(
                     df_ohlcv,
-                    ema_fast=params["ema_fast"],
-                    ema_slow=params["ema_slow"],
-                    sl_mode=params["sl_mode"],
-                    atr_period=params["atr_period"],
-                    atr_sl_mult=params["atr_sl_mult"],
+                    ema_length=params["ema_length"],
+                    ema_slope_bars=params["ema_slope_bars"],
+                    swing_window=params["swing_window"],
+                    fib_min=params["fib_min"],
+                    fib_max=params["fib_max"],
                     rr=params["rr"],
-                    risk_percent=params["risk_percent"],
-                    fee_rate=params.get("fee_rate", 0.001),
-                )
-            elif self.strategy_name == "VWAP Rejection Scalping":
-                from core.strategy_vwap_rejection import run_vwap_rejection
-                df_signals = run_vwap_rejection(
-                    df_ohlcv,
-                    rr=params["rr"],
-                    risk_percent=params["risk_percent"],
-                    fee_rate=params.get("fee_rate", 0.001),
-                )
-            elif self.strategy_name == "Opening Range Breakout":
-                from core.strategy_orb import run_orb
-                df_signals = run_orb(
-                    df_ohlcv,
-                    range_bars=params["range_bars"],
-                    volume_mult=params["volume_mult"],
-                    rr=params["rr"],
-                    risk_percent=params["risk_percent"],
-                    fee_rate=params.get("fee_rate", 0.001),
-                )
-            elif self.strategy_name == "RSI Mean Reversion":
-                from core.strategy_rsi_mean_reversion import run_rsi_mean_reversion
-                df_signals = run_rsi_mean_reversion(
-                    df_ohlcv,
-                    rsi_length=params["rsi_length"],
-                    rsi_oversold=params["rsi_oversold"],
-                    rsi_overbought=params["rsi_overbought"],
-                    rr=params["rr"],
-                    risk_percent=params["risk_percent"],
-                    fee_rate=params.get("fee_rate", 0.001),
-                )
-            elif self.strategy_name == "Bollinger Band Reversal":
-                from core.strategy_bb_reversal import run_bb_reversal
-                df_signals = run_bb_reversal(
-                    df_ohlcv,
-                    bb_period=params["bb_period"],
-                    bb_std=params["bb_std"],
                     risk_percent=params["risk_percent"],
                     fee_rate=params.get("fee_rate", 0.001),
                 )
@@ -347,19 +300,6 @@ class BacktestPanel(QWidget):
             self._add_param("risk_percent", "Risk per trade (%)", 1.0, 0.1, 10.0, 0.1)
             self._add_param("fee_rate", "Fee rate (%)", self.state.fee_rate * 100, 0.0, 1.0, 0.01, 3)
 
-        elif name == "5M Trend Pullback V2":
-            self._add_param("ema_length", "EMA Length", 200, 20, 500, 1, is_int=True)
-            self._add_param("rsi_length", "RSI Length", 14, 2, 50, 1, is_int=True)
-            self._add_param("rsi_buy_lower", "RSI Buy Lower", 30, 10, 50, 1, is_int=True)
-            self._add_param("rsi_buy_upper", "RSI Buy Upper", 40, 20, 60, 1, is_int=True)
-            self._add_param("rsi_sell_upper", "RSI Sell Upper", 70, 60, 90, 1, is_int=True)
-            self._add_param("rsi_sell_lower", "RSI Sell Lower", 60, 50, 80, 1, is_int=True)
-            self._add_param("atr_period", "ATR Period", 14, 5, 50, 1, is_int=True)
-            self._add_param("atr_sl_mult", "ATR SL Multiplier", 1.5, 0.5, 5.0, 0.1)
-            self._add_param("rr", "Risk:Reward", 2.0, 0.5, 10.0, 0.1)
-            self._add_param("risk_percent", "Risk per trade (%)", 1.0, 0.1, 10.0, 0.1)
-            self._add_param("fee_rate", "Fee rate (%)", self.state.fee_rate * 100, 0.0, 1.0, 0.01, 3)
-
         elif name == "ATR Trend-Breakout":
             self._add_param("ema_fast", "EMA Fast", 50, 10, 200, 1, is_int=True)
             self._add_param("ema_slow", "EMA Slow", 200, 50, 500, 1, is_int=True)
@@ -375,42 +315,13 @@ class BacktestPanel(QWidget):
             self._add_param("risk_percent", "Risk per trade (%)", 3.0, 0.1, 10.0, 0.1)
             self._add_param("fee_rate", "Fee rate (%)", self.state.fee_rate * 100, 0.0, 1.0, 0.01, 3)
 
-        elif name == "EMA Pullback Scalping":
-            self._add_param("ema_fast", "EMA Fast", 20, 5, 100, 1, is_int=True)
-            self._add_param("ema_slow", "EMA Slow", 50, 10, 200, 1, is_int=True)
-            sl_combo = QComboBox()
-            sl_combo.addItems(["swing", "atr"])
-            self.strategy_params_layout.addRow("SL Mode:", sl_combo)
-            self._strategy_param_widgets["sl_mode"] = sl_combo
-            self._add_param("atr_period", "ATR Period", 14, 5, 50, 1, is_int=True)
-            self._add_param("atr_sl_mult", "ATR SL Multiplier", 1.5, 0.5, 5.0, 0.1)
-            self._add_param("rr", "Risk:Reward", 2.0, 0.5, 10.0, 0.1)
-            self._add_param("risk_percent", "Risk per trade (%)", 1.0, 0.1, 10.0, 0.1)
-            self._add_param("fee_rate", "Fee rate (%)", self.state.fee_rate * 100, 0.0, 1.0, 0.01, 3)
-
-        elif name == "VWAP Rejection Scalping":
-            self._add_param("rr", "Risk:Reward", 2.0, 0.5, 10.0, 0.1)
-            self._add_param("risk_percent", "Risk per trade (%)", 1.0, 0.1, 10.0, 0.1)
-            self._add_param("fee_rate", "Fee rate (%)", self.state.fee_rate * 100, 0.0, 1.0, 0.01, 3)
-
-        elif name == "Opening Range Breakout":
-            self._add_param("range_bars", "Range Bars (5M)", 6, 3, 24, 1, is_int=True)
-            self._add_param("volume_mult", "Volume Surge Min", 1.5, 1.0, 5.0, 0.1)
-            self._add_param("rr", "Risk:Reward", 2.0, 0.5, 10.0, 0.1)
-            self._add_param("risk_percent", "Risk per trade (%)", 1.0, 0.1, 10.0, 0.1)
-            self._add_param("fee_rate", "Fee rate (%)", self.state.fee_rate * 100, 0.0, 1.0, 0.01, 3)
-
-        elif name == "RSI Mean Reversion":
-            self._add_param("rsi_length", "RSI Length", 14, 5, 30, 1, is_int=True)
-            self._add_param("rsi_oversold", "RSI Oversold", 30, 10, 40, 1, is_int=True)
-            self._add_param("rsi_overbought", "RSI Overbought", 70, 60, 90, 1, is_int=True)
-            self._add_param("rr", "Risk:Reward", 1.5, 0.5, 10.0, 0.1)
-            self._add_param("risk_percent", "Risk per trade (%)", 1.0, 0.1, 10.0, 0.1)
-            self._add_param("fee_rate", "Fee rate (%)", self.state.fee_rate * 100, 0.0, 1.0, 0.01, 3)
-
-        elif name == "Bollinger Band Reversal":
-            self._add_param("bb_period", "BB Period", 20, 10, 50, 1, is_int=True)
-            self._add_param("bb_std", "BB Std Dev", 2.0, 1.0, 4.0, 0.1)
+        elif name == "IBR (Institutional Breakout Retest)":
+            self._add_param("ema_length", "EMA Length (4H)", 200, 50, 500, 1, is_int=True)
+            self._add_param("ema_slope_bars", "EMA Slope Bars", 5, 2, 20, 1, is_int=True)
+            self._add_param("swing_window", "Swing Window (1H)", 5, 2, 20, 1, is_int=True)
+            self._add_param("fib_min", "Fib Retrace Min", 0.382, 0.236, 0.5, 0.01)
+            self._add_param("fib_max", "Fib Retrace Max", 0.618, 0.5, 0.786, 0.01)
+            self._add_param("rr", "Risk:Reward", 2.0, 1.0, 10.0, 0.1)
             self._add_param("risk_percent", "Risk per trade (%)", 1.0, 0.1, 10.0, 0.1)
             self._add_param("fee_rate", "Fee rate (%)", self.state.fee_rate * 100, 0.0, 1.0, 0.01, 3)
 

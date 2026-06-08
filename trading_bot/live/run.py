@@ -6,6 +6,7 @@ import sys
 from exchange.connector import build_exchange
 from live.config import load_config, allocate_capital
 from live.engine import LiveEngine
+from live.telegram_bot import TelegramBot
 
 LOG_DIR = os.path.join(os.path.dirname(__file__), "..", "live", "logs")
 os.makedirs(LOG_DIR, exist_ok=True)
@@ -70,7 +71,14 @@ def main():
         print(f"│  ⚠  LIVE MODE — real money trading!          │")
     print(f"└──────────────────────────────────────────────┘")
 
-    engine = LiveEngine(config)
+    telegram = TelegramBot(
+        token=config.get("telegram_token", ""),
+        chat_id=config.get("telegram_chat_id", ""),
+    )
+    engine = LiveEngine(config, telegram=telegram)
+    telegram.engine = engine
+    telegram.start()
+
     if display_capital > 0:
         engine.executor.equity = display_capital
         engine.peak_equity = display_capital

@@ -38,13 +38,13 @@ main.py (entry point — QApplication + dark theme)
 main_window.py (QMainWindow with QTabWidget navigation)
 state.py (AppState dataclass — replaces st.session_state)
 
-core/        Strategy* (5 strategies) + backtest_engine.py + metrics.py
+core/        Strategy* (4 strategies) + backtest_engine.py + metrics.py
 data/        ohlcv.py (fetch OHLCV via CCXT, cache to parquet)
 exchange/    connector.py (thin CCXT wrapper, 111 exchanges)
 
 widgets/
 ├── settings_panel.py     Exchange config + API keys + backtest defaults
-├── backtest_panel.py     Strategy params (5 strategies) + Run button + QThread + summary
+├── backtest_panel.py     Strategy params (4 strategies) + Run button + QThread + summary
 ├── statistics_panel.py   QTableWidget-based metrics + trade log + CSV export
 ├── charts_panel.py       QTabWidget with 3 chart tabs (equity, monthly, trade)
 └── chart_widgets.py      PyQtGraph plot builders (equity, histogram, scatter) + ChartViewBox
@@ -61,7 +61,12 @@ widgets/
 - **Entry is at next bar open** (not signal bar close). SL/TP are auto-shifted relative to the actual entry price in `backtest_engine.py` (`diff = entry_price - prev_entry`).
 - **Strategies imported explicitly** inside `BacktestWorker.run()` — a syntax error in a strategy file appears only when "Run Backtest" is clicked.
 - **4H NY Range Re-Entry** accepts both `df_5m` (signal generation) and `df_4h` (range calculation). Worker fetches both timeframes separately.
-- **ATR Trend-Breakout** uses 4H data only (fetched directly). All other strategies use 5M data only.
+- **ATR Trend-Breakout** uses 4H data only (fetched directly). 5M Trend Pullback uses 5M data.
+- **IBR (Institutional Breakout Retest)** uses 15M data only. Resamples 1H and 4H internally from 15M using `df.resample("1h")` / `df.resample("4h")`. Lookahead is prevented by shifting resampled 1H/4H data +1 period before merging into 15M.
+- **IBR swing detection** uses no-lookahead rolling max/min (past `swing_window` bars only, no `center=True`). Swing points are updated after zone checks in the 1H loop.
+- **IBR FVG**: hybrid model — strict FVG (gap between 1H lows/highs) scores 2, imbalance FVG (displacement > 1 ATR + body > 60% range) scores 1. Both must accompany an impulse candle (range > 1.5 ATR) breaking a swing pivot to create a zone.
+- **IBR scoring**: 7-point system — trend(1) + zone+fvg(1-2) + structure break(1) + retest(1) + price action engulfing/pin bar(1) + volume surge(1). Entry if score ≥ 4. Zone disabled after 2 retests.
+- **IBR SL**: for buys, the lower of the swing price and zone low. For sells, the higher of the swing price and zone high.
 - **ATR Trend-Breakout** passes `trail_activation_atr` and `trail_offset_atr` to `run_backtest()` for trailing stop support. Other strategies leave them at 0 (disabled).
 - **Max 1 open trade at a time** — no pyramiding, no concurrent positions.
 - **Slippage is always 0.0** — no UI slider exists.

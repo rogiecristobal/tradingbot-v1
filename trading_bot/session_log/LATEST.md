@@ -1,202 +1,95 @@
-# Session Summary — June 8, 2026
+# Session Summary — 2026-06-08
 
-## Overview
+## What was built
 
-Two main workstreams: (1) cleanup of dead/deprecated files, and (2) safety hardening of the live trading bot — retry logic for API calls, total-capital risk partitioning, and a max-open-trades limit.
+Two major feature sets were implemented in this session:
 
----
+### 1. Five New Backtest Strategies (`core/`)
 
-## What Was Built/Changed
+Created 5 new strategy files following the existing architecture (accepts 5M OHLCV DataFrame, returns DataFrame with `signal`/`entry_price`/`sl_price`/`tp_price` columns):
 
-### 1. Dead Code Cleanup
+| File | Strategy | Key Logic |
+|------|----------|-----------|
+| `core/strategy_ema_pullback.py` | EMA 20/50 Pullback Scalping | EMA20 > EMA50 trend filter, pullback to EMA20, bullish/bearish candle close. SL mode param: `swing` (nearest swing low/high) or `atr` (ATR × multiplier). TP: 1:2 RR. |
+| `core/strategy_vwap_rejection.py` | VWAP Rejection Scalping | VWAP resets daily at 00:00 UTC. Rejection candle: price touches VWAP, closes in trend direction. SL: 0.1% below/above candle extreme. TP: 1:2 RR. |
+| `core/strategy_orb.py` | Opening Range Breakout | First 6 bars of each day (00:00–00:30 UTC) define range. Breakout with volume surge (×1.5 SMA) confirms entry. SL: opposite side of range. TP: 2× risk. |
+| `core/strategy_rsi_mean_reversion.py` | RSI Mean Reversion | RSI 14, oversold < 30 / overbought > 70. Entry on cross back above/below threshold. SL: nearest swing in last 20 bars. TP: 1.5:1 RR. |
+| `core/strategy_bb_reversal.py` | Bollinger Band Reversal | BB(20, 2). Candle closes outside band, next candle closes back inside. SL: signal candle extreme. TP: middle band (falls back to 2R if unattainable). |
 
-**Removed `resample_to_4h()` from `data/ohlcv.py:103-109`**
-- Function was defined but never called anywhere in the codebase
-- No import changes needed (only `pd` was used, which was already imported)
-- Line count: 109 → 100
+**Modified:** `widgets/backtest_panel.py`
+- Added 5 entries to `STRATEGIES` list (now 9 total)
+- Added param blocks in `_rebuild_strategy_params()` — EMA Pullback has a `sl_mode` QComboBox (swing/atr)
+- Updated `_collect_params()` to handle `QComboBox` widgets (for `sl_mode`)
+- Added 5 `elif` branches in `BacktestWorker.run()` with lazy imports
 
-**Updated `AGENTS.md`**
-- Removed the `resample_to_4h()` dead code note from "Key conventions & gotchas"
-- Removed "Old Streamlit files still exist on disk but are unused" line
-- Added `.gitignore` note to the conventions section
+### 2. Telegram Notifications + Remote Control (`live/`)
 
-### 2. Streamlit Cleanup
+| File | Action | Description |
+|------|--------|-------------|
+| `live/telegram_bot.py` | **Created** | TelegramBot class — runs async polling in a daemon thread. Sends notifications (startup, entry, exit, heartbeat, safety, errors). Handles 6 remote commands + button panel. |
+| `live/config.py` | Modified | Added `telegram_token`, `telegram_chat_id` to `DEFAULT_CONFIG`. Added `.env` loading for `TELEGRAM_BOT_TOKEN` and `TELEGRAM_CHAT_ID`. |
+| `live/engine.py` | Modified | Added `telegram` param to `__init__`. Added `_paused` / `_stopped` / `_telegram_heartbeat_count` flags. Startup notification, `_stopped` check in main loop, heartbeat every 30 min, entry/exit notifications, pause check before new entries, safety notifications. |
+| `live/run.py` | Modified | Instantiates `TelegramBot`, wires it into `LiveEngine`, starts bot thread. |
+| `Pipfile` | Modified | Added `python-telegram-bot >=20.0` dependency. |
 
-**Deleted `.streamlit/` directory** (recursive)
-- Contained `config.toml` (Streamlit theme) and `secrets.toml` (empty API key template)
-- No Python file in the project imports streamlit — confirmed by project-wide grep
-- Pipfile already had streamlit removed (only ccxt, pandas, numpy, pytz, pyqt6, pyqtgraph remain)
+**Notification types (bot → user):**
+- 🤖 Bot started (mode, exchange, symbols, capital)
+- 🟢 Trade entry (symbol, side, price, qty, SL, TP)
+- 🔴/🟢 Trade exit (symbol, reason, P&L, equity)
+- 📊 Heartbeat every 30 min (open trades, equity, drawdown %, daily P&L)
+- ⚠️ Max daily loss / max drawdown warnings
+- 🛑 Bot stopped
+- ⚠️ Tick errors
 
-**Deleted `requirements.txt`**
-- Outdated — listed streamlit, plotly alongside core deps
-- Pipfile is the single source of truth; this was a stale duplicate
+**Remote commands (user → bot):**
 
-**Created `.gitignore`**
-```
-config.json
-.env
-.streamlit/
-cache/
-__pycache__/
-*.pyc
-live/logs/
-```
-Protects API keys and sensitive config from accidental git commits.
+| Command/Button | Action |
+|----------------|--------|
+| `/start`, 📊 Status | Bot state, mode, equity, open trades |
+| `/pause`, ⏸ Pause | Stop new entries (existing trades continue) |
+| `/resume`, ▶ Resume | Resume new entries |
+| `/stop`, 🛑 Stop | Shut down after current tick |
+| `/positions`, 📋 Positions | List all open positions with SL/TP |
+| `/help`, ❓ Help | Available commands |
 
-### 3. Retry Logic for Exchange Initialization
-
-**Modified `exchange/connector.py` — `build_exchange()`**
-- Added `import time`
-- Added `retries: int = 3` parameter to `build_exchange()`
-- Wrapped the exchange init + `load_markets()` in a retry loop (3 attempts, 2s delay)
-- On success: returns exchange instance immediately
-- On transient failure: logs `WARNING` with attempt count, retries
-- On final failure: logs `ERROR`, returns `None` (same as before)
-
-| Attempt | Behaviour |
-|---|---|
-| 1st fail | Warning log, 2s sleep, retry |
-| 2nd fail | Warning log, 2s sleep, retry |
-| 3rd fail | Error log "after 3 attempts", return None |
-
-- Fixes the intermittent `GET /v5/market/instruments-info?category=inverse&status=PreLaunch` failures from Bybit's API
-
-### 4. Retry Logic for Order Placement
-
-**Modified `live/executor.py` — `LiveExecutor`**
-- Added `import time`, `from typing import Callable`
-- Added `_retry_call(fn, label, retries=3, delay=1.0)` helper method:
-  - Attempts the callable N times
-  - Logs `WARNING` on each retry
-  - Raises on final failure (caller propagates up)
-
-- **`place_market_entry()`**: `create_order()` now goes through `_retry_call` (3 retries, 1s delay)
-- **`place_market_close()`**:
-  - `cancel_all_orders()`: `_retry_call` with 2 retries, best-effort (caught exception proceeds)
-  - `create_market_order()`: `_retry_call` with 3 retries, 1s delay
-
-- PaperExecutor unchanged (no API calls)
-
-### 5. Total-Capital Risk + Max Open Trades
-
-**Modified `live/config.py`**
-- Added `"max_open_trades": 3` to `DEFAULT_CONFIG`
-
-**Modified `live/engine.py` — `_compute_quantity()`**
-- Renamed `alloc_capital` → `total_capital`
-- Added `leverage: float = 1.0` parameter
-- **Risk now computed from total capital**: `risk_amount = total_capital * (risk_percent / 100.0)`
-- **Added notional cap**: `qty = min(qty, max_notional / entry)` where `max_notional = total_capital * leverage`
-  - Prevents position size exceeding exchange-acceptable margin even with tight SL
-- Min-order filter unchanged
-
-**Modified `live/engine.py` — `LiveEngine.__init__()`**
-- Added `self.max_open_trades: int = config.get("max_open_trades", 3)`
-- Removed `self.allocations` and `allocate_capital()` call (no longer needed)
-- Removed `allocate_capital` from imports
-
-**Modified `live/engine.py` — `_process_symbol()`**
-- Entry block now checks: `open_count >= self.max_open_trades` → skip with info log
-- Uses `total_cap = self.config.get("capital", 100.0)` instead of per-symbol allocation
-- Passes `leverage=self.config.get("leverage", 1)` to `_compute_quantity`
-- `allocate_capital` import removed
-
-### 6. Test Script (Created, Left on Disk)
-
-**Created `test_server_sl_tp.py`**
-- Standalone script to test server-side SL/TP placement on Bybit
-- Fetches DOGE/USDT:USDT market info, computes qty for $1, places market buy with SL/TP, then closes
-- First attempt failed with EOFError on interactive prompts → removed prompts
-- Order placement failed with Bybit `retCode:10005` — API key lacks Contract Trading permission
-- Script retained for future testing once API permissions are fixed
-
----
-
-## Files Changed
-
-| File | Action | Lines | Change |
-|---|---|---|---|
-| `data/ohlcv.py` | Modified | 109→100 | Removed `resample_to_4h()` dead function |
-| `AGENTS.md` | Modified | 138→137 | Removed dead code + Streamlit notes, added .gitignore note |
-| `exchange/connector.py` | Modified | 53→59 | Added retry loop to `build_exchange()` + `import time` |
-| `live/executor.py` | Modified | 116→139 | Added `_retry_call()` helper + retry-wrapped entry/close |
-| `live/engine.py` | Modified | 302→311 | Total-capital risk, max_open_trades, notional cap, removed allocate_capital |
-| `live/config.py` | Modified | 130→131 | Added `max_open_trades: 3` default |
-| `.gitignore` | Created | 0→7 | New file |
-| `test_server_sl_tp.py` | Created | 0→~110 | Test script (left on disk) |
-| `.streamlit/` | Deleted | — | Entire directory (config.toml + secrets.toml) |
-| `requirements.txt` | Deleted | — | Outdated duplicate of Pipfile |
-
----
+The button panel uses a persistent `ReplyKeyboardMarkup` with 2 rows of 3 buttons each.
 
 ## Key Decisions
 
-1. **Total-capital risk over per-symbol allocation** — more intuitive: `risk_percent` literally means "% of my whole account per trade". Prevents confusion when symbol count changes.
+1. **VWAP reset**: Midnight UTC (standard for crypto — 24/7 market)
+2. **EMA Pullback SL**: Dual mode — `swing` (nearest swing low/high) or `atr` (ATR × multiplier), user-selectable via dropdown. Ready for future hybrid version.
+3. **ORB range**: First 6 × 5M bars of each day (00:00–00:30 UTC) — no midnight-UTC ORB since crypto never closes
+4. **BB TP**: Middle band (mean reversion target), with 2R fallback
+5. **Stop behavior**: `/stop` prevents new entries but lets existing trades reach SL/TP
+6. **Heartbeat**: Every 30 min (15 heartbeats × 2 min interval)
+7. **Telegram thread**: Daemon thread with own asyncio event loop; async message sending via `asyncio.run_coroutine_threadsafe()`
 
-2. **Notional cap = total_capital × leverage** — prevents the exchange from rejecting orders due to insufficient margin, especially when risk-based qty × entry_price exceeds buying power.
+## Bugs Fixed
 
-3. **max_open_trades = 3** — balances opportunity with safety at $74 capital. With 18 symbols, a 4H candle close could theoretically trigger entries on all 18. Limiting to 3 prevents >40% account exposure at once.
-
-4. **Retry 3 times, 1-2s delay** — Bybit API hiccups are typically sub-second. 3 retries with short delay handles transient issues without excessive wait.
-
-5. **cancel_all_orders is best-effort (2 retries)** — it's not critical for trade execution; the close order can succeed even without cancelling stale SL/TP orders (they'll fail to execute when position is closed).
-
-6. **Deleted Streamlit remnants** — project is fully PyQt6 + CLI live bot. Keeping `.streamlit/` and outdated `requirements.txt` adds confusion and risk (secrets.toml template).
-
-7. **Retained `allocate_capital()` in `config.py`** — still used by `run.py` for banner display, even though engine no longer consumes it for risk computation.
-
----
+1. **Missing `/start` handler** — `CommandHandler("start", self._cmd_start)` was registered in `_run_polling()` but the `_cmd_start` method was never defined. Added a welcome message + button panel on `/start`.
+2. **Wrong keyword argument** `persistent` in `ReplyKeyboardMarkup` — should be `is_persistent`. Error logged at `2026-06-08 10:13:47`: `ReplyKeyboardMarkup.__init__() got an unexpected keyword argument 'persistent'. Did you mean 'is_persistent'?`
 
 ## Errors Encountered
 
-### 1. `pipenv` not on PATH
-- PowerShell couldn't find `pipenv` command
-- Fix: Used full path `& "$env:LOCALAPPDATA\Programs\Python\Python313\Scripts\pipenv.exe"`
-
-### 2. `EOFError: EOF when reading a line` in test script
-- `input()` call in `test_server_sl_tp.py` failed because the tool doesn't support interactive prompts
-- Fix: Removed both confirmation prompts, made script fully automated
-
-### 3. Bybit API `retCode:10005 — Permission denied`
-- Two separate permission failures:
-  - `set_margin_mode()`: needs "Account Transfer" permission
-  - `create_order()`: needs "Contract Trading" permission
-- Root cause: API key in config.json lacks trading permissions on Bybit
-- Resolution: User needs to update API key permissions on Bybit website
-- Not a code bug — test script cannot proceed until permissions are fixed
-
-### 4. False safety warnings (from prior session, re-confirmed)
-- `peak_equity`/`daily_start_equity` initialized from `config["capital"]` ($100), but executor equity overridden to real balance ($74) in `run.py`
-- Already fixed in prior session — verified still working
-
----
+1. `UnicodeDecodeError` when verifying Python files — fixed by specifying `encoding='utf-8'` in file reads
+2. `ReplyKeyboardMarkup.__init__() got an unexpected keyword argument 'persistent'` — fixed by renaming to `is_persistent`
+3. Pipenv not on `PATH` — run with full path: `& "$env:LOCALAPPDATA\Programs\Python\Python313\Scripts\pipenv.exe"`
 
 ## Known Issues
 
-1. **Server-side SL/TP untested** — `test_server_sl_tp.py` created but cannot complete due to Bybit API key permissions. Need to enable "Contract Trading" on the API key.
+1. **Strategy files not git-tracked** — 5 new `core/strategy_*.py` files may not have been committed to git
+2. **Live bot only runs ATR Trend-Breakout** — the live engine hardcodes `from core.strategy_atr_breakout import run_atr_breakout`. The 5 new strategies are only available in the backtest UI
+3. **No persistency** — All backtest results live in `AppState` / `st.session_state`, lost on restart
+4. **Slippage always 0.0** — no UI control exists
+5. **Bot needs PC running** — Telegram bot thread dies when the process stops. No cloud/24/7 hosting
+6. **Logs may grow large** — `live/logs/bot.log` accumulates with no rotation
 
-2. **Cancel-all-orders permission** may also be missing for the same API key — will surface during live exit.
+## What To Continue With Next
 
-3. **Safety guards are log-only** — `_check_safety()` logs warnings when max daily loss or drawdown is breached but does not stop the bot or close positions.
-
-4. **No auto-shutdown on consecutive API errors** — if `fetch_ohlcv()` fails repeatedly, the bot keeps logging warnings but never self-terminates.
-
-5. **Sharpe/Sortino `n_per_year`** in `core/metrics.py` hardcoded to 5M bars (105,120) — wrong for 4H frequency.
-
-6. **No tests, no CI** — no test framework exists.
-
----
-
-## What to Continue With Next
-
-1. **Fix Bybit API permissions**, then re-run `test_server_sl_tp.py` to verify server-side SL/TP actually works on the exchange.
-
-2. **Test the max_open_trades limit** in paper mode — run the bot and verify that when >3 symbols signal, only 3 enter.
-
-3. **Verify total-capital risk calculation** end-to-end — confirm `_compute_quantity()` produces expected qty values with real data.
-
-4. **Add auto-shutdown to safety guards** — kill the bot when max daily loss or drawdown is breached.
-
-5. **Add consecutive error guard** — if N API calls fail in a row, shut down instead of trading on stale data.
-
-6. **Add notional cap check at the engine level** — log a warning when `_compute_quantity()` returns a capped value (risk-based qty > buying power allows), so the user knows the position is notional-limited rather than risk-limited.
+- [ ] **Commit new strategy files** to git if not already tracked
+- [ ] **Support more strategies in live engine** — extend `_process_symbol()` to allow selecting which strategy to run per-symbol (via `config.json` or per-symbol param)
+- [ ] **Regime filter** — add market regime detection (trending vs ranging) for RSI Mean Reversion and Bollinger Reversal (as noted in the strategy spec)
+- [ ] **Log rotation** for `live/logs/bot.log`
+- [ ] **Server hosting** — deploy the live bot to a VPS so it runs 24/7 without your PC
+- [ ] **Add more remote commands** — `/settings` to show current params, `/cancel_all` to close all positions
+- [ ] **Inline keyboard buttons** — replace `ReplyKeyboardMarkup` with `InlineKeyboardMarkup` for a more polished UX (buttons inline with message text)

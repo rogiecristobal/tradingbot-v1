@@ -43,6 +43,8 @@ DEFAULT_CONFIG = {
     "max_daily_loss_pct": 10.0,
     "max_drawdown_pct": 20.0,
     "max_open_trades": 3,
+    "telegram_token": "",
+    "telegram_chat_id": "",
 }
 
 
@@ -101,6 +103,10 @@ def _load_env_overrides(config: dict) -> dict:
                 config["api_key"] = value
             elif key == "BYBIT_API_SECRET" and value:
                 config["api_secret"] = value
+            elif key == "TELEGRAM_BOT_TOKEN" and value:
+                config["telegram_token"] = value
+            elif key == "TELEGRAM_CHAT_ID" and value:
+                config["telegram_chat_id"] = value
     return config
 
 

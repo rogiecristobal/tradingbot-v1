@@ -1261,3 +1261,1101 @@ AttributeError: 'LiveExecutor' object has no attribute 'equity'
 2026-06-08 08:19:00,504 [INFO] live.engine: SUI/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
 2026-06-08 08:20:02,306 [INFO] live.engine: Heartbeat — 18 symbols, 0 open, equity=$74.53
 2026-06-08 08:22:53,586 [INFO] run: Shutdown signal received, exiting...
+2026-06-08 08:46:40,463 [INFO] live.executor: [LIVE] Leverage 1x, cross margin set for 18 symbols
+2026-06-08 08:46:40,467 [INFO] live.engine: Restored 0 open position(s) across 18 symbols
+2026-06-08 08:46:40,467 [INFO] live.engine: Bot starting — bybit 18 symbols mode=LIVE
+2026-06-08 08:46:45,979 [INFO] live.engine: BTC/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 08:46:48,778 [INFO] live.engine: ETH/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 08:46:50,915 [INFO] live.engine: SOL/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 08:46:53,209 [INFO] live.engine: BNB/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 08:46:55,249 [INFO] live.engine: XRP/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 08:46:56,975 [INFO] live.engine: ADA/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 08:46:58,674 [INFO] live.engine: DOGE/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 08:47:01,011 [INFO] live.engine: DOT/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 08:47:02,857 [INFO] live.engine: AVAX/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 08:47:04,775 [INFO] live.engine: LINK/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 08:47:06,951 [INFO] live.engine: UNI/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 08:47:08,690 [INFO] live.engine: ATOM/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 08:47:10,679 [INFO] live.engine: LTC/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 08:47:12,992 [INFO] live.engine: BCH/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 08:47:14,953 [INFO] live.engine: APT/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 08:47:16,714 [INFO] live.engine: ARB/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 08:47:18,490 [INFO] live.engine: OP/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 08:47:20,223 [INFO] live.engine: SUI/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 08:48:22,021 [INFO] live.engine: Heartbeat — 18 symbols, 0 open, equity=$74.53
+2026-06-08 08:51:32,906 [INFO] live.engine: Heartbeat — 18 symbols, 0 open, equity=$74.53
+2026-06-08 08:54:45,246 [INFO] live.engine: Heartbeat — 18 symbols, 0 open, equity=$74.53
+2026-06-08 08:58:08,296 [INFO] live.engine: Heartbeat — 18 symbols, 0 open, equity=$74.53
+2026-06-08 09:01:22,741 [INFO] live.engine: Heartbeat — 18 symbols, 0 open, equity=$74.53
+2026-06-08 09:04:37,815 [INFO] live.engine: Heartbeat — 18 symbols, 0 open, equity=$74.53
+2026-06-08 09:07:58,356 [INFO] live.engine: Heartbeat — 18 symbols, 0 open, equity=$74.53
+2026-06-08 09:11:22,360 [INFO] live.engine: Heartbeat — 18 symbols, 0 open, equity=$74.53
+2026-06-08 09:14:49,033 [INFO] live.engine: Heartbeat — 18 symbols, 0 open, equity=$74.53
+2026-06-08 09:18:12,285 [INFO] live.engine: Heartbeat — 18 symbols, 0 open, equity=$74.53
+2026-06-08 09:21:37,576 [INFO] live.engine: Heartbeat — 18 symbols, 0 open, equity=$74.53
+2026-06-08 09:24:59,414 [INFO] live.engine: Heartbeat — 18 symbols, 0 open, equity=$74.53
+2026-06-08 09:28:19,581 [INFO] live.engine: Heartbeat — 18 symbols, 0 open, equity=$74.53
+2026-06-08 09:31:42,659 [INFO] live.engine: Heartbeat — 18 symbols, 0 open, equity=$74.53
+2026-06-08 09:35:04,024 [INFO] live.engine: Heartbeat — 18 symbols, 0 open, equity=$74.53
+2026-06-08 09:38:24,613 [INFO] live.engine: Heartbeat — 18 symbols, 0 open, equity=$74.53
+2026-06-08 09:41:48,585 [INFO] live.engine: Heartbeat — 18 symbols, 0 open, equity=$74.53
+2026-06-08 09:44:57,275 [INFO] live.engine: Heartbeat — 18 symbols, 0 open, equity=$74.53
+2026-06-08 09:48:16,964 [INFO] live.engine: Heartbeat — 18 symbols, 0 open, equity=$74.53
+2026-06-08 09:51:35,267 [INFO] live.engine: Heartbeat — 18 symbols, 0 open, equity=$74.53
+2026-06-08 09:54:48,840 [INFO] live.engine: Heartbeat — 18 symbols, 0 open, equity=$74.53
+2026-06-08 09:58:03,344 [INFO] live.engine: Heartbeat — 18 symbols, 0 open, equity=$74.53
+2026-06-08 10:01:27,517 [INFO] live.engine: Heartbeat — 18 symbols, 0 open, equity=$74.53
+2026-06-08 10:04:40,861 [INFO] live.engine: Heartbeat — 18 symbols, 0 open, equity=$74.53
+2026-06-08 10:06:45,762 [INFO] run: Shutdown signal received, exiting...
+2026-06-08 10:07:04,295 [INFO] live.executor: [LIVE] Leverage 1x, cross margin set for 18 symbols
+2026-06-08 10:07:04,298 [INFO] live.engine: Restored 0 open position(s) across 18 symbols
+2026-06-08 10:07:04,299 [INFO] live.telegram_bot: Telegram bot thread started
+2026-06-08 10:07:04,299 [INFO] live.engine: Bot starting — bybit 18 symbols mode=LIVE
+2026-06-08 10:07:05,214 [INFO] live.telegram_bot: Telegram bot polling...
+2026-06-08 10:07:09,363 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getMe "HTTP/1.1 200 OK"
+2026-06-08 10:07:09,552 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/deleteWebhook "HTTP/1.1 200 OK"
+2026-06-08 10:07:09,554 [INFO] telegram.ext.Application: Application started
+2026-06-08 10:07:09,585 [INFO] live.engine: BTC/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 10:07:11,504 [INFO] live.engine: ETH/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 10:07:13,396 [INFO] live.engine: SOL/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 10:07:15,170 [INFO] live.engine: BNB/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 10:07:17,083 [INFO] live.engine: XRP/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 10:07:18,878 [INFO] live.engine: ADA/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 10:07:20,131 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:07:20,619 [INFO] live.engine: DOGE/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 10:07:22,204 [INFO] live.engine: DOT/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 10:07:23,871 [INFO] live.engine: AVAX/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 10:07:25,588 [INFO] live.engine: LINK/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 10:07:27,241 [INFO] live.engine: UNI/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 10:07:28,882 [INFO] live.engine: ATOM/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 10:07:30,325 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:07:30,455 [INFO] live.engine: LTC/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 10:07:32,089 [INFO] live.engine: BCH/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 10:07:33,795 [INFO] live.engine: APT/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 10:07:35,332 [INFO] live.engine: ARB/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 10:07:36,999 [INFO] live.engine: OP/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 10:07:38,772 [INFO] live.engine: SUI/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 10:07:40,518 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:07:50,711 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:08:00,903 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:08:11,096 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:08:21,288 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:08:31,481 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:08:40,573 [INFO] live.engine: Heartbeat — 18 symbols, 0 open, equity=$74.53
+2026-06-08 10:08:41,673 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:08:51,866 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:09:02,070 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:09:12,263 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:09:22,456 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:09:32,649 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:09:40,285 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:09:50,479 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:09:55,713 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:09:56,471 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/sendMessage "HTTP/1.1 200 OK"
+2026-06-08 10:10:05,906 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:10:16,099 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:10:26,302 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:10:36,497 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:10:46,692 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:10:56,885 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:11:07,079 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:11:17,272 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:11:27,466 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:11:37,659 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:11:47,016 [INFO] live.engine: Heartbeat — 18 symbols, 0 open, equity=$74.53
+2026-06-08 10:11:47,853 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:11:58,046 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:12:08,239 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:12:18,431 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:12:21,807 [INFO] run: Shutdown signal received, exiting...
+2026-06-08 10:13:13,883 [INFO] live.executor: [LIVE] Leverage 1x, cross margin set for 18 symbols
+2026-06-08 10:13:13,887 [INFO] live.engine: Restored 0 open position(s) across 18 symbols
+2026-06-08 10:13:13,887 [INFO] live.telegram_bot: Telegram bot thread started
+2026-06-08 10:13:13,888 [INFO] live.engine: Bot starting — bybit 18 symbols mode=LIVE
+2026-06-08 10:13:14,365 [INFO] live.telegram_bot: Telegram bot polling...
+2026-06-08 10:13:14,985 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getMe "HTTP/1.1 200 OK"
+2026-06-08 10:13:15,179 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/deleteWebhook "HTTP/1.1 200 OK"
+2026-06-08 10:13:15,181 [INFO] telegram.ext.Application: Application started
+2026-06-08 10:13:19,309 [INFO] live.engine: BTC/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 10:13:21,326 [INFO] live.engine: ETH/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 10:13:23,107 [INFO] live.engine: SOL/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 10:13:24,896 [INFO] live.engine: BNB/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 10:13:25,751 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:13:26,793 [INFO] live.engine: XRP/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 10:13:28,564 [INFO] live.engine: ADA/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 10:13:29,843 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:13:30,357 [INFO] live.engine: DOGE/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 10:13:32,262 [INFO] live.engine: DOT/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 10:13:33,999 [INFO] live.engine: AVAX/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 10:13:35,857 [INFO] live.engine: LINK/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 10:13:37,655 [INFO] live.engine: UNI/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 10:13:39,570 [INFO] live.engine: ATOM/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 10:13:40,034 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:13:41,414 [INFO] live.engine: LTC/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 10:13:44,161 [INFO] live.engine: BCH/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 10:13:46,043 [INFO] live.engine: APT/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 10:13:47,093 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:13:47,094 [ERROR] live.telegram_bot: Telegram reply error: ReplyKeyboardMarkup.__init__() got an unexpected keyword argument 'persistent'. Did you mean 'is_persistent'?
+2026-06-08 10:13:49,853 [INFO] live.engine: ARB/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 10:13:51,805 [INFO] live.engine: OP/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 10:13:53,765 [INFO] live.engine: SUI/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 10:13:57,284 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:14:07,475 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:14:17,666 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:14:27,856 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:14:38,050 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:14:48,243 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:14:55,564 [INFO] live.engine: Heartbeat — 18 symbols, 0 open, equity=$74.53
+2026-06-08 10:14:58,435 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:15:08,626 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:15:18,817 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:15:24,940 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:15:35,132 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:15:45,324 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:15:55,517 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:16:05,708 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:16:15,899 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:16:26,092 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:16:36,282 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:16:46,474 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:16:56,667 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:17:06,858 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:17:17,048 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:17:27,239 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:17:37,430 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:17:39,009 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:17:49,200 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:17:59,392 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:18:03,062 [INFO] live.engine: Heartbeat — 18 symbols, 0 open, equity=$74.53
+2026-06-08 10:18:09,582 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:18:19,805 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:18:27,658 [INFO] run: Shutdown signal received, exiting...
+2026-06-08 10:19:14,466 [INFO] live.executor: [LIVE] Leverage 1x, cross margin set for 18 symbols
+2026-06-08 10:19:14,470 [INFO] live.engine: Restored 0 open position(s) across 18 symbols
+2026-06-08 10:19:14,470 [INFO] live.telegram_bot: Telegram bot thread started
+2026-06-08 10:19:14,470 [INFO] live.engine: Bot starting — bybit 18 symbols mode=LIVE
+2026-06-08 10:19:14,953 [INFO] live.telegram_bot: Telegram bot polling...
+2026-06-08 10:19:15,626 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getMe "HTTP/1.1 200 OK"
+2026-06-08 10:19:15,814 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/deleteWebhook "HTTP/1.1 200 OK"
+2026-06-08 10:19:15,815 [INFO] telegram.ext.Application: Application started
+2026-06-08 10:19:20,544 [INFO] live.engine: BTC/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 10:19:23,975 [INFO] live.engine: ETH/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 10:19:25,725 [INFO] live.engine: SOL/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 10:19:26,394 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:19:27,472 [INFO] live.engine: BNB/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 10:19:29,513 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:19:29,514 [ERROR] live.telegram_bot: Telegram reply error: ReplyKeyboardMarkup.__init__() got an unexpected keyword argument 'persistent'. Did you mean 'is_persistent'?
+2026-06-08 10:19:30,465 [INFO] live.engine: XRP/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 10:19:32,285 [INFO] live.engine: ADA/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 10:19:34,217 [INFO] live.engine: DOGE/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 10:19:36,125 [INFO] live.engine: DOT/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 10:19:37,914 [INFO] live.engine: AVAX/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 10:19:39,706 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:19:39,761 [INFO] live.engine: LINK/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 10:19:41,516 [INFO] live.engine: UNI/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 10:19:43,819 [INFO] live.engine: ATOM/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 10:19:46,807 [INFO] live.engine: LTC/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 10:19:48,593 [INFO] live.engine: BCH/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 10:19:49,898 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:19:51,450 [INFO] live.engine: APT/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 10:19:53,182 [INFO] live.engine: ARB/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 10:19:54,971 [INFO] live.engine: OP/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 10:19:56,820 [INFO] live.engine: SUI/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 10:20:00,090 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:20:10,283 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:20:20,475 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:20:30,668 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:20:40,861 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:20:51,053 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:20:58,620 [INFO] live.engine: Heartbeat — 18 symbols, 0 open, equity=$74.53
+2026-06-08 10:21:01,246 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:21:04,369 [INFO] run: Shutdown signal received, exiting...
+2026-06-08 10:21:28,656 [INFO] live.executor: [LIVE] Leverage 1x, cross margin set for 18 symbols
+2026-06-08 10:21:28,660 [INFO] live.engine: Restored 0 open position(s) across 18 symbols
+2026-06-08 10:21:28,661 [INFO] live.telegram_bot: Telegram bot thread started
+2026-06-08 10:21:28,661 [INFO] live.engine: Bot starting — bybit 18 symbols mode=LIVE
+2026-06-08 10:21:29,134 [INFO] live.telegram_bot: Telegram bot polling...
+2026-06-08 10:21:29,706 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getMe "HTTP/1.1 200 OK"
+2026-06-08 10:21:29,895 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/deleteWebhook "HTTP/1.1 200 OK"
+2026-06-08 10:21:29,896 [INFO] telegram.ext.Application: Application started
+2026-06-08 10:21:33,116 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:21:33,492 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/sendMessage "HTTP/1.1 200 OK"
+2026-06-08 10:21:34,551 [INFO] live.engine: BTC/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 10:21:36,551 [INFO] live.engine: ETH/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 10:21:38,288 [INFO] live.engine: SOL/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 10:21:40,123 [INFO] live.engine: BNB/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 10:21:41,939 [INFO] live.engine: XRP/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 10:21:43,310 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:21:43,716 [INFO] live.engine: ADA/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 10:21:45,446 [INFO] live.engine: DOGE/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 10:21:47,337 [INFO] live.engine: DOT/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 10:21:49,313 [INFO] live.engine: AVAX/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 10:21:51,181 [INFO] live.engine: LINK/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 10:21:53,238 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:21:53,716 [INFO] live.engine: UNI/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 10:21:54,078 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/sendMessage "HTTP/1.1 200 OK"
+2026-06-08 10:21:56,448 [INFO] live.engine: ATOM/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 10:21:58,096 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:21:58,305 [INFO] live.engine: LTC/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 10:21:58,481 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/sendMessage "HTTP/1.1 200 OK"
+2026-06-08 10:22:00,091 [INFO] live.engine: BCH/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 10:22:03,063 [INFO] live.engine: APT/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 10:22:04,817 [INFO] live.engine: ARB/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 10:22:04,897 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:22:05,662 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/sendMessage "HTTP/1.1 200 OK"
+2026-06-08 10:22:07,012 [INFO] live.engine: OP/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 10:22:09,006 [INFO] live.engine: SUI/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 10:22:15,034 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:22:15,850 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/sendMessage "HTTP/1.1 200 OK"
+2026-06-08 10:22:25,225 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:22:35,414 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:22:45,606 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:22:55,798 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:23:05,992 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:23:10,807 [INFO] live.engine: Heartbeat — 18 symbols, 0 open, equity=$74.53
+2026-06-08 10:23:16,187 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:23:26,378 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:23:36,571 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:23:46,764 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:23:56,959 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:24:07,151 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:24:17,343 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:24:27,532 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:24:37,723 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:24:47,941 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:24:58,131 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:25:08,320 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:25:18,518 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:25:28,711 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:25:38,902 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:25:49,102 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:25:59,292 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:26:09,483 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:26:19,673 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:26:28,618 [INFO] live.engine: Heartbeat — 18 symbols, 0 open, equity=$74.53
+2026-06-08 10:26:29,882 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:26:40,071 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:26:50,262 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:27:00,454 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:27:10,645 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:27:20,837 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:27:31,028 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:27:41,221 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:27:51,413 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:28:01,609 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:28:11,801 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:28:21,997 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:28:32,187 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:28:42,435 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:28:52,627 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:29:02,816 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:29:13,006 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:29:23,195 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:29:33,388 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:29:43,578 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:29:44,704 [INFO] live.engine: Heartbeat — 18 symbols, 0 open, equity=$74.53
+2026-06-08 10:29:53,767 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:30:03,967 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:30:14,161 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:30:24,355 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:30:34,548 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:30:44,738 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:30:54,930 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:31:05,121 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:31:15,311 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:31:25,501 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:31:35,713 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:31:45,910 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:31:56,108 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:32:06,301 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:32:16,504 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:32:26,696 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:32:36,889 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:32:47,083 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:32:57,290 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:33:07,490 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:33:10,185 [INFO] live.engine: Heartbeat — 18 symbols, 0 open, equity=$74.53
+2026-06-08 10:33:17,700 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:33:27,890 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:33:38,081 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:33:48,270 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:33:58,462 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:34:08,652 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:34:18,847 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:34:29,041 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:34:39,239 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:34:49,429 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:34:59,620 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:35:09,812 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:35:20,008 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:35:30,203 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:35:40,395 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:35:50,584 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:36:00,776 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:36:10,966 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:36:21,157 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:36:31,351 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:36:41,539 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:36:51,730 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:36:58,939 [INFO] live.engine: Heartbeat — 18 symbols, 0 open, equity=$74.53
+2026-06-08 10:37:01,936 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:37:12,134 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:37:22,325 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:37:32,518 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:37:42,708 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:37:52,899 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:38:03,093 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:38:13,283 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:38:23,475 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:38:33,668 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:38:43,857 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:38:54,054 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:39:04,245 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:39:14,438 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:39:24,633 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:39:34,830 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:39:45,021 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:39:55,214 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:40:05,403 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:40:15,593 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:40:25,794 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:40:31,717 [INFO] live.engine: Heartbeat — 18 symbols, 0 open, equity=$74.53
+2026-06-08 10:40:35,989 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:40:46,216 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:40:56,418 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:41:06,616 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:41:16,817 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:41:27,007 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:41:37,203 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:41:47,392 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:41:57,584 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:42:07,777 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:42:18,039 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:42:28,324 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:42:38,519 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:42:48,711 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:42:58,905 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:43:09,094 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:43:19,286 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:43:29,475 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:43:39,669 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:43:44,902 [INFO] live.engine: Heartbeat — 18 symbols, 0 open, equity=$74.53
+2026-06-08 10:43:49,862 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:44:00,054 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:44:10,244 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:44:20,436 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:44:30,626 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:44:40,818 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:44:51,009 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:45:01,202 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:45:11,394 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:45:21,586 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:45:31,779 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:45:41,971 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:45:52,164 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:46:02,355 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:46:12,544 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:46:22,735 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:46:32,925 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:46:43,116 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:46:53,308 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:47:03,501 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:47:04,179 [INFO] live.engine: Heartbeat — 18 symbols, 0 open, equity=$74.53
+2026-06-08 10:47:13,695 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:47:23,889 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:47:34,079 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:47:44,271 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:47:54,461 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:48:04,653 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:48:14,843 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:48:25,034 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:48:35,223 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:48:45,417 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:48:55,608 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:49:05,798 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:49:15,990 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:49:26,188 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:49:36,387 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:49:46,579 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:49:56,772 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:50:06,963 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:50:17,159 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:50:18,263 [INFO] live.engine: Heartbeat — 18 symbols, 0 open, equity=$74.53
+2026-06-08 10:50:27,368 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:50:37,563 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:50:47,762 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:50:57,954 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:51:08,143 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:51:18,334 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:51:28,528 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:51:38,718 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:51:48,913 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:51:59,113 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:52:09,303 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:52:19,495 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:52:29,685 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:52:39,878 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:52:50,069 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:53:00,262 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:53:10,451 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:53:20,646 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:53:30,840 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:53:34,225 [INFO] live.engine: Heartbeat — 18 symbols, 0 open, equity=$74.53
+2026-06-08 10:53:41,063 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:53:51,256 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:54:01,484 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:54:11,684 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:54:21,882 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:54:32,071 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:54:42,264 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:54:52,454 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:55:02,643 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:55:12,844 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:55:23,039 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:55:33,231 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:55:43,422 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:55:53,617 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:56:03,819 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:56:14,010 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:56:24,200 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:56:34,389 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:56:44,582 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:56:51,225 [INFO] live.engine: Heartbeat — 18 symbols, 0 open, equity=$74.53
+2026-06-08 10:56:54,773 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:57:04,963 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:57:15,155 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:57:25,359 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:57:35,551 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:57:45,742 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:57:55,933 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:58:06,124 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:58:16,316 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:58:26,505 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:58:36,695 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:58:46,885 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:58:57,076 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:59:07,266 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:59:17,456 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:59:27,647 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:59:37,838 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:59:48,027 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 10:59:58,222 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:00:03,326 [INFO] live.engine: Heartbeat — 18 symbols, 0 open, equity=$74.53
+2026-06-08 11:00:08,418 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:00:18,610 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:00:28,803 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:00:38,997 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:00:49,189 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:00:59,378 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:01:09,567 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:01:19,766 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:01:29,975 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:01:40,175 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:01:50,365 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:02:00,582 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:02:10,771 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:02:20,963 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:02:31,156 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:02:41,350 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:02:51,550 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:03:01,744 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:03:11,934 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:03:22,125 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:03:25,536 [INFO] live.engine: Heartbeat — 18 symbols, 0 open, equity=$74.53
+2026-06-08 11:03:32,316 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:03:42,509 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:03:52,700 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:04:02,893 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:04:13,090 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:04:23,279 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:04:33,473 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:04:43,679 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:04:53,870 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:05:04,059 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:05:14,250 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:05:24,441 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:05:34,631 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:05:44,825 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:05:55,021 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:06:05,218 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:06:15,417 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:06:25,611 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:06:35,802 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:06:42,238 [INFO] live.engine: Heartbeat — 18 symbols, 0 open, equity=$74.53
+2026-06-08 11:06:45,991 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:06:56,182 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:07:06,411 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:07:16,605 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:07:26,794 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:07:36,986 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:07:47,178 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:07:57,369 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:08:07,561 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:08:17,753 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:08:27,942 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:08:38,132 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:08:48,322 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:08:58,514 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:09:08,706 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:09:18,896 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:09:29,088 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:09:39,277 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:09:49,473 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:09:59,664 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:10:09,860 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:10:20,055 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:10:20,263 [INFO] live.engine: Heartbeat — 18 symbols, 0 open, equity=$74.53
+2026-06-08 11:10:21,076 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/sendMessage "HTTP/1.1 200 OK"
+2026-06-08 11:10:30,248 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:10:40,438 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:10:50,628 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:11:00,819 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:11:11,019 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:11:21,215 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:11:31,404 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:11:41,594 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:11:51,784 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:12:01,985 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:12:12,177 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:12:22,381 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:12:32,571 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:12:42,767 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:12:52,957 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:13:03,151 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:13:13,353 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:13:23,649 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:13:33,840 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:13:38,061 [INFO] live.engine: Heartbeat — 18 symbols, 0 open, equity=$74.53
+2026-06-08 11:13:44,033 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:13:54,223 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:14:04,434 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:14:14,630 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:14:24,820 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:14:35,016 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:14:45,218 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:14:55,410 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:15:05,605 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:15:15,796 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:15:25,990 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:15:36,181 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:15:46,371 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:15:56,566 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:16:06,764 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:16:16,961 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:16:27,152 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:16:37,345 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:16:47,536 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:16:57,212 [INFO] live.engine: Heartbeat — 18 symbols, 0 open, equity=$74.53
+2026-06-08 11:16:57,728 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:17:07,919 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:17:18,110 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:17:28,302 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:17:38,494 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:17:48,685 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:17:58,874 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:18:09,064 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:18:19,256 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:18:29,453 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:18:39,646 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:18:49,937 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:19:00,151 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:19:10,345 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:19:20,534 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:19:30,724 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:19:40,913 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:19:51,103 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:20:01,297 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:20:11,491 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:20:12,605 [INFO] live.engine: Heartbeat — 18 symbols, 0 open, equity=$74.53
+2026-06-08 11:20:21,687 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:20:31,883 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:20:42,073 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:20:52,264 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:21:02,462 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:21:12,657 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:21:22,853 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:21:33,044 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:21:43,237 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:21:53,845 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:22:04,044 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:22:14,244 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:22:24,439 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:22:34,637 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:22:44,831 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:22:55,025 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:23:05,219 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:23:15,412 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:23:25,608 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:23:30,065 [INFO] live.engine: Heartbeat — 18 symbols, 0 open, equity=$74.53
+2026-06-08 11:23:35,803 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:23:45,999 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:23:56,192 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:24:06,386 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:24:16,582 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:24:26,775 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:24:36,969 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:24:47,165 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:24:57,360 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:25:07,554 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:25:17,747 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:25:27,940 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:25:38,133 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:25:48,325 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:25:58,518 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:26:08,712 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:26:18,908 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:26:29,101 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:26:39,323 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:26:44,159 [INFO] live.engine: Heartbeat — 18 symbols, 0 open, equity=$74.53
+2026-06-08 11:26:49,538 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:26:59,831 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:27:10,027 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:27:20,220 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:27:30,417 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:27:40,609 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:27:50,805 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:28:00,460 [INFO] run: Shutdown signal received, exiting...
+2026-06-08 11:35:41,212 [INFO] live.executor: [LIVE] Leverage 1x, cross margin set for 18 symbols
+2026-06-08 11:35:41,215 [INFO] live.engine: Restored 0 open position(s) across 18 symbols
+2026-06-08 11:35:41,215 [INFO] live.telegram_bot: Telegram bot thread started
+2026-06-08 11:35:41,215 [INFO] live.engine: Bot starting — bybit 18 symbols mode=LIVE
+2026-06-08 11:35:41,676 [INFO] live.telegram_bot: Telegram bot polling...
+2026-06-08 11:35:42,270 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getMe "HTTP/1.1 200 OK"
+2026-06-08 11:35:42,461 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/deleteWebhook "HTTP/1.1 200 OK"
+2026-06-08 11:35:42,464 [INFO] telegram.ext.Application: Application started
+2026-06-08 11:35:46,578 [INFO] live.engine: BTC/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 11:35:48,598 [INFO] live.engine: ETH/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 11:35:50,565 [INFO] live.engine: SOL/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 11:35:52,873 [INFO] live.engine: BNB/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 11:35:53,040 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:35:54,946 [INFO] live.engine: XRP/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 11:35:56,794 [INFO] live.engine: ADA/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 11:35:58,848 [INFO] live.engine: DOGE/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 11:36:00,792 [INFO] live.engine: DOT/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 11:36:03,233 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:36:05,244 [INFO] live.engine: AVAX/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 11:36:07,386 [INFO] live.engine: LINK/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 11:36:09,876 [INFO] live.engine: UNI/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 11:36:13,039 [INFO] live.engine: ATOM/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 11:36:13,426 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:36:15,193 [INFO] live.engine: LTC/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 11:36:17,161 [INFO] live.engine: BCH/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 11:36:19,116 [INFO] live.engine: APT/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 11:36:20,989 [INFO] live.engine: ARB/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 11:36:23,249 [INFO] live.engine: OP/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 11:36:23,622 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:36:25,390 [INFO] live.engine: SUI/USDT:USDT: first candle seen 2026-06-08 00:00:00+00:00 — will not trade this one
+2026-06-08 11:36:33,814 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:36:44,007 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:36:54,200 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:37:04,392 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:37:14,584 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:37:24,777 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:37:27,276 [INFO] live.engine: Heartbeat — 18 symbols, 0 open, equity=$74.53
+2026-06-08 11:37:34,969 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:37:45,163 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:37:55,366 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:38:05,560 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:38:15,753 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:38:25,945 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:38:36,137 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:38:46,332 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:38:56,523 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:39:06,716 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:39:16,909 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:39:27,101 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:39:37,297 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:39:47,490 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:39:57,683 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:40:07,876 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:40:18,070 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:40:28,262 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:40:38,454 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:40:48,647 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:40:49,806 [INFO] live.engine: Heartbeat — 18 symbols, 0 open, equity=$74.53
+2026-06-08 11:40:58,840 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:41:09,033 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:41:19,227 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:41:29,419 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:41:39,612 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:41:49,804 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:41:59,996 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:42:10,189 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:42:20,382 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:42:30,574 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:42:40,768 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:42:50,961 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:43:01,154 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:43:11,348 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:43:21,540 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:43:31,733 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:43:41,926 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:43:52,118 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:44:02,310 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:44:12,502 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:44:22,695 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:44:32,888 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:44:43,081 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:44:53,273 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:45:03,465 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:45:13,658 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:45:23,851 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:45:34,043 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:45:44,235 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:45:54,428 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:46:04,620 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:46:13,312 [INFO] live.engine: Heartbeat — 18 symbols, 0 open, equity=$74.53
+2026-06-08 11:46:14,813 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:46:25,005 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:46:35,198 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:46:45,390 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:46:55,584 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:47:05,777 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:47:15,973 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:47:26,165 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:47:36,358 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:47:46,550 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:47:56,742 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:48:06,934 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:48:17,138 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:48:27,331 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:48:37,524 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:48:47,718 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:48:57,910 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:49:08,102 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:49:18,294 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:49:28,487 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:49:38,679 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:49:40,214 [INFO] live.engine: Heartbeat — 18 symbols, 0 open, equity=$74.53
+2026-06-08 11:49:48,873 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:49:59,071 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:50:09,263 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:50:19,455 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:50:29,650 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:50:39,842 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:50:50,035 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:51:00,228 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:51:10,437 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:51:20,629 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:51:30,859 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:51:41,135 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:51:51,328 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:52:01,521 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:52:11,714 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:52:21,908 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:52:32,100 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:52:42,294 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:52:52,487 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:53:02,680 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:53:11,959 [INFO] live.engine: Heartbeat — 18 symbols, 0 open, equity=$74.53
+2026-06-08 11:53:12,873 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:53:23,067 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:53:33,260 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:53:43,453 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:53:53,645 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:54:03,838 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:54:14,033 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:54:24,227 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:54:34,420 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:54:44,617 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:54:54,810 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:55:05,004 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:55:15,196 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:55:25,389 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:55:35,581 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:55:45,774 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:55:55,968 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:56:06,160 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:56:16,353 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:56:26,547 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:56:36,739 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:56:40,496 [INFO] live.engine: Heartbeat — 18 symbols, 0 open, equity=$74.53
+2026-06-08 11:56:46,932 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:56:57,153 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:57:07,394 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:57:17,587 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:57:27,814 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:57:38,006 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:57:48,200 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:57:58,393 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:58:08,586 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:58:18,780 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:58:28,975 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:58:39,168 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:58:49,369 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:58:59,563 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:59:09,757 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:59:19,950 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:59:30,143 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:59:40,335 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:59:50,565 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 11:59:55,484 [INFO] live.engine: Heartbeat — 18 symbols, 0 open, equity=$74.53
+2026-06-08 12:00:00,758 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:00:02,091 [INFO] live.engine: ETH/USDT:USDT: new 4H candle 2026-06-08 04:00:00+00:00
+2026-06-08 12:00:04,377 [INFO] live.engine: SOL/USDT:USDT: new 4H candle 2026-06-08 04:00:00+00:00
+2026-06-08 12:00:10,642 [INFO] live.engine: ADA/USDT:USDT: new 4H candle 2026-06-08 04:00:00+00:00
+2026-06-08 12:00:10,951 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:00:14,593 [INFO] live.engine: DOT/USDT:USDT: new 4H candle 2026-06-08 04:00:00+00:00
+2026-06-08 12:00:16,720 [INFO] live.engine: AVAX/USDT:USDT: new 4H candle 2026-06-08 04:00:00+00:00
+2026-06-08 12:00:21,144 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:00:21,310 [INFO] live.engine: UNI/USDT:USDT: new 4H candle 2026-06-08 04:00:00+00:00
+2026-06-08 12:00:25,262 [INFO] live.engine: ATOM/USDT:USDT: new 4H candle 2026-06-08 04:00:00+00:00
+2026-06-08 12:00:27,547 [INFO] live.engine: LTC/USDT:USDT: new 4H candle 2026-06-08 04:00:00+00:00
+2026-06-08 12:00:29,894 [INFO] live.engine: BCH/USDT:USDT: new 4H candle 2026-06-08 04:00:00+00:00
+2026-06-08 12:00:31,336 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:00:32,245 [INFO] live.engine: APT/USDT:USDT: new 4H candle 2026-06-08 04:00:00+00:00
+2026-06-08 12:00:35,157 [INFO] live.engine: ARB/USDT:USDT: new 4H candle 2026-06-08 04:00:00+00:00
+2026-06-08 12:00:37,863 [INFO] live.engine: OP/USDT:USDT: new 4H candle 2026-06-08 04:00:00+00:00
+2026-06-08 12:00:39,997 [INFO] live.engine: SUI/USDT:USDT: new 4H candle 2026-06-08 04:00:00+00:00
+2026-06-08 12:00:41,530 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:00:51,723 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:01:01,916 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:01:12,109 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:01:22,303 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:01:32,496 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:01:42,690 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:01:43,606 [INFO] live.engine: BTC/USDT:USDT: new 4H candle 2026-06-08 04:00:00+00:00
+2026-06-08 12:01:49,054 [INFO] live.engine: BNB/USDT:USDT: new 4H candle 2026-06-08 04:00:00+00:00
+2026-06-08 12:01:50,914 [INFO] live.engine: XRP/USDT:USDT: new 4H candle 2026-06-08 04:00:00+00:00
+2026-06-08 12:01:52,883 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:01:54,479 [INFO] live.engine: DOGE/USDT:USDT: new 4H candle 2026-06-08 04:00:00+00:00
+2026-06-08 12:01:59,783 [INFO] live.engine: LINK/USDT:USDT: new 4H candle 2026-06-08 04:00:00+00:00
+2026-06-08 12:02:03,075 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:02:13,268 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:02:23,461 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:02:33,654 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:02:43,848 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:02:54,042 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:03:04,235 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:03:14,428 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:03:16,485 [INFO] live.engine: Heartbeat — 18 symbols, 0 open, equity=$74.53
+2026-06-08 12:03:24,634 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:03:34,828 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:03:45,021 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:03:55,217 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:04:05,411 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:04:15,604 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:04:25,797 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:04:35,990 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:04:46,183 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:04:56,376 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:05:06,570 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:05:16,763 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:05:26,956 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:05:37,149 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:05:47,343 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:05:57,535 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:06:07,729 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:06:17,922 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:06:28,115 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:06:38,308 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:06:48,502 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:06:50,428 [INFO] live.engine: Heartbeat — 18 symbols, 0 open, equity=$74.53
+2026-06-08 12:06:58,697 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:07:08,890 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:07:19,082 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:07:29,274 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:07:39,468 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:07:49,661 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:07:59,853 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:08:10,047 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:08:20,241 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:08:30,433 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:08:40,626 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:08:50,821 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:09:01,013 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:09:11,207 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:09:21,399 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:09:31,593 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:09:41,786 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:09:51,978 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:10:02,170 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:10:12,362 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:10:22,554 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:10:23,119 [INFO] live.engine: Heartbeat — 18 symbols, 0 open, equity=$74.53
+2026-06-08 12:10:32,746 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:10:42,939 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:10:53,162 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:11:03,357 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:11:13,550 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:11:23,743 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:11:33,937 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:11:44,131 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:11:54,325 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:12:04,518 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:12:14,711 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:12:24,947 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:12:35,205 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:12:45,399 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:12:55,592 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:13:05,785 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:13:15,978 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:13:26,171 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:13:36,364 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:13:44,470 [INFO] live.engine: Heartbeat — 18 symbols, 0 open, equity=$74.53
+2026-06-08 12:13:46,557 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:13:56,750 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:14:06,944 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:14:17,146 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:14:27,340 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:14:37,533 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:14:47,727 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:14:57,921 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:15:08,113 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:15:18,306 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:15:28,498 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:15:38,691 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:15:48,884 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:15:59,078 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:16:09,271 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:16:19,464 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:16:29,659 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:16:39,852 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:16:50,044 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:17:00,237 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:17:07,637 [INFO] live.engine: Heartbeat — 18 symbols, 0 open, equity=$74.53
+2026-06-08 12:17:10,429 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:17:20,623 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:17:30,816 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:17:41,009 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:17:51,201 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:18:01,394 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:18:11,587 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:18:21,780 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:18:32,186 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:18:42,379 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:18:52,572 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:18:53,798 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:18:54,601 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/sendMessage "HTTP/1.1 200 OK"
+2026-06-08 12:19:03,994 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:19:14,187 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:19:24,379 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:19:34,572 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:19:44,766 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:19:54,959 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:20:05,153 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:20:15,346 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:20:25,540 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:20:35,734 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:20:37,301 [INFO] live.engine: Heartbeat — 18 symbols, 0 open, equity=$74.53
+2026-06-08 12:20:45,927 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:20:56,120 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:21:06,314 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:21:16,531 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:21:26,725 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:21:36,920 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:21:47,114 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:21:57,308 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:22:07,502 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:22:17,696 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:22:27,891 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:22:38,093 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:22:45,808 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:22:46,664 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/sendMessage "HTTP/1.1 200 OK"
+2026-06-08 12:22:56,003 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:23:06,196 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:23:16,389 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:23:26,583 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:23:36,779 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:23:46,972 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:23:57,165 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:24:03,444 [INFO] live.engine: Heartbeat — 18 symbols, 0 open, equity=$74.53
+2026-06-08 12:24:07,358 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:24:17,551 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:24:27,745 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:24:37,938 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:24:48,131 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:24:58,327 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:25:08,521 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:25:18,717 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:25:28,911 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:25:39,104 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:25:49,297 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:25:59,491 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:26:09,685 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:26:19,879 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:26:30,072 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:26:40,265 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:26:50,459 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:27:00,652 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:27:10,845 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:27:21,038 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:27:30,800 [INFO] live.engine: Heartbeat — 18 symbols, 0 open, equity=$74.53
+2026-06-08 12:27:31,237 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:27:31,651 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/sendMessage "HTTP/1.1 200 OK"
+2026-06-08 12:27:41,431 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:27:51,650 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:28:01,843 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:28:12,037 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:28:22,229 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:28:32,423 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:28:42,617 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:28:52,811 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:29:03,004 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:29:13,197 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:29:23,465 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:29:33,720 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:29:43,916 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:29:54,109 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:30:04,303 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:30:14,504 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:30:24,697 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:30:31,962 [INFO] live.engine: Heartbeat — 18 symbols, 0 open, equity=$74.53
+2026-06-08 12:30:34,890 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:30:45,084 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:30:55,277 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:31:05,470 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:31:15,663 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:31:25,859 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:31:36,052 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:31:46,245 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:31:56,438 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:32:06,632 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:32:16,825 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:32:27,017 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:32:37,211 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:32:47,404 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:32:57,597 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:33:07,791 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:33:17,986 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:33:28,179 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:33:38,372 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:33:48,565 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:33:58,758 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:34:00,169 [INFO] live.engine: Heartbeat — 18 symbols, 0 open, equity=$74.53
+2026-06-08 12:34:08,951 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:34:19,143 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:34:29,337 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:34:39,530 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:34:49,723 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:34:59,918 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:35:10,110 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:35:20,304 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:35:30,497 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:35:40,690 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:35:50,883 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:36:01,075 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:36:11,679 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:36:21,870 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:36:32,061 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:36:42,251 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:36:52,442 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:37:02,633 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:37:12,824 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:37:23,014 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:37:26,496 [INFO] live.engine: Heartbeat — 18 symbols, 0 open, equity=$74.53
+2026-06-08 12:37:33,205 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:37:43,396 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:37:53,586 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:38:03,777 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:38:13,975 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:38:24,166 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:38:34,358 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:38:44,548 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:38:54,740 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:39:04,942 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:39:15,133 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:39:25,336 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:39:35,527 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:39:45,738 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
+2026-06-08 12:39:55,931 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8912918274:AAELR6N14j1DBnmZT-xeJj9Ti86HknF-_54/getUpdates "HTTP/1.1 200 OK"
