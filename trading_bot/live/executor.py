@@ -1,5 +1,6 @@
 import logging
-from typing import Optional
+import time
+from typing import Callable, Optional
 
 from exchange.connector import build_exchange
 
@@ -70,6 +71,18 @@ class LiveExecutor:
                 pass
         logger.info(f"[LIVE] Leverage {leverage}x, cross margin set for {len(symbols)} symbols")
 
+    def _retry_call(self, fn: Callable, label: str, retries: int = 3, delay: float = 1.0):
+        for attempt in range(1, retries + 1):
+            try:
+                return fn()
+            except Exception as e:
+                if attempt < retries:
+                    logger.warning(f"{label} failed (attempt {attempt}/{retries}): {e}")
+                    time.sleep(delay)
+                else:
+                    logger.error(f"{label} failed after {retries} attempts: {e}")
+                    raise
+
     def place_market_entry(self, symbol: str, side: int, qty: float,
                            entry_price: float, sl: float, tp: float) -> dict:
         side_str = "buy" if side == 1 else "sell"
@@ -86,7 +99,10 @@ class LiveExecutor:
                 "type": "Market",
             },
         }
-        order = self.ex.create_order(symbol, "market", side_str, qty, None, params)
+        order = self._retry_call(
+            lambda: self.ex.create_order(symbol, "market", side_str, qty, None, params),
+            f"[LIVE] {symbol} ENTER {side_str.upper()}",
+        )
         filled_price = order.get("average", order.get("price", entry_price))
         logger.info(
             f"[LIVE] {symbol} ENTER {side_str.upper()} qty={qty:.6f} @ {filled_price:.2f} "
@@ -98,10 +114,17 @@ class LiveExecutor:
                            exit_price: float) -> dict:
         side_str = "sell" if side == 1 else "buy"
         try:
-            self.ex.cancel_all_orders(symbol)
+            self._retry_call(
+                lambda: self.ex.cancel_all_orders(symbol),
+                f"[LIVE] {symbol} CANCEL_ORDERS",
+                retries=2, delay=1.0,
+            )
         except Exception:
-            pass
-        order = self.ex.create_market_order(symbol, side_str, qty)
+            logger.warning(f"[LIVE] {symbol} cancel_all_orders failed, proceeding")
+        order = self._retry_call(
+            lambda: self.ex.create_market_order(symbol, side_str, qty),
+            f"[LIVE] {symbol} EXIT {side_str.upper()}",
+        )
         logger.info(
             f"[LIVE] {symbol} EXIT {side_str.upper()} qty={qty:.6f} @ "
             f"{order.get('average', exit_price):.2f}"

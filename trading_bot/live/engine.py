@@ -8,20 +8,23 @@ import pytz
 
 from data.ohlcv import fetch_ohlcv
 from exchange.connector import build_exchange
-from live.config import load_config, save_config, allocate_capital
+from live.config import load_config, save_config
 from live.executor import build_executor
 from live.position_manager import Position, check_exit, update_trail
 
 logger = logging.getLogger(__name__)
 
 
-def _compute_quantity(alloc_capital: float, entry: float, sl: float,
-                      risk_percent: float, exchange=None, symbol=None) -> float:
+def _compute_quantity(total_capital: float, entry: float, sl: float,
+                      risk_percent: float, leverage: float = 1.0,
+                      exchange=None, symbol=None) -> float:
     risk_per_unit = abs(entry - sl)
     if risk_per_unit <= 0:
         return 0
-    risk_amount = alloc_capital * (risk_percent / 100.0)
+    risk_amount = total_capital * (risk_percent / 100.0)
     qty = risk_amount / risk_per_unit
+    max_notional = total_capital * leverage
+    qty = min(qty, max_notional / entry)
 
     if exchange and symbol:
         try:
@@ -54,7 +57,7 @@ class LiveEngine:
             )
 
         self.symbols: list = config.get("symbols", [])
-        self.allocations: dict = allocate_capital(self.symbols, config.get("capital", 100.0))
+        self.max_open_trades: int = config.get("max_open_trades", 3)
 
         self.positions: Dict[str, Optional[Position]] = {}
         self.last_candle_times: Dict[str, Optional[pd.Timestamp]] = {}
@@ -223,6 +226,11 @@ class LiveEngine:
         sig = last_signal.get("signal", 0)
 
         if sig != 0 and self.positions.get(symbol) is None:
+            open_count = sum(1 for p in self.positions.values() if p is not None)
+            if open_count >= self.max_open_trades:
+                logger.info(f"{symbol}: signal but open trades ({open_count}) >= max ({self.max_open_trades})")
+                return
+
             prev_entry = last_signal["entry_price"]
             prev_sl = last_signal["sl_price"]
             prev_tp = last_signal["tp_price"]
@@ -236,12 +244,13 @@ class LiveEngine:
             sl_price = prev_sl + diff
             tp_price = prev_tp + diff
 
-            alloc = self.allocations.get(symbol, self.config.get("capital", 100.0) / max(len(self.symbols), 1))
+            total_cap = self.config.get("capital", 100.0)
             risk_pct = sym_params.get("risk_percent", 1.0)
             qty = _compute_quantity(
-                alloc, entry_price, sl_price, risk_pct,
-                self.exchange if mode == "live" else None,
-                symbol if mode == "live" else None,
+                total_cap, entry_price, sl_price, risk_pct,
+                leverage=self.config.get("leverage", 1),
+                exchange=self.exchange if mode == "live" else None,
+                symbol=symbol if mode == "live" else None,
             )
             if qty <= 0:
                 return

@@ -42,6 +42,7 @@ DEFAULT_CONFIG = {
     "capital": 100.0,
     "max_daily_loss_pct": 10.0,
     "max_drawdown_pct": 20.0,
+    "max_open_trades": 3,
 }
 
 

@@ -1,5 +1,6 @@
 import ccxt
 import logging
+import time
 
 logger = logging.getLogger(__name__)
 
@@ -8,7 +9,7 @@ def get_exchange_names():
     return sorted(ccxt.exchanges)
 
 
-def build_exchange(exchange_id: str, api_key: str = "", api_secret: str = ""):
+def build_exchange(exchange_id: str, api_key: str = "", api_secret: str = "", retries: int = 3):
     exchange_class = getattr(ccxt, exchange_id, None)
     if exchange_class is None:
         logger.error(f"Unknown exchange: {exchange_id}")
@@ -18,14 +19,19 @@ def build_exchange(exchange_id: str, api_key: str = "", api_secret: str = ""):
         config["apiKey"] = api_key
     if api_secret:
         config["secret"] = api_secret
-    try:
-        ex = exchange_class(config)
-        if not api_key:
-            ex.load_markets()
-        return ex
-    except Exception as e:
-        logger.error(f"Failed to initialize {exchange_id}: {e}")
-        return None
+    for attempt in range(1, retries + 1):
+        try:
+            ex = exchange_class(config)
+            if not api_key:
+                ex.load_markets()
+            return ex
+        except Exception as e:
+            if attempt < retries:
+                logger.warning(f"Failed to init {exchange_id} (attempt {attempt}/{retries}): {e}")
+                time.sleep(2)
+            else:
+                logger.error(f"Failed to initialize {exchange_id} after {retries} attempts: {e}")
+                return None
 
 
 def validate_credentials(exchange_id: str, api_key: str, api_secret: str) -> bool:
