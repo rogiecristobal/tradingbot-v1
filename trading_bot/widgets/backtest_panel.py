@@ -23,6 +23,7 @@ STRATEGIES = [
     "5M Trend Pullback",
     "ATR Trend-Breakout",
     "IBR (Institutional Breakout Retest)",
+    "SLC (Structure-Level-Confirmation)",
 ]
 
 
@@ -54,9 +55,10 @@ class BacktestWorker(QObject):
             is_ny_range = self.strategy_name == "4H NY Range Re-Entry"
             is_atr = self.strategy_name == "ATR Trend-Breakout"
             is_ibr = self.strategy_name == "IBR (Institutional Breakout Retest)"
+            is_slc = self.strategy_name == "SLC (Structure-Level-Confirmation)"
             if is_atr:
                 tf, tf_label = "4h", "4-hour"
-            elif is_ibr:
+            elif is_ibr or is_slc:
                 tf, tf_label = "15m", "15-minute"
             else:
                 tf, tf_label = "5m", "5-minute"
@@ -129,6 +131,20 @@ class BacktestWorker(QObject):
                     swing_window=params["swing_window"],
                     fib_min=params["fib_min"],
                     fib_max=params["fib_max"],
+                    rr=params["rr"],
+                    risk_percent=params["risk_percent"],
+                    fee_rate=params.get("fee_rate", 0.001),
+                )
+            elif is_slc:
+                from core.strategy_slc import run_slc
+                df_signals = run_slc(
+                    df_ohlcv,
+                    ema_length=params["ema_length"],
+                    ema_slope_bars=params["ema_slope_bars"],
+                    swing_window=params["swing_window"],
+                    atr_period=params["atr_period"],
+                    impulse_mult=params["impulse_mult"],
+                    zone_buffer_atr=params["zone_buffer_atr"],
                     rr=params["rr"],
                     risk_percent=params["risk_percent"],
                     fee_rate=params.get("fee_rate", 0.001),
@@ -322,6 +338,17 @@ class BacktestPanel(QWidget):
             self._add_param("fib_min", "Fib Retrace Min", 0.382, 0.236, 0.5, 0.01)
             self._add_param("fib_max", "Fib Retrace Max", 0.618, 0.5, 0.786, 0.01)
             self._add_param("rr", "Risk:Reward", 2.0, 1.0, 10.0, 0.1)
+            self._add_param("risk_percent", "Risk per trade (%)", 1.0, 0.1, 10.0, 0.1)
+            self._add_param("fee_rate", "Fee rate (%)", self.state.fee_rate * 100, 0.0, 1.0, 0.01, 3)
+
+        elif name == "SLC (Structure-Level-Confirmation)":
+            self._add_param("ema_length", "EMA Length (4H)", 200, 50, 500, 1, is_int=True)
+            self._add_param("ema_slope_bars", "EMA Slope Bars", 5, 2, 20, 1, is_int=True)
+            self._add_param("swing_window", "Swing Window (15M)", 5, 2, 20, 1, is_int=True)
+            self._add_param("atr_period", "ATR Period", 14, 5, 50, 1, is_int=True)
+            self._add_param("impulse_mult", "Impulse ATR Multiplier", 1.5, 1.0, 5.0, 0.1)
+            self._add_param("zone_buffer_atr", "Zone Buffer (ATR)", 0.3, 0.1, 1.0, 0.1)
+            self._add_param("rr", "Risk:Reward", 2.0, 0.5, 10.0, 0.1)
             self._add_param("risk_percent", "Risk per trade (%)", 1.0, 0.1, 10.0, 0.1)
             self._add_param("fee_rate", "Fee rate (%)", self.state.fee_rate * 100, 0.0, 1.0, 0.01, 3)
 

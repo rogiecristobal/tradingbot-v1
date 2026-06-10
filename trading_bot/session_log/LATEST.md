@@ -1,95 +1,110 @@
-# Session Summary — 2026-06-08
+# Session: SLC Strategy (Structure-Level-Confirmation) + ccxt Startup Fix
 
-## What was built
+**Date:** 2026-06-10
 
-Two major feature sets were implemented in this session:
+---
 
-### 1. Five New Backtest Strategies (`core/`)
+## Summary
 
-Created 5 new strategy files following the existing architecture (accepts 5M OHLCV DataFrame, returns DataFrame with `signal`/`entry_price`/`sl_price`/`tp_price` columns):
+Built the SLC (Structure-Level-Confirmation) backtest strategy — a 3-tier multi-timeframe system (4H structure, 1H supply/demand zones, 15M confirmation + entry). Fixed a pre-existing startup hang caused by top-level `import ccxt`. The app now launches in ~1.4s vs. 30-90s previously.
 
-| File | Strategy | Key Logic |
-|------|----------|-----------|
-| `core/strategy_ema_pullback.py` | EMA 20/50 Pullback Scalping | EMA20 > EMA50 trend filter, pullback to EMA20, bullish/bearish candle close. SL mode param: `swing` (nearest swing low/high) or `atr` (ATR × multiplier). TP: 1:2 RR. |
-| `core/strategy_vwap_rejection.py` | VWAP Rejection Scalping | VWAP resets daily at 00:00 UTC. Rejection candle: price touches VWAP, closes in trend direction. SL: 0.1% below/above candle extreme. TP: 1:2 RR. |
-| `core/strategy_orb.py` | Opening Range Breakout | First 6 bars of each day (00:00–00:30 UTC) define range. Breakout with volume surge (×1.5 SMA) confirms entry. SL: opposite side of range. TP: 2× risk. |
-| `core/strategy_rsi_mean_reversion.py` | RSI Mean Reversion | RSI 14, oversold < 30 / overbought > 70. Entry on cross back above/below threshold. SL: nearest swing in last 20 bars. TP: 1.5:1 RR. |
-| `core/strategy_bb_reversal.py` | Bollinger Band Reversal | BB(20, 2). Candle closes outside band, next candle closes back inside. SL: signal candle extreme. TP: middle band (falls back to 2R if unattainable). |
+---
 
-**Modified:** `widgets/backtest_panel.py`
-- Added 5 entries to `STRATEGIES` list (now 9 total)
-- Added param blocks in `_rebuild_strategy_params()` — EMA Pullback has a `sl_mode` QComboBox (swing/atr)
-- Updated `_collect_params()` to handle `QComboBox` widgets (for `sl_mode`)
-- Added 5 `elif` branches in `BacktestWorker.run()` with lazy imports
+## Files Created
 
-### 2. Telegram Notifications + Remote Control (`live/`)
+### `trading_bot/core/strategy_slc.py` (new, 366 lines)
 
-| File | Action | Description |
-|------|--------|-------------|
-| `live/telegram_bot.py` | **Created** | TelegramBot class — runs async polling in a daemon thread. Sends notifications (startup, entry, exit, heartbeat, safety, errors). Handles 6 remote commands + button panel. |
-| `live/config.py` | Modified | Added `telegram_token`, `telegram_chat_id` to `DEFAULT_CONFIG`. Added `.env` loading for `TELEGRAM_BOT_TOKEN` and `TELEGRAM_CHAT_ID`. |
-| `live/engine.py` | Modified | Added `telegram` param to `__init__`. Added `_paused` / `_stopped` / `_telegram_heartbeat_count` flags. Startup notification, `_stopped` check in main loop, heartbeat every 30 min, entry/exit notifications, pause check before new entries, safety notifications. |
-| `live/run.py` | Modified | Instantiates `TelegramBot`, wires it into `LiveEngine`, starts bot thread. |
-| `Pipfile` | Modified | Added `python-telegram-bot >=20.0` dependency. |
+Full SLC strategy implementation following the spec from the "Systematic Crypto Version" video.
 
-**Notification types (bot → user):**
-- 🤖 Bot started (mode, exchange, symbols, capital)
-- 🟢 Trade entry (symbol, side, price, qty, SL, TP)
-- 🔴/🟢 Trade exit (symbol, reason, P&L, equity)
-- 📊 Heartbeat every 30 min (open trades, equity, drawdown %, daily P&L)
-- ⚠️ Max daily loss / max drawdown warnings
-- 🛑 Bot stopped
-- ⚠️ Tick errors
+**Architecture:** Fetches 15M OHLCV only; resamples internally to 1H (zone detection) and 4H (trend structure) via `pd.DataFrame.resample()`.
 
-**Remote commands (user → bot):**
+**Pipeline components:**
 
-| Command/Button | Action |
-|----------------|--------|
-| `/start`, 📊 Status | Bot state, mode, equity, open trades |
-| `/pause`, ⏸ Pause | Stop new entries (existing trades continue) |
-| `/resume`, ▶ Resume | Resume new entries |
-| `/stop`, 🛑 Stop | Shut down after current tick |
-| `/positions`, 📋 Positions | List all open positions with SL/TP |
-| `/help`, ❓ Help | Available commands |
+| Step | Timeframe | Logic |
+|---|---|---|
+| **S — Structure** | 4H (resampled) | EMA200 + slope over `ema_slope_bars`. Trend = 1 if price > EMA200 and slope > 0; -1 if price < EMA200 and slope < 0; 0 otherwise. Merged into 15M via `pd.merge_asof` with `.shift(1)` for lookahead safety. |
+| **L — Level** | 1H (resampled) | Stateful loop detecting bearish impulse candles (range > `impulse_mult * ATR`) after a bullish base → supply zone, and bullish impulses after a bearish base → demand zone. Zone = full range `[high, low]` of the base candle. Touch count increments on entry; zone invalid after 2 touches. Shifted +1 before merge into 15M. |
+| **C — Confirmation** | 15M | 4 detectors OR'd together: (1) bullish/bearish engulfing, (2) pin bar with wick ≥ 60% of range + body < 30%, (3) CHOCH via swing point break, (4) break of minor support/resistance. |
+| **Entry** | 15M | All 3 must align. SL = zone boundary ± `zone_buffer_atr * ATR`. TP = entry ± risk × fixed RR. |
 
-The button panel uses a persistent `ReplyKeyboardMarkup` with 2 rows of 3 buttons each.
+**8 adjustable UI params:** EMA Length, EMA Slope Bars, Swing Window, ATR Period, Impulse ATR Multiplier, Zone Buffer (ATR), Risk:Reward, Risk per trade.
 
-## Key Decisions
+**Helpers defined:** `_resample_ohlcv`, `_ema`, `_atr`, `_is_bull_engulfing`, `_is_bear_engulfing`, `_is_bull_pin_bar`, `_is_bear_pin_bar`, `_find_swing_highs`, `_find_swing_lows`.
 
-1. **VWAP reset**: Midnight UTC (standard for crypto — 24/7 market)
-2. **EMA Pullback SL**: Dual mode — `swing` (nearest swing low/high) or `atr` (ATR × multiplier), user-selectable via dropdown. Ready for future hybrid version.
-3. **ORB range**: First 6 × 5M bars of each day (00:00–00:30 UTC) — no midnight-UTC ORB since crypto never closes
-4. **BB TP**: Middle band (mean reversion target), with 2R fallback
-5. **Stop behavior**: `/stop` prevents new entries but lets existing trades reach SL/TP
-6. **Heartbeat**: Every 30 min (15 heartbeats × 2 min interval)
-7. **Telegram thread**: Daemon thread with own asyncio event loop; async message sending via `asyncio.run_coroutine_threadsafe()`
+---
 
-## Bugs Fixed
+## Files Modified
 
-1. **Missing `/start` handler** — `CommandHandler("start", self._cmd_start)` was registered in `_run_polling()` but the `_cmd_start` method was never defined. Added a welcome message + button panel on `/start`.
-2. **Wrong keyword argument** `persistent` in `ReplyKeyboardMarkup` — should be `is_persistent`. Error logged at `2026-06-08 10:13:47`: `ReplyKeyboardMarkup.__init__() got an unexpected keyword argument 'persistent'. Did you mean 'is_persistent'?`
+### `trading_bot/widgets/backtest_panel.py` (3 insertions)
+
+1. **Line 26** — Added `"SLC (Structure-Level-Confirmation)"` to `STRATEGIES` list
+2. **Lines 58, 61** — Added `is_slc` flag alongside `is_ibr`, shares 15M timeframe
+3. **Lines 138-151** — Added `elif is_slc:` block in `BacktestWorker.run()` importing and calling `run_slc()` with all 9 params
+4. **Lines 344-353** — Added `elif name == "SLC..."` block in `_rebuild_strategy_params()` with 9 param widgets
+
+### `trading_bot/exchange/connector.py` (bug fix)
+
+**Problem:** Top-level `import ccxt` at module startup imported all 110+ exchange classes, blocking the GUI for 30-90 seconds on Windows.
+
+**Fix:** Moved `import ccxt` into the two functions that need it (`get_exchange_names()` and `build_exchange()`). `validate_credentials()` and `get_markets()` already delegate to `build_exchange()`, so they needed no change.
+
+| Line | Before | After |
+|------|--------|-------|
+| 1 | `import ccxt` | *(removed)* |
+| 8 | `return sorted(ccxt.exchanges)` | `import ccxt` inside function first |
+| 13 | `exchange_class = getattr(ccxt, exchange_id, None)` | `import ccxt` inside function first |
+
+---
+
+## Bash Commands Executed
+
+| Command | Purpose | Result |
+|---------|---------|--------|
+| `pipenv run python -c "import py_compile; ..."` *×2* | Syntax check both changed .py files | PASS |
+| `pipenv run python -c "from core.strategy_slc import run_slc"` | Verify runtime import | PASS |
+| `pipenv run python -c "from widgets.backtest_panel import BacktestPanel, STRATEGIES"` | Verify UI registration + strategy list | 5 strategies printed |
+| `pipenv run python -c "..."` (mock 3000-bar DataFrame) | Smoke test strategy logic | 69 signals generated on random data, correct columns |
+| `pipenv run python -c "from widgets.settings_panel import SettingsPanel"` | Verify startup import no longer hangs | 0.66s (previously 30-90s) |
+| `pipenv run python -c "..."` (verbose startup timing) | Measure full app startup time | 1.39s total |
+
+---
 
 ## Errors Encountered
 
-1. `UnicodeDecodeError` when verifying Python files — fixed by specifying `encoding='utf-8'` in file reads
-2. `ReplyKeyboardMarkup.__init__() got an unexpected keyword argument 'persistent'` — fixed by renaming to `is_persistent`
-3. Pipenv not on `PATH` — run with full path: `& "$env:LOCALAPPDATA\Programs\Python\Python313\Scripts\pipenv.exe"`
+1. **`import ccxt` startup hang (30-90s)** — Top-level `import ccxt` in `connector.py` blocked GUI initialization. Fixed with lazy imports inside functions.
+
+2. **Bybit API connection failure** — Warnings `Failed to init bybit (attempt N/3): bybit GET https://api.bybit.com/v5/market/instruments-info?category=spot` appear at startup. These come from `build_exchange("bybit")` when `load_markets()` is called during validation (no API key mode). Root cause: firewall/network blocking Bybit API. Non-blocking — the QApplication event loop is already running by this point (it runs as a delayed log line after `app.exec()` starts). The app is fully usable for backtesting; only live trading/bybit data fetches will fail.
+
+---
 
 ## Known Issues
 
-1. **Strategy files not git-tracked** — 5 new `core/strategy_*.py` files may not have been committed to git
-2. **Live bot only runs ATR Trend-Breakout** — the live engine hardcodes `from core.strategy_atr_breakout import run_atr_breakout`. The 5 new strategies are only available in the backtest UI
-3. **No persistency** — All backtest results live in `AppState` / `st.session_state`, lost on restart
-4. **Slippage always 0.0** — no UI control exists
-5. **Bot needs PC running** — Telegram bot thread dies when the process stops. No cloud/24/7 hosting
-6. **Logs may grow large** — `live/logs/bot.log` accumulates with no rotation
+- **Bybit API blocked** — Same issue as previous sessions. The exchange's REST API (`api.bybit.com`) is inaccessible from this network. Workaround: use a different exchange or VPN.
+- **SLC untuned on real data** — Strategy passed smoke test on random data but hasn't been backtested with real OHLCV data. Zone detection thresholds (`impulse_mult=1.5`, `zone_buffer_atr=0.3`) may need tuning per market.
+- **No max_hold_bars** — Unlike NY Range (288 bars), SLC has no force-close mechanism. A runaway trade could theoretically hold indefinitely. Add a `max_hold_bars` param if needed.
+- **Zone invalidation is strict** — Invalidated after 2 touches. Some traders prefer tracking chop vs. clean breakout for the second touch. The strict model might miss re-entries after a clean displacement.
+- **CHOCH detection is basic** — Uses simple swing-point breakout. Doesn't distinguish between micro-structure shifts during ranging markets vs. genuine trend reversals. May produce false confirmation signals in choppy 15M action.
 
-## What To Continue With Next
+---
 
-- [ ] **Commit new strategy files** to git if not already tracked
-- [ ] **Support more strategies in live engine** — extend `_process_symbol()` to allow selecting which strategy to run per-symbol (via `config.json` or per-symbol param)
-- [ ] **Regime filter** — add market regime detection (trending vs ranging) for RSI Mean Reversion and Bollinger Reversal (as noted in the strategy spec)
-- [ ] **Log rotation** for `live/logs/bot.log`
-- [ ] **Server hosting** — deploy the live bot to a VPS so it runs 24/7 without your PC
-- [ ] **Add more remote commands** — `/settings` to show current params, `/cancel_all` to close all positions
-- [ ] **Inline keyboard buttons** — replace `ReplyKeyboardMarkup` with `InlineKeyboardMarkup` for a more polished UX (buttons inline with message text)
+## Key Decisions
+
+| Decision | Rationale |
+|----------|-----------|
+| **15M primary, resample to 1H/4H internally** | Single data fetch (one API call), cleaner code, matches IBR pattern. User confirmed. |
+| **Invalidate zone after 2 touches** | Matches spec (first/second interaction only). User confirmed. |
+| **Swing window = 5 bars (user-adjustable)** | Balances reactivity vs false signals. User requested making it a parameter. |
+| **Confidence = OR of 4 detectors** | Engulfing + pin bar + CHOCH + support/resistance break. Any single one is enough for entry when structure + zone align. |
+| **Lazy ccxt import** | Eliminates 30-90s startup delay. CCXT loads on-demand only when user opens Settings or runs a backtest. |
+| **Followed IBR pattern** for resampling, merge_asof, shift(1) lookahead protection | Proven pattern already in the codebase. The backtest engine and metrics pipeline work unchanged. |
+
+---
+
+## What to Continue With Next
+
+1. **Backtest SLC on real data** — Run on BTC/USDT or ETH/USDT with 90+ days of history. Tune thresholds.
+2. **Add `max_hold_bars` param** — Guard against runaway trades (e.g. 288 bars = 3 days on 15M).
+3. **Add stochastic RSI as optional bonus confirmation** — Spec mentions this as a non-required filter. Could increase win rate.
+4. **FVG detection** — Spec mentions FVG inside impulse as optional criterion for zone strength scoring.
+5. **Partial TP (TP1 = 1R, TP2 = next opposing zone)** — The spec's "better version" of TP logic.
+6. **Fix Bybit API connectivity** — If live trading on Bybit is needed, resolve firewall/VPN issue.

@@ -1,5 +1,6 @@
 import asyncio
 import logging
+import os
 import threading
 from typing import Optional
 
@@ -17,12 +18,13 @@ class TelegramBot:
         self._app: Optional[Application] = None
         self._loop: Optional[asyncio.AbstractEventLoop] = None
         self._thread: Optional[threading.Thread] = None
+        self.startup_text: str = ""
 
     def _build_keyboard(self):
         return ReplyKeyboardMarkup(
             [
                 ["📊 Status", "⏸ Pause", "▶ Resume"],
-                ["🛑 Stop", "📋 Positions", "❓ Help"],
+                ["🛑 Stop", "📋 Positions", "📋 Logs"],
             ],
             resize_keyboard=True,
             is_persistent=True,
@@ -40,16 +42,28 @@ class TelegramBot:
         if self._app:
             self._app.stop()
 
+    async def _on_startup(self, app: Application):
+        msg = self.startup_text or "🤖 Bot online"
+        try:
+            await app.bot.send_message(
+                chat_id=self.chat_id, text=msg,
+                reply_markup=self._build_keyboard(),
+            )
+            logger.info("Startup notification sent via Telegram")
+        except Exception as e:
+            logger.warning(f"Startup notification failed: {e}")
+
     def _run_polling(self):
         self._loop = asyncio.new_event_loop()
         asyncio.set_event_loop(self._loop)
-        self._app = ApplicationBuilder().token(self.token).build()
+        self._app = ApplicationBuilder().token(self.token).post_init(self._on_startup).build()
         self._app.add_handler(CommandHandler("start", self._cmd_start))
         self._app.add_handler(CommandHandler("status", self._cmd_status))
         self._app.add_handler(CommandHandler("pause", self._cmd_pause))
         self._app.add_handler(CommandHandler("resume", self._cmd_resume))
         self._app.add_handler(CommandHandler("stop", self._cmd_stop))
         self._app.add_handler(CommandHandler("positions", self._cmd_positions))
+        self._app.add_handler(CommandHandler("logs", self._cmd_logs))
         self._app.add_handler(CommandHandler("help", self._cmd_help))
         self._app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, self._handle_button))
         logger.info("Telegram bot polling...")
@@ -61,7 +75,10 @@ class TelegramBot:
     def send(self, text: str):
         if not self._app or not self._loop or not self._loop.is_running():
             return
-        asyncio.run_coroutine_threadsafe(self._send(text), self._loop)
+        try:
+            asyncio.run_coroutine_threadsafe(self._send(text), self._loop)
+        except RuntimeError:
+            logger.debug("Telegram send skipped — interpreter shutting down")
 
     async def _send(self, text: str):
         try:
@@ -159,6 +176,25 @@ class TelegramBot:
             lines.append("No open positions.")
         await self._reply(update, "\n\n".join(lines))
 
+    async def _cmd_logs(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
+        if not self._is_authorized(update):
+            return
+        log_path = os.path.join(os.path.dirname(__file__), "logs", "bot.log")
+        if not os.path.exists(log_path):
+            await self._reply(update, "No log file found.")
+            return
+        try:
+            with open(log_path, "r", encoding="utf-8", errors="backslashreplace") as f:
+                lines = f.readlines()
+            tail = lines[-50:]
+            text = "".join(tail)
+            if len(text) > 4000:
+                text = "..." + text[-3997:]
+            await self._reply(update, f"📋 Last {len(tail)} log lines:\n```\n{text}\n```")
+        except Exception as e:
+            logger.error(f"Error reading logs: {e}")
+            await self._reply(update, f"Error reading logs: {e}")
+
     async def _cmd_help(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
         if not self._is_authorized(update):
             return
@@ -169,6 +205,7 @@ class TelegramBot:
             "/resume — Resume new entries\n"
             "/stop — Stop bot (no new entries after current tick)\n"
             "/positions — List all open positions\n"
+            "/logs — Show last 50 log lines\n"
             "/help — Show this message"
         )
         await self._reply(update, help_text)
@@ -181,7 +218,7 @@ class TelegramBot:
             "▶ Resume": self._cmd_resume,
             "🛑 Stop": self._cmd_stop,
             "📋 Positions": self._cmd_positions,
-            "❓ Help": self._cmd_help,
+            "📋 Logs": self._cmd_logs,
         }
         handler = routing.get(text)
         if handler:

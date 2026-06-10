@@ -1,4 +1,3 @@
-import ccxt
 import logging
 import time
 
@@ -6,10 +5,12 @@ logger = logging.getLogger(__name__)
 
 
 def get_exchange_names():
+    import ccxt
     return sorted(ccxt.exchanges)
 
 
 def build_exchange(exchange_id: str, api_key: str = "", api_secret: str = "", retries: int = 3):
+    import ccxt
     exchange_class = getattr(ccxt, exchange_id, None)
     if exchange_class is None:
         logger.error(f"Unknown exchange: {exchange_id}")

@@ -2,6 +2,7 @@ import logging
 import os
 import signal
 import sys
+import time
 
 from exchange.connector import build_exchange
 from live.config import load_config, allocate_capital
@@ -77,21 +78,52 @@ def main():
     )
     engine = LiveEngine(config, telegram=telegram)
     telegram.engine = engine
-    telegram.start()
 
     if display_capital > 0:
         engine.executor.equity = display_capital
         engine.peak_equity = display_capital
         engine.daily_start_equity = display_capital
 
+    telegram.startup_text = (
+        f"🤖 Bot online\n"
+        f"Exchange: {config['exchange_id']}\n"
+        f"Mode: {mode.upper()}\n"
+        f"Symbols: {len(symbols)}\n"
+        f"Capital: ${display_capital:.2f}"
+    )
+    telegram.start()
+
+    shutdown_flag = False
+
     def shutdown(sig, frame):
-        logger.info("Shutdown signal received, exiting...")
-        sys.exit(0)
+        nonlocal shutdown_flag
+        logger.info("Shutdown signal received — exiting after current tick...")
+        shutdown_flag = True
+        if engine:
+            engine._stopped = True
 
     signal.signal(signal.SIGINT, shutdown)
     signal.signal(signal.SIGTERM, shutdown)
 
-    engine.start()
+    while not shutdown_flag:
+        engine.start()
+        if shutdown_flag:
+            break
+        logger.info("Bot stopped — restarting in 3s...")
+        time.sleep(3)
+        if shutdown_flag:
+            break
+        config = load_config()
+        symbols = config.get("symbols", [])
+        engine = LiveEngine(config, telegram=telegram)
+        telegram.engine = engine
+        cap = config.get("capital", 0)
+        if cap > 0:
+            engine.executor.equity = cap
+            engine.peak_equity = cap
+            engine.daily_start_equity = cap
+        telegram.send("🔄 Bot restarted")
+        logger.info(f"Restarted — {len(symbols)} symbols, capital=${cap:.2f}")
 
 
 if __name__ == "__main__":

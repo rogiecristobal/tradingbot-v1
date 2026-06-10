@@ -11,6 +11,7 @@ from exchange.connector import build_exchange
 from live.config import load_config, save_config
 from live.executor import build_executor
 from live.position_manager import Position, check_exit, update_trail
+from live.news_checker import check_news
 
 logger = logging.getLogger(__name__)
 
@@ -107,7 +108,10 @@ class LiveEngine:
                 logger.exception(f"Tick error: {e}")
                 if self.telegram:
                     self.telegram.send(f"⚠️ Tick error: {e}")
-            time.sleep(60)
+            for _ in range(60):
+                if self._stopped:
+                    break
+                time.sleep(1)
 
     def _current_price(self, symbol: str) -> Optional[float]:
         if self.exchange:
@@ -138,6 +142,8 @@ class LiveEngine:
             logger.warning(f"[LIVE] {symbol} reconciliation failed: {e}")
 
     def _tick(self):
+        if self._stopped:
+            return
         mode = self.config.get("mode", "paper")
 
         # ── 1. Prices + reconcile (live mode) ──
@@ -265,75 +271,95 @@ class LiveEngine:
         sym_params = dict(params)
         sym_params.update(self.config.get("symbol_params", {}).get(symbol, {}))
         signals_df = run_atr_breakout(df, **sym_params)
+
+        # ── Trade decision ──
         if signals_df.empty:
+            logger.info(f"{symbol}: no trade this candle — strategy returned no data")
             return
 
         last_signal = signals_df.iloc[-1]
         sig = last_signal.get("signal", 0)
 
-        if sig != 0 and self.positions.get(symbol) is None:
-            if self._paused:
-                logger.info(f"{symbol}: paused — skipping entry")
-                return
-            open_count = sum(1 for p in self.positions.values() if p is not None)
-            if open_count >= self.max_open_trades:
-                logger.info(f"{symbol}: signal but open trades ({open_count}) >= max ({self.max_open_trades})")
-                return
+        if self.positions.get(symbol) is not None:
+            logger.info(f"{symbol}: no trade this candle — already in position")
+            return
 
-            prev_entry = last_signal["entry_price"]
-            prev_sl = last_signal["sl_price"]
-            prev_tp = last_signal["tp_price"]
+        if sig == 0:
+            logger.info(f"{symbol}: no trade this candle — no signal")
+            return
 
-            if mode == "live" and current_price is not None:
-                entry_price = current_price
-            else:
-                entry_price = latest_bar["close"]
+        if self._paused:
+            logger.info(f"{symbol}: no trade this candle — paused")
+            return
 
-            diff = entry_price - prev_entry
-            sl_price = prev_sl + diff
-            tp_price = prev_tp + diff
+        open_count = sum(1 for p in self.positions.values() if p is not None)
+        if open_count >= self.max_open_trades:
+            logger.info(f"{symbol}: no trade this candle — max open trades ({open_count})")
+            return
 
-            total_cap = self.config.get("capital", 100.0)
-            risk_pct = sym_params.get("risk_percent", 1.0)
-            qty = _compute_quantity(
-                total_cap, entry_price, sl_price, risk_pct,
-                leverage=self.config.get("leverage", 1),
-                exchange=self.exchange if mode == "live" else None,
-                symbol=symbol if mode == "live" else None,
-            )
-            if qty <= 0:
-                return
-
-            atr_val = last_signal.get("atr", 0)
-            if pd.isna(atr_val):
-                atr_val = 0
-
-            self.executor.place_market_entry(symbol, sig, qty, entry_price, sl_price, tp_price)
-
-            self.positions[symbol] = Position(
-                side=sig,
-                entry_time=str(latest_time),
-                entry_price=entry_price,
-                quantity=qty,
-                sl_price=sl_price,
-                tp_price=tp_price,
-                atr_at_entry=atr_val,
-                highest_price=entry_price,
-                lowest_price=entry_price,
-            )
-            logger.info(
-                f"{symbol} ENTERED {'LONG' if sig == 1 else 'SHORT'} "
-                f"qty={qty:.6f} @ {entry_price:.2f} "
-                f"SL={sl_price:.2f} TP={tp_price:.2f}"
-            )
+        news_headlines = check_news(symbol)
+        if news_headlines:
+            logger.info(f"{symbol} news: {' | '.join(news_headlines[:3])}")
             if self.telegram:
-                side_str = "LONG" if sig == 1 else "SHORT"
-                self.telegram.send(
-                    f"🟢 {symbol} ENTER {side_str}\n"
-                    f"Entry: ${entry_price:.2f}\n"
-                    f"Qty: {qty:.6f}\n"
-                    f"SL: ${sl_price:.2f} | TP: ${tp_price:.2f}"
-                )
+                lines = "\n".join(f"• {h}" for h in news_headlines[:3])
+                self.telegram.send(f"📰 {symbol} headlines:\n{lines}")
+
+        prev_entry = last_signal["entry_price"]
+        prev_sl = last_signal["sl_price"]
+        prev_tp = last_signal["tp_price"]
+
+        if mode == "live" and current_price is not None:
+            entry_price = current_price
+        else:
+            entry_price = latest_bar["close"]
+
+        diff = entry_price - prev_entry
+        sl_price = prev_sl + diff
+        tp_price = prev_tp + diff
+
+        total_cap = self.config.get("capital", 100.0)
+        risk_pct = sym_params.get("risk_percent", 1.0)
+        qty = _compute_quantity(
+            total_cap, entry_price, sl_price, risk_pct,
+            leverage=self.config.get("leverage", 1),
+            exchange=self.exchange if mode == "live" else None,
+            symbol=symbol if mode == "live" else None,
+        )
+        if qty <= 0:
+            logger.info(f"{symbol}: no trade this candle — quantity below minimum")
+            return
+
+        atr_val = last_signal.get("atr", 0)
+        if pd.isna(atr_val):
+            atr_val = 0
+
+        logger.info(
+            f"{symbol} ENTERING {'LONG' if sig == 1 else 'SHORT'} "
+            f"qty={qty:.6f} @ {entry_price:.2f} "
+            f"SL={sl_price:.2f} TP={tp_price:.2f}"
+        )
+
+        self.executor.place_market_entry(symbol, sig, qty, entry_price, sl_price, tp_price)
+
+        self.positions[symbol] = Position(
+            side=sig,
+            entry_time=str(latest_time),
+            entry_price=entry_price,
+            quantity=qty,
+            sl_price=sl_price,
+            tp_price=tp_price,
+            atr_at_entry=atr_val,
+            highest_price=entry_price,
+            lowest_price=entry_price,
+        )
+        if self.telegram:
+            side_str = "LONG" if sig == 1 else "SHORT"
+            self.telegram.send(
+                f"🟢 {symbol} ENTER {side_str}\n"
+                f"Entry: ${entry_price:.2f}\n"
+                f"Qty: {qty:.6f}\n"
+                f"SL: ${sl_price:.2f} | TP: ${tp_price:.2f}"
+            )
 
     def _check_safety(self):
         equity = self.executor.equity
