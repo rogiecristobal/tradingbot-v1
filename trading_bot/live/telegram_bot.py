@@ -19,6 +19,8 @@ class TelegramBot:
         self._loop: Optional[asyncio.AbstractEventLoop] = None
         self._thread: Optional[threading.Thread] = None
         self.startup_text: str = ""
+        self._ready = False
+        self._send_queue: list = []
 
     def _build_keyboard(self):
         return ReplyKeyboardMarkup(
@@ -42,38 +44,14 @@ class TelegramBot:
         if self._app:
             self._app.stop()
 
-    async def _on_startup(self, app: Application):
-        msg = self.startup_text or "🤖 Bot online"
-        try:
-            await app.bot.send_message(
-                chat_id=self.chat_id, text=msg,
-                reply_markup=self._build_keyboard(),
-            )
-            logger.info("Startup notification sent via Telegram")
-        except Exception as e:
-            logger.warning(f"Startup notification failed: {e}")
-
-    def _run_polling(self):
-        self._loop = asyncio.new_event_loop()
-        asyncio.set_event_loop(self._loop)
-        self._app = ApplicationBuilder().token(self.token).post_init(self._on_startup).build()
-        self._app.add_handler(CommandHandler("start", self._cmd_start))
-        self._app.add_handler(CommandHandler("status", self._cmd_status))
-        self._app.add_handler(CommandHandler("pause", self._cmd_pause))
-        self._app.add_handler(CommandHandler("resume", self._cmd_resume))
-        self._app.add_handler(CommandHandler("stop", self._cmd_stop))
-        self._app.add_handler(CommandHandler("positions", self._cmd_positions))
-        self._app.add_handler(CommandHandler("logs", self._cmd_logs))
-        self._app.add_handler(CommandHandler("help", self._cmd_help))
-        self._app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, self._handle_button))
-        logger.info("Telegram bot polling...")
-        try:
-            self._app.run_polling()
-        except Exception as e:
-            logger.error(f"Telegram polling error: {e}")
-
     def send(self, text: str):
-        if not self._app or not self._loop or not self._loop.is_running():
+        if not self._app or not self._loop:
+            self._send_queue.append(text)
+            logger.debug("Telegram not ready — queued message")
+            return
+        if not self._ready:
+            self._send_queue.append(text)
+            logger.debug("Telegram not ready — queued message")
             return
         try:
             asyncio.run_coroutine_threadsafe(self._send(text), self._loop)
@@ -89,11 +67,58 @@ class TelegramBot:
         except Exception as e:
             logger.error(f"Telegram send error: {e}")
 
+    async def _flush_queue(self):
+        for text in self._send_queue:
+            try:
+                await self._app.bot.send_message(
+                    chat_id=self.chat_id, text=text,
+                    reply_markup=self._build_keyboard(),
+                )
+            except Exception as e:
+                logger.warning(f"Telegram flush failed for queued message: {e}")
+        self._send_queue.clear()
+
     async def _reply(self, update: Update, text: str):
         try:
             await update.message.reply_text(text, reply_markup=self._build_keyboard())
         except Exception as e:
             logger.error(f"Telegram reply error: {e}")
+
+    def _run_polling(self):
+        self._loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(self._loop)
+        self._app = ApplicationBuilder().token(self.token).build()
+        self._app.add_handler(CommandHandler("start", self._cmd_start))
+        self._app.add_handler(CommandHandler("status", self._cmd_status))
+        self._app.add_handler(CommandHandler("pause", self._cmd_pause))
+        self._app.add_handler(CommandHandler("resume", self._cmd_resume))
+        self._app.add_handler(CommandHandler("stop", self._cmd_stop))
+        self._app.add_handler(CommandHandler("positions", self._cmd_positions))
+        self._app.add_handler(CommandHandler("logs", self._cmd_logs))
+        self._app.add_handler(CommandHandler("help", self._cmd_help))
+        self._app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, self._handle_button))
+        logger.info("Telegram bot polling...")
+        try:
+            self._loop.run_until_complete(self._manual_poll())
+        except Exception as e:
+            logger.error(f"Telegram polling error: {e}")
+
+    async def _manual_poll(self):
+        await self._app.initialize()
+        await self._app.start()
+        await self._app.updater.start_polling()
+        self._ready = True
+        if self.startup_text:
+            try:
+                await self._app.bot.send_message(
+                    chat_id=self.chat_id, text=self.startup_text,
+                    reply_markup=self._build_keyboard(),
+                )
+                logger.info("Startup notification sent via Telegram")
+            except Exception as e:
+                logger.warning(f"Startup notification failed: {e}")
+        await self._flush_queue()
+        await asyncio.Event().wait()
 
     # ── Command handlers ──
 
