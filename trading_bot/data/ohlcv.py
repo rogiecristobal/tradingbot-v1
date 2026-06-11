@@ -37,8 +37,10 @@ def fetch_ohlcv(
         df = pd.read_parquet(cache_path)
         if not df.empty:
             latest = df.index.max()
+            earliest = df.index.min()
             cached_end = latest.strftime("%Y-%m-%d")
-            if cached_end >= end_date:
+            cached_start = earliest.strftime("%Y-%m-%d")
+            if cached_end >= end_date and cached_start <= start_date:
                 start_ts = pd.Timestamp(start_date, tz=pytz.UTC)
                 end_ts = pd.Timestamp(end_date, tz=pytz.UTC) + timedelta(days=1)
                 mask = (df.index >= start_ts) & (df.index <= end_ts)
