@@ -24,12 +24,39 @@ pipenv run python main.py
 - Create the venv and install dependencies: `pipenv install` (reads `Pipfile`, venv goes to `~/.virtualenvs/trading_bot-*/`).
 - To run a one-off command: `pipenv run <command>`.
 - To activate an interactive shell: `pipenv shell`.
-- Dependencies: ccxt, pandas, numpy, pytz, pyqt6, pyqtgraph.
+- Dependencies: ccxt, pandas, numpy, pytz, python-telegram-bot, pyarrow, feedparser.
 - If `pipenv` is not on PATH:
   ```powershell
   pip install pipenv
   & "$env:LOCALAPPDATA\Programs\Python\Python313\Scripts\pipenv.exe" run python main.py
   ```
+
+## Termux (Android)
+
+See `SETUP_TERMUX.md` for full guide. The Streamlit web UI is the recommended
+way to use the bot on a phone.
+
+```bash
+pkg install python git openssl-tool binutils -y
+cd trading_bot
+cp .env.example .env          # then nano .env to fill in keys
+pip install -r requirements.txt
+
+# Web UI (backtest + live bot control) — opens at http://localhost:8501
+streamlit run streamlit_app.py
+
+# CLI backtest only
+python backtest_cli.py --symbol ETH/USDT --strategy atr-breakout
+
+# Headless live bot only
+python -m live.run
+```
+
+The Streamlit UI has two pages:
+- **Backtest** — all 5 strategies with Plotly charts, trade log, monthly returns
+- **Live Bot** — start/stop bot, view positions, tail logs, edit config
+
+A CLI backtest script (`backtest_cli.py`) is also available. Run `python backtest_cli.py --help` for options.
 
 ## Architecture
 
@@ -83,6 +110,7 @@ widgets/
 ## Live bot (ATR Trend-Breakout on Bybit perp)
 
 ```
+backtest_cli.py            CLI backtest runner (Termux-friendly, all 5 strategies)
 live/
 ├── config.py              JSON load/save (symbols, params, API keys via .env, positions)
 ├── position_manager.py    SL/TP/trail math (mirrors backtest_engine.py logic)
@@ -91,6 +119,9 @@ live/
 └── run.py                 CLI entry point
 config.json                Saved settings (gitignored — never commit API keys)
 .env                       API keys only (gitignored — optional, overrides config.json)
+.env.example               API key template (safe to commit)
+requirements.txt           pip dependencies for Termux/pip users
+SETUP_TERMUX.md            Full Android setup guide
 ```
 
 ### Run (paper mode — default)
