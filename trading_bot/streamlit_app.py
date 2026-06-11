@@ -128,19 +128,31 @@ class _PortfolioTrade(Trade):
 
 def _portfolio_backtest(signal_dfs, capital, risk_pct, fee_rate, max_hold_bars,
                         trail_act, trail_off, max_concurrent=999):
-    timestamps = list(list(signal_dfs.values())[0].index)
+    # Align all symbol DataFrames to the union of all timestamps
+    all_ts = sorted(set.union(*(set(df.index) for df in signal_dfs.values())))
+    reindexed = {}
+    for sym, df in signal_dfs.items():
+        ohlc = df[["open", "high", "low", "close"]].reindex(all_ts).ffill()
+        extra = pd.DataFrame(index=all_ts)
+        for col in ["signal", "entry_price", "sl_price", "tp_price", "atr"]:
+            if col in df.columns:
+                extra[col] = df[col].reindex(all_ts)
+        merged = pd.concat([ohlc, extra], axis=1)
+        merged["signal"] = merged["signal"].fillna(0).astype(int)
+        reindexed[sym] = merged
+
     pool = float(capital)
     positions = {}
     all_trades = []
     equity_curve = []
 
-    for i in range(len(timestamps)):
-        t = timestamps[i]
+    for i in range(len(all_ts)):
+        t = all_ts[i]
 
         # ── Check SL/TP for all open positions ──
         for sym in list(positions.keys()):
             pos = positions[sym]
-            bar = signal_dfs[sym].iloc[i]
+            bar = reindexed[sym].iloc[i]
             low, high, close = bar["low"], bar["high"], bar["close"]
 
             is_long = pos.side == 1
@@ -216,12 +228,12 @@ def _portfolio_backtest(signal_dfs, capital, risk_pct, fee_rate, max_hold_bars,
 
         # ── Enter new trades from previous bar ──
         if i > 0 and len(positions) < max_concurrent:
-            for sym, df in signal_dfs.items():
+            for sym in reindexed:
                 if sym in positions:
                     continue
-                prev = df.iloc[i - 1]
+                prev = reindexed[sym].iloc[i - 1]
                 if prev["signal"] != 0 and not pd.isna(prev["entry_price"]) and not pd.isna(prev["sl_price"]):
-                    curr = df.iloc[i]
+                    curr = reindexed[sym].iloc[i]
                     entry_price = curr["open"]
                     diff = entry_price - prev["entry_price"]
                     sl = prev["sl_price"] + diff
@@ -246,8 +258,8 @@ def _portfolio_backtest(signal_dfs, capital, risk_pct, fee_rate, max_hold_bars,
                         exit_reason="",
                         entry_bar_idx=i,
                     )
-                    if "atr" in df.columns:
-                        atr_val = df.loc[prev.name, "atr"]
+                    if "atr" in reindexed[sym].columns:
+                        atr_val = reindexed[sym].iloc[i - 1]["atr"]
                         if not pd.isna(atr_val):
                             pos.atr_at_entry = atr_val
                             pos.highest_price = entry_price
@@ -256,15 +268,15 @@ def _portfolio_backtest(signal_dfs, capital, risk_pct, fee_rate, max_hold_bars,
 
         # ── Record equity ──
         unrealized = sum(
-            (signal_dfs[sym].iloc[i]["close"] - pos.entry_price) * pos.quantity * pos.side
+            (reindexed[sym].iloc[i]["close"] - pos.entry_price) * pos.quantity * pos.side
             for sym, pos in positions.items()
         )
         equity_curve.append({"time": t, "equity": pool + unrealized})
 
     # ── Force-close remaining positions ──
     for sym, pos in list(positions.items()):
-        last_idx = timestamps[-1]
-        last_bar = signal_dfs[sym].iloc[-1]
+        last_idx = all_ts[-1]
+        last_bar = reindexed[sym].iloc[-1]
         close_price = last_bar["close"]
         pnl = (close_price - pos.entry_price) * pos.quantity * pos.side
         pnl -= pos.entry_price * pos.quantity * fee_rate
