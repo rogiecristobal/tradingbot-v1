@@ -10,6 +10,14 @@ from data.ohlcv import fetch_ohlcv
 from core.backtest_engine import run_backtest
 from core.metrics import calculate_metrics
 
+POPULAR_SYMBOLS = [
+    "BTC/USDT", "ETH/USDT", "SOL/USDT", "BNB/USDT",
+    "XRP/USDT", "ADA/USDT", "DOGE/USDT", "DOT/USDT",
+    "AVAX/USDT", "LINK/USDT", "UNI/USDT", "ATOM/USDT",
+    "LTC/USDT", "BCH/USDT", "APT/USDT", "ARB/USDT",
+    "OP/USDT", "SUI/USDT",
+]
+
 STRATEGIES = {
     "ATR Trend-Breakout": {
         "tf": "4h", "module": "core.strategy_atr_breakout", "func": "run_atr_breakout",
@@ -117,11 +125,15 @@ def main():
     with st.sidebar:
         st.header("Settings")
         exchange = st.text_input("Exchange", value="bybit")
-        symbol = st.text_input("Symbol", value="BTC/USDT")
+        symbol_idx = st.selectbox("Symbol", ["BTC/USDT"] + [s for s in POPULAR_SYMBOLS if s != "BTC/USDT"] + ["Custom..."], index=0)
+        custom_symbol = ""
+        if symbol_idx == "Custom...":
+            custom_symbol = st.text_input("Custom Symbol", value="", placeholder="e.g. FTM/USDT")
+        symbol = custom_symbol if symbol_idx == "Custom..." else symbol_idx
         lookback = st.number_input("Lookback (days)", min_value=7, max_value=365, value=90, step=1)
         capital = st.number_input("Initial Capital ($)", min_value=100, max_value=10_000_000,
                                    value=10_000, step=1000, format="%d")
-        rr = st.number_input("Risk:Reward", min_value=0.5, max_value=10.0, value=2.0, step=0.1)
+        rr = st.number_input("Risk:Reward", min_value=0.5, max_value=10.0, value=5.0, step=0.1)
         risk_pct = st.number_input("Risk per Trade (%)", min_value=0.1, max_value=10.0, value=1.0, step=0.1)
         fee = st.number_input("Fee Rate (%)", min_value=0.0, max_value=1.0, value=0.1, step=0.01, format="%.2f")
 
