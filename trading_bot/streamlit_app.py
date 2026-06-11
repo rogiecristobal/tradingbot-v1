@@ -73,7 +73,7 @@ STRATEGIES = {
 def _strategy_params_ui(spec):
     p = {}
     for key, cfg in spec["params"].items():
-        if cfg["int"]:
+        if cfg.get("int", False):
             p[key] = st.number_input(cfg["label"], min_value=cfg["min"], max_value=cfg["max"],
                                       value=cfg["default"], step=1, key=key)
         else:

@@ -1,7 +1,12 @@
 import asyncio
+import json
 import logging
 import os
 import threading
+import time
+import urllib.error
+import urllib.request
+from datetime import datetime
 from typing import Optional
 
 from telegram import Update, ReplyKeyboardMarkup
@@ -21,6 +26,7 @@ class TelegramBot:
         self.startup_text: str = ""
         self._ready = False
         self._send_queue: list = []
+        self._last_direct_attempt = 0.0
 
     def _build_keyboard(self):
         return ReplyKeyboardMarkup(
@@ -32,10 +38,49 @@ class TelegramBot:
             is_persistent=True,
         )
 
+    def _send_http_direct(self, text: str) -> bool:
+        if not self.token or not self.chat_id:
+            return False
+        now = time.time()
+        if now - self._last_direct_attempt < 5:
+            return False
+        self._last_direct_attempt = now
+        url = f"https://api.telegram.org/bot{self.token}/sendMessage"
+        data = json.dumps({
+            "chat_id": self.chat_id,
+            "text": text,
+            "parse_mode": "HTML",
+        }).encode()
+        req = urllib.request.Request(
+            url, data=data,
+            headers={"Content-Type": "application/json"},
+        )
+        try:
+            urllib.request.urlopen(req, timeout=10)
+            logger.info("Telegram message sent via direct HTTP")
+            return True
+        except urllib.error.HTTPError as e:
+            body = e.read().decode(errors="replace")
+            logger.error(f"Telegram HTTP {e.code}: {body}")
+            return False
+        except Exception as e:
+            logger.warning(f"Telegram direct HTTP failed: {e}")
+            return False
+
     def start(self):
         if not self.token or not self.chat_id:
             logger.info("Telegram bot not configured — skipping")
             return
+        if self.token.startswith("your_") or self.token == "YOUR_TELEGRAM_BOT_TOKEN_HERE":
+            logger.warning("TELEGRAM TOKEN LOOKS LIKE A PLACEHOLDER — edit your .env file!")
+        safe_suffix = self.token[-6:] if len(self.token) >= 6 else "(too short)"
+        logger.info(f"Telegram bot starting — token ends with ...{safe_suffix}")
+        # Immediate connectivity test
+        test_ok = self._send_http_direct("🔌 Telegram self-test: bot is starting...")
+        if test_ok:
+            logger.info("Telegram connectivity test PASSED")
+        else:
+            logger.warning("Telegram connectivity test FAILED — check token and chat_id in .env")
         self._thread = threading.Thread(target=self._run_polling, daemon=True)
         self._thread.start()
         logger.info("Telegram bot thread started")
@@ -44,19 +89,24 @@ class TelegramBot:
         if self._app:
             self._app.stop()
 
-    def send(self, text: str):
-        if not self._app or not self._loop:
-            self._send_queue.append(text)
-            logger.debug("Telegram not ready — queued message")
-            return
-        if not self._ready:
-            self._send_queue.append(text)
-            logger.debug("Telegram not ready — queued message")
-            return
-        try:
-            asyncio.run_coroutine_threadsafe(self._send(text), self._loop)
-        except RuntimeError:
-            logger.debug("Telegram send skipped — interpreter shutting down")
+    def send(self, text: str, level: str = "INFO"):
+        tag = {"INFO": "ℹ️", "WARN": "⚠️", "ERROR": "🚨"}.get(level, "ℹ️")
+        now_str = datetime.now().strftime("%Y-%m-%d %H:%M")
+        prefixed = f"{tag} [{level}] {now_str}\n{text}"
+        if self._ready and self._app and self._loop:
+            try:
+                asyncio.run_coroutine_threadsafe(self._send(prefixed), self._loop)
+                return
+            except RuntimeError:
+                logger.debug("Telegram send skipped — interpreter shutting down")
+                return
+
+        self._send_queue.append(prefixed)
+        logger.debug(f"Telegram queued message (queue={len(self._send_queue)})")
+
+        if len(self._send_queue) >= 3:
+            logger.warning(f"Telegram queue growing ({len(self._send_queue)}) — trying direct HTTP")
+            self._send_http_direct(prefixed)
 
     async def _send(self, text: str):
         try:
@@ -78,6 +128,14 @@ class TelegramBot:
                 logger.warning(f"Telegram flush failed for queued message: {e}")
         self._send_queue.clear()
 
+    def _flush_queue_direct(self):
+        if not self._send_queue:
+            return
+        queued = list(self._send_queue)
+        for text in queued:
+            if self._send_http_direct(text):
+                self._send_queue.remove(text)
+
     async def _reply(self, update: Update, text: str):
         try:
             await update.message.reply_text(text, reply_markup=self._build_keyboard())
@@ -98,10 +156,23 @@ class TelegramBot:
         self._app.add_handler(CommandHandler("help", self._cmd_help))
         self._app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, self._handle_button))
         logger.info("Telegram bot polling...")
-        try:
-            self._loop.run_until_complete(self._manual_poll())
-        except Exception as e:
-            logger.error(f"Telegram polling error: {e}")
+        retries = 0
+        max_retries = 10
+        while retries < max_retries:
+            try:
+                self._loop.run_until_complete(self._manual_poll())
+                return
+            except Exception as e:
+                retries += 1
+                logger.error(f"Telegram polling error (attempt {retries}/{max_retries}): {e}")
+                if retries < max_retries:
+                    wait = min(5 * retries, 60)
+                    logger.info(f"Retrying Telegram in {wait}s...")
+                    # Flush queue via direct HTTP while waiting
+                    self._flush_queue_direct()
+                    time.sleep(wait)
+        logger.error("Telegram polling failed after max retries — messages will use direct HTTP only")
+        self._flush_queue_direct()
 
     async def _manual_poll(self):
         await self._app.initialize()

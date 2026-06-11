@@ -95,19 +95,19 @@ class LiveEngine:
             f"mode={mode.upper()}"
         )
         if self.telegram:
-            self.telegram.send(msg)
+            self.telegram.send(msg, "INFO")
         while True:
             if self._stopped:
                 logger.info("Bot stopped via Telegram /stop command")
                 if self.telegram:
-                    self.telegram.send("🛑 Bot stopped.")
+                    self.telegram.send("🛑 Bot stopped.", "INFO")
                 break
             try:
                 self._tick()
             except Exception as e:
                 logger.exception(f"Tick error: {e}")
                 if self.telegram:
-                    self.telegram.send(f"⚠️ Tick error: {e}")
+                    self.telegram.send(f"Tick error: {e}", "ERROR")
             for _ in range(60):
                 if self._stopped:
                     break
@@ -156,9 +156,9 @@ class LiveEngine:
                     logger.warning(f"{sym}: could not fetch price")
                 self._reconcile_position(sym)
 
-        # ── 2. Heartbeat every 2 minutes ──
+        # ── 2. Heartbeat every 5 minutes ──
         self._tick_count += 1
-        if self._tick_count % 2 == 0:
+        if self._tick_count % 5 == 0:
             open_count = sum(1 for p in self.positions.values() if p is not None)
             equity = self.executor.equity
             logger.info(
@@ -168,19 +168,14 @@ class LiveEngine:
             )
             if self.telegram:
                 self._telegram_heartbeat_count += 1
-                if self._telegram_heartbeat_count >= 15:
+                if self._telegram_heartbeat_count >= 4:
                     self._telegram_heartbeat_count = 0
-                    dd = (self.peak_equity - equity) / self.peak_equity * 100 if self.peak_equity > 0 else 0
-                    daily = (self.daily_start_equity - equity) / self.daily_start_equity * 100 if self.daily_start_equity > 0 else 0
-                    paused = " PAUSED" if self._paused else ""
+                    paused = " ⏸" if self._paused else ""
                     hb_msg = (
-                        f"📊 Heartbeat{paused}\n"
+                        f"ATR Bot{paused}\n"
                         f"Symbols: {len(self.symbols)} | Open: {open_count}\n"
-                        f"Equity: ${equity:.2f}\n"
-                        f"DD: {dd:.1f}% | Daily: {daily:+.1f}%"
+                        f"Equity: ${equity:.2f}"
                     )
-                    if self._paused:
-                        hb_msg += "\n⏸ New entries paused"
                     self.telegram.send(hb_msg)
 
         # ── 3. Process each symbol ──
@@ -246,11 +241,13 @@ class LiveEngine:
                 if self.telegram:
                     side_str = "LONG" if pos.side == 1 else "SHORT"
                     emoji = "🔴" if pnl < 0 else "🟢"
+                    level = "WARN" if pnl < 0 else "INFO"
                     self.telegram.send(
                         f"{emoji} {symbol} CLOSED ({reason})\n"
                         f"Side: {side_str}\n"
                         f"P&L: ${pnl:.2f}\n"
-                        f"Equity: ${self.executor.equity:.2f}"
+                        f"Equity: ${self.executor.equity:.2f}",
+                        level,
                     )
                 self.positions[symbol] = None
 
@@ -302,7 +299,7 @@ class LiveEngine:
             logger.info(f"{symbol} news: {' | '.join(news_headlines[:3])}")
             if self.telegram:
                 lines = "\n".join(f"• {h}" for h in news_headlines[:3])
-                self.telegram.send(f"📰 {symbol} headlines:\n{lines}")
+                self.telegram.send(f"📰 {symbol} headlines:\n{lines}", "INFO")
 
         prev_entry = last_signal["entry_price"]
         prev_sl = last_signal["sl_price"]
@@ -358,7 +355,8 @@ class LiveEngine:
                 f"🟢 {symbol} ENTER {side_str}\n"
                 f"Entry: ${entry_price:.2f}\n"
                 f"Qty: {qty:.6f}\n"
-                f"SL: ${sl_price:.2f} | TP: ${tp_price:.2f}"
+                f"SL: ${sl_price:.2f} | TP: ${tp_price:.2f}",
+                "INFO",
             )
 
     def _check_safety(self):
@@ -376,7 +374,8 @@ class LiveEngine:
             if self.telegram:
                 self.telegram.send(
                     f"⚠️ Max daily loss triggered!\n"
-                    f"Daily loss: {daily_loss:.1f}% (limit: {max_daily}%)"
+                    f"Daily loss: {daily_loss:.1f}% (limit: {max_daily}%)",
+                    "WARN",
                 )
         max_dd = self.config.get("max_drawdown_pct", 20.0)
         dd = (self.peak_equity - equity) / self.peak_equity * 100
@@ -385,7 +384,8 @@ class LiveEngine:
             if self.telegram:
                 self.telegram.send(
                     f"⚠️ Max drawdown triggered!\n"
-                    f"Drawdown: {dd:.1f}% (limit: {max_dd}%)"
+                    f"Drawdown: {dd:.1f}% (limit: {max_dd}%)",
+                    "WARN",
                 )
 
     def _save_state(self):

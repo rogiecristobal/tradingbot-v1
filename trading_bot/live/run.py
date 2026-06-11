@@ -20,6 +20,7 @@ logging.basicConfig(
         logging.StreamHandler(sys.stdout),
     ],
 )
+logging.getLogger("httpx").setLevel(logging.WARNING)
 logger = logging.getLogger("run")
 
 
