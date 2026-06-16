@@ -164,8 +164,9 @@ class LiveEngine:
         if mode == "live" and self.exchange:
             for sym in self.symbols:
                 p = self._current_price(sym)
+                if p is not None:
+                    self._last_prices[sym] = p
                 prices[sym] = p
-                self._last_prices[sym] = p
                 if p is None:
                     logger.warning(f"{sym}: could not fetch price")
                 self._reconcile_position(sym)
@@ -223,6 +224,8 @@ class LiveEngine:
         latest_bar = df.iloc[-1]
         latest_time = df.index[-1]
         if mode != "live":
+            self._last_prices[symbol] = latest_bar["close"]
+        elif symbol not in self._last_prices or self._last_prices[symbol] is None:
             self._last_prices[symbol] = latest_bar["close"]
         pos = self.positions.get(symbol)
         candle_time = self.last_candle_times.get(symbol)

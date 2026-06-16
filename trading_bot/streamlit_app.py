@@ -21,7 +21,9 @@ POPULAR_SYMBOLS = [
 
 STRATEGIES = {
     "ATR Trend-Breakout": {
-        "tf": "4h", "module": "core.strategy_atr_breakout", "func": "run_atr_breakout",
+        "tf_options": ["5m", "15m", "30m", "1h", "2h", "4h"],
+        "tf_default": "4h",
+        "module": "core.strategy_atr_breakout", "func": "run_atr_breakout",
         "params": {
             "ema_fast": {"label": "EMA Fast", "default": 50, "min": 10, "max": 200, "int": True},
             "ema_slow": {"label": "EMA Slow", "default": 200, "min": 50, "max": 500, "int": True},
@@ -448,7 +450,12 @@ def main():
         st.divider()
         strategy_name = st.selectbox("Strategy", list(STRATEGIES.keys()))
         spec = STRATEGIES[strategy_name]
-        st.caption(f"Timeframe: {spec['tf']}")
+        if "tf_options" in spec:
+            tf = st.selectbox("Timeframe", spec["tf_options"],
+                              index=spec["tf_options"].index(spec.get("tf_default", "4h")))
+        else:
+            tf = spec["tf"]
+            st.caption(f"Timeframe: {tf}")
         strat_params = _strategy_params_ui(spec)
         run_label = f"Run Comparison ({len(selected_symbols)} symbols)" if compare_mode else "Run Backtest"
         run = st.button(run_label, type="primary", width="stretch")
@@ -460,7 +467,8 @@ def main():
     strat_params.update(rr=rr, risk_percent=risk_pct, fee_rate=fee / 100)
     strategy_fn_name = spec["func"]
     module_path = spec["module"]
-    tf = spec["tf"]
+    if "tf_options" not in spec:
+        tf = spec["tf"]
     max_hold = spec.get("max_hold", 0)
     has_trail = spec.get("has_trail", False)
     trail_act = strat_params.pop("trail_activation", 0) if has_trail else 0
