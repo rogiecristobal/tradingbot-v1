@@ -59,10 +59,12 @@ class LiveEngine:
             )
 
         self.symbols: list = config.get("symbols", [])
-        self.max_open_trades: int = config.get("max_open_trades", 3)
+        self.max_open_trades: Optional[int] = config.get("max_open_trades")
 
         self.positions: Dict[str, Optional[Position]] = {}
         self.last_candle_times: Dict[str, Optional[pd.Timestamp]] = {}
+        self._last_prices: Dict[str, float] = {}
+        self.current_value = float(config.get("capital", 100.0))
         positions_raw = config.get("positions", {})
 
         for sym in self.symbols:
@@ -141,6 +143,17 @@ class LiveEngine:
         except Exception as e:
             logger.warning(f"[LIVE] {symbol} reconciliation failed: {e}")
 
+    def _update_current_value(self):
+        total_unrealized = 0.0
+        for sym, pos in self.positions.items():
+            if pos is None:
+                continue
+            price = self._last_prices.get(sym)
+            if price is None or price <= 0:
+                continue
+            total_unrealized += (price - pos.entry_price) * pos.quantity * pos.side
+        self.current_value = self.executor.equity + total_unrealized
+
     def _tick(self):
         if self._stopped:
             return
@@ -152,6 +165,7 @@ class LiveEngine:
             for sym in self.symbols:
                 p = self._current_price(sym)
                 prices[sym] = p
+                self._last_prices[sym] = p
                 if p is None:
                     logger.warning(f"{sym}: could not fetch price")
                 self._reconcile_position(sym)
@@ -160,7 +174,7 @@ class LiveEngine:
         self._tick_count += 1
         if self._tick_count % 5 == 0:
             open_count = sum(1 for p in self.positions.values() if p is not None)
-            equity = self.executor.equity
+            equity = self.current_value
             logger.info(
                 f"Heartbeat — {len(self.symbols)} symbols, "
                 f"{open_count} open, "
@@ -181,6 +195,8 @@ class LiveEngine:
         # ── 3. Process each symbol ──
         for sym in self.symbols:
             self._process_symbol(sym, prices.get(sym) if mode == "live" else None)
+
+        self._update_current_value()
 
         # ── 4. Safety checks ──
         self._check_safety()
@@ -206,6 +222,8 @@ class LiveEngine:
 
         latest_bar = df.iloc[-1]
         latest_time = df.index[-1]
+        if mode != "live":
+            self._last_prices[symbol] = latest_bar["close"]
         pos = self.positions.get(symbol)
         candle_time = self.last_candle_times.get(symbol)
 
@@ -290,7 +308,7 @@ class LiveEngine:
             return
 
         open_count = sum(1 for p in self.positions.values() if p is not None)
-        if open_count >= self.max_open_trades:
+        if self.max_open_trades is not None and open_count >= self.max_open_trades:
             logger.info(f"{symbol}: no trade this candle — max open trades ({open_count})")
             return
 
@@ -314,7 +332,7 @@ class LiveEngine:
         sl_price = prev_sl + diff
         tp_price = prev_tp + diff
 
-        total_cap = self.config.get("capital", 100.0)
+        total_cap = self.current_value
         risk_pct = sym_params.get("risk_percent", 1.0)
         qty = _compute_quantity(
             total_cap, entry_price, sl_price, risk_pct,
@@ -360,7 +378,7 @@ class LiveEngine:
             )
 
     def _check_safety(self):
-        equity = self.executor.equity
+        equity = self.current_value
         if equity > self.peak_equity:
             self.peak_equity = equity
         today = date.today()
@@ -389,7 +407,7 @@ class LiveEngine:
                 )
 
     def _save_state(self):
-        self.config["capital"] = round(self.executor.equity, 2)
+        self.config["capital"] = round(self.current_value, 2)
         positions_raw = {}
         for sym in self.symbols:
             pos = self.positions.get(sym)

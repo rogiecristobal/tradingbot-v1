@@ -226,6 +226,12 @@ def _portfolio_backtest(signal_dfs, capital, risk_pct, fee_rate, max_hold_bars,
                 pool += pnl
                 del positions[sym]
 
+        # ── Compute current portfolio equity (including unrealized P&L) ──
+        current_eq = pool + sum(
+            (reindexed[sym].iloc[i]["close"] - pos.entry_price) * pos.quantity * pos.side
+            for sym, pos in positions.items()
+        )
+
         # ── Enter new trades from previous bar ──
         if i > 0 and len(positions) < max_concurrent:
             for sym in reindexed:
@@ -239,8 +245,8 @@ def _portfolio_backtest(signal_dfs, capital, risk_pct, fee_rate, max_hold_bars,
                     sl = prev["sl_price"] + diff
                     tp = prev["tp_price"] + diff
                     risk_per_unit = abs(entry_price - sl)
-                    if risk_per_unit > 0 and pool > 0:
-                        risk_amount = pool * (risk_pct / 100.0)
+                    if risk_per_unit > 0 and current_eq > 0:
+                        risk_amount = current_eq * (risk_pct / 100.0)
                         quantity = risk_amount / risk_per_unit
                     else:
                         quantity = 0
