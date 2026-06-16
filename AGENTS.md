@@ -13,8 +13,8 @@ agent to review all session changes and update `session_log/LATEST.md`.
 
 ```powershell
 cd trading_bot
-pipenv run streamlit run app.py
-# Opens at http://localhost:8501
+pipenv run streamlit run app.py --server.headless true
+# Opens at http://localhost:8501 (add --server.headless true on Termux/Android to skip browser auto-open)
 ```
 
 > **Do NOT auto-start the app.** Only run this when explicitly asked by the user.
@@ -29,7 +29,7 @@ pipenv run streamlit run app.py
 - If `pipenv` is not on PATH, install it and use the full path:
   ```powershell
   pip install pipenv
-  & "$env:APPDATA\..\Local\Programs\Python\Python313\Scripts\pipenv.exe" run streamlit run app.py
+  & "$env:APPDATA\..\Local\Programs\Python\Python313\Scripts\pipenv.exe" run streamlit run app.py --server.headless true
   ```
 
 ## Architecture

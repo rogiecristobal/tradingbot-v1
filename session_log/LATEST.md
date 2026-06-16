@@ -1,16 +1,16 @@
-﻿# Session: Telegram Robustness, Heartbeat Cadence, Level Tags, Symbol Dropdown
+﻿# Session: Multi-Symbol Portfolio Backtest, CLI Comparison, Live Engine Equity Tracking
 
-**Date:** 2026-06-11
+**Date:** 2026-06-16
 
 ---
 
 ## Summary
 
-This session focused on fixing **Telegram notification reliability** (messages were
-not arriving at all or were silently dropped), adding **log level tags** (`[INFO]`,
-`[WARN]`, `[ERROR]`) to every Telegram message, adjusting **heartbeat cadences**
-(file log → 5 min, Telegram → 20 min), silencing noisy HTTP polling logs, and
-adding a **symbol dropdown** to the Streamlit backtest UI.
+Added **shared-capital portfolio backtesting** with concurrent positions in both
+Streamlit UI and CLI, **live engine equity tracking** (realized + unrealized P&L
+from all open positions), and fixed several bugs in OHLCV caching and backtest
+sizing. Timestamps across symbols are now properly aligned via set-union
+reindexing.
 
 ---
 
@@ -18,23 +18,26 @@ adding a **symbol dropdown** to the Streamlit backtest UI.
 
 | File | Changes |
 |------|---------|
-| `live/telegram_bot.py` | Added `import urllib.error` (was missing — caused `NameError` crash in `_send_http_direct()`) |
-| | Added `from datetime import datetime` |
-| | Added token length guard (`self.token[-6:]` crash for short tokens) |
-| | Added placeholder token warning (detects `your_` or unedited template values) |
-| | Added startup self-test via `_send_http_direct()` — logs PASSED or FAILED instantly with HTTP error code |
-| | Modified `send()` to accept `level` param (`INFO`/`WARN`/`ERROR`) — auto-prefixes every message with `ℹ️ [INFO] 2026-06-11 14:30` |
-| | Increased direct HTTP fallback threshold (queue >= 3 triggers direct send) |
-| `live/engine.py` | File log heartbeat: every **2 min → 5 min** (`_tick_count % 2` → `% 5`) |
-| | Telegram heartbeat: every **30 min → 20 min** (`>= 15` → `>= 4` × 5 min ticks) |
-| | Simplified heartbeat format: removed DD/Daily, added "ATR Bot" identity |
-| | Added `level` parameter to all `send()` calls — INFO for normal, WARN for losses/safety, ERROR for exceptions |
-| `live/run.py` | Added `logging.getLogger("httpx").setLevel(logging.WARNING)` — silences the `POST 200` Telegram poll lines |
-| | Removed duplicate test ping (now handled by `telegram_bot.start()` self-test) |
-| `streamlit_app.py` | Fixed `KeyError: 'int'` on float params (`cfg["int"]` → `cfg.get("int", False)`) |
-| | Added `POPULAR_SYMBOLS` list (18 symbols, excluding MATIC and PEPE) |
-| | Replaced symbol text input with `st.selectbox()` dropdown + "Custom..." option |
-| | Changed default R:R from 2.0 to 5.0 (matches ATR Trend-Breakout desktop UI default) |
+| `streamlit_app.py` | +`_PortfolioTrade` dataclass, +`_portfolio_backtest()` function (+~200 loc), +`_render_single_result()` helper (refactored single-symbol results out of `main()`) |
+| | Added compare mode: checkbox toggle in sidebar, `st.multiselect()` for symbols, `max_concurrent` slider |
+| | Portfolio summary cards, combined equity curve, per-symbol breakdown table, trade log with Symbol column, monthly returns, detailed stats |
+| | Timestamp alignment: union of all timestamps across symbol DataFrames with reindex + forward-fill |
+| | Sizing uses `current_eq = pool + Σ unrealized P&L` from still-open positions |
+| `backtest_cli.py` | Added `POPULAR_SYMBOLS` list (18 symbols, same as Streamlit) |
+| | Added `--all-symbols` and `--symbols` flags |
+| | Refactored strategy loading + backtest into `run_one()` helper |
+| | Added comparison table sorted by total return (Symbol, Return %, CAGR, Sharpe, Max DD, Win Rate, PF, Trades) |
+| `data/ohlcv.py` | Fixed cache date range check: now verifies both `cached_start <= start_date` AND `cached_end >= end_date` before serving cached data |
+| `live/engine.py` | Added `self._last_prices: Dict[str, float]` — stores latest ticker/close per symbol |
+| | Added `self.current_value` — equity + unrealized P&L from all open positions |
+| | Added `_update_current_value()` method |
+| | `_tick()` stores ticker prices in `_last_prices` (live) or OHLC close (paper), calls `_update_current_value()` after processing symbols |
+| | Heartbeat uses `self.current_value` instead of `self.executor.equity` |
+| | `_process_symbol()` stores `latest_bar["close"]` in `_last_prices` for paper mode |
+| | Trade sizing uses `self.current_value` instead of `config.get("capital", 100.0)` |
+| | `max_open_trades` default changed to `None` (unlimited). Guard checks `self.max_open_trades is not None` |
+| | `_check_safety()` uses `self.current_value` instead of `self.executor.equity` |
+| | `_save_state()` saves `self.current_value` instead of `self.executor.equity` |
 
 ---
 
@@ -42,56 +45,78 @@ adding a **symbol dropdown** to the Streamlit backtest UI.
 
 | Decision | Rationale |
 |----------|-----------|
-| `start_polling()` over `run_polling()` | `run_polling()` calls `signal.set_wakeup_fd()` which crashes outside main thread; `start_polling()` avoids this entirely |
-| Direct HTTP fallback via `urllib` | Stdlib only — no extra dependency needed. Fires when queue reaches 3+ messages or polling fails |
-| Level tags in message body (not metadata) | `[INFO]` / `[WARN]` / `[ERROR]` visible in Telegram notification preview at a glance |
-| 5 min file heartbeat / 20 min Telegram | 5 min matches common trading bot standards; 20 min is frequent enough to know bot is alive without being noisy |
-| Removed DD/Daily from heartbeat | User requested "details, date, where it came from" only — performance metrics available via `/status` command |
-| Removed MATIC and PEPE from symbol list | User reported CCXT cannot fetch data for these pairs |
+| Shared capital pool with concurrent positions | Matches live engine behavior (all symbols share one capital pool, unrealized P&L from open positions counts toward available margin) |
+| Timestamp alignment via union + reindex + ffill | Symbols have different bar counts / start dates; union of all timestamps with forward-fill preserves the most recent data for each symbol at every step |
+| `current_eq = pool + Σ unrealized` used for trade sizing | Backtest now matches live engine — new entries are sized based on total portfolio value, not just realized cash |
+| Unlimited concurrent trades by default (`max_open_trades: None`) | Simpler config — user explicitly sets limit only if needed |
+| Cache check verifies both start AND end bounds | Prior code only checked `cached_end >= end_date` — increasing lookback preserved stale cache instead of re-fetching |
+| Sequential symbol processing in compare mode | Parallel CCXT fetch risks rate limits; sequential is safe and simple |
 
 ---
 
 ## Bugs Fixed
 
-### 1. `NameError: name 'urllib' is not defined` in `_send_http_direct()` (`telegram_bot.py:61`)
+### 1. Cache served truncated data when lookback increased (`data/ohlcv.py`)
 
-**Symptom:** When direct HTTP fallback triggered (queue >= 3), `except urllib.error.HTTPError` threw `NameError` because `urllib.error` was never imported. Error was silently caught by the generic `except Exception` and logged as a non-specific warning. All queued messages lost forever.
+**Symptom:** Increasing lookback (e.g., 90 → 180 days) did not trigger a re-fetch.
+Only `cached_end >= end_date` was checked — if cached data started at a later
+date than requested, the old cache was returned with missing early bars.
 
-**Fix:** Added `import urllib.error` at top of file.
+**Fix:** Added `cached_start <= start_date` check. If either bound is
+unsatisfied, cache is invalidated and fresh data is fetched.
 
-### 2. `self.token[-6:]` crash for short tokens (`telegram_bot.py:73`)
+### 2. Backtest sizing used `pool` only, ignored unrealized P&L (`streamlit_app.py`)
 
-**Symptom:** If token was empty or shorter than 6 characters, negative slice crashed.
+**Symptom:** When multiple trades were open simultaneously, new entries were
+sized based solely on realized cash (`pool`), ignoring unrealized P&L from
+still-open positions. This under-sized trades and understated portfolio equity.
 
-**Fix:** Added length guard: `self.token[-6:] if len(self.token) >= 6 else "(too short)"`.
+**Fix:** `current_eq = pool + sum((close - entry) * qty * side for each open pos)`
+is used for both trade sizing and equity curve recording.
 
-### 3. No notification on startup failure (`telegram_bot.py`)
+### 3. Live engine trade sizing ignored other open positions (`live/engine.py`)
 
-**Symptom:** If polling failed at startup (wrong token, network down), no error was surfaced. User had to wait 30+ minutes to notice no heartbeat arrived.
+**Symptom:** `total_cap = config.get("capital", 100.0)` was static. If symbol A
+had an open trade with $50 unrealized profit and symbol B was processing a new
+entry, the new trade was sized against the original $100 capital instead of $150.
 
-**Fix:** Added immediate self-test via `_send_http_direct("🔌 Telegram self-test...")` in `start()` — logs `PASSED` or `FAILED` within 2 seconds of launching.
+**Fix:** `total_cap = self.current_value` — dynamically includes unrealized P&L
+from all open positions at the time of entry.
 
-### 4. Placeholder token not detected
+### 4. `max_open_trades: 3` default prevented concurrent multi-symbol entries (`live/engine.py`)
 
-**Symptom:** If user copied `.env.example` to `.env` without editing values, token was `your_telegram_bot_token_here` — polling fails silently.
+**Symptom:** Default max_open_trades=3 capped concurrent positions even when
+user expected all 20 symbols to trade independently.
 
-**Fix:** Added check in `start()` — if token starts with `your_` or equals the example placeholder, logs a clear `WARNING` telling user to edit `.env`.
-
-### 5. `KeyError: 'int'` in `streamlit_app.py:76`
-
-**Symptom:** Selecting ATR Trend-Breakout or any strategy with float-only params crashed with `KeyError: 'int'`.
-
-**Fix:** Changed `if cfg["int"]:` → `if cfg.get("int", False):`. Float param dicts lack the `"int"` key.
+**Fix:** Default changed to `None` (unlimited). Guard: `if self.max_open_trades
+is not None and open_count >= self.max_open_trades:`.
 
 ---
 
 ## Known Issues
 
-1. **pyarrow/parquet caching** — will fail on Termux ARM (no pre-compiled wheel). CSV fallback planned but not yet implemented.
-2. **Telegram startup delay** — self-test logs result immediately, but `start_polling()` may take 3-8 seconds before first heartbeat notification is sent.
-3. **Bot pauses when screen off without `termux-wake-lock`** — Android suspends CPU. Must use wake-lock for 24/7 operation.
-4. **Streamlit live bot page** — reads logs from file (not stdout). `config.json` may briefly show stale state between saves.
-5. **`.env` with live keys** — still present in working directory (gitignored). Regenerate keys if repo is shared publicly.
+1. **pyarrow/parquet caching** — will fail on Termux ARM (no pre-compiled wheel).
+   CSV fallback planned but not yet implemented.
+2. **Intra-tick stale `current_value`** — `_update_current_value()` runs after
+   all symbols are processed. If symbol A closes a position (increasing executor
+   equity) and symbol B enters a new trade in the same tick, B sizes against
+   the pre-close `current_value`. This is a minor edge case and matches the
+   original behavior (which was even worse, using static config capital).
+3. **Streamlit live bot page** — reads logs from file (not stdout). `config.json`
+   may briefly show stale state between saves.
+4. **`.env` with live keys** — still present in working directory (gitignored).
+   Regenerate keys if repo is shared publicly.
+
+---
+
+## Commits (this session)
+
+```
+2991e18 Fix bugs
+3af1d69 Fix cache date range check to verify both start and end bounds
+ee10089 Align all symbol DataFrames by union of timestamps in portfolio backtest
+c4cc9d4 Shared-capital portfolio backtest with concurrent multi-symbol support
+```
 
 ---
 
@@ -99,36 +124,39 @@ adding a **symbol dropdown** to the Streamlit backtest UI.
 
 ```
 trading_bot/
-├── streamlit_app.py            # Backtest UI (symbol dropdown, 5 strategies, Plotly charts)
-├── pages/live.py               # Live bot control page
-├── backtest_cli.py             # CLI backtest runner
+├── streamlit_app.py            # Compare mode + portfolio backtest + single-symbol results
+├── pages/live.py               # Live bot control page (unchanged)
+├── backtest_cli.py             # --all-symbols / --symbols flags + comparison table
 ├── live/
-│   ├── telegram_bot.py         # Fixed: start_polling, urllib.error, self-test, level tags
-│   ├── run.py                  # Added: httpx suppression
-│   ├── engine.py               # Updated: 5min/20min cadence, level tags on all sends
+│   ├── telegram_bot.py         # start_polling, urllib.error, self-test, level tags
+│   ├── run.py                  # httpx suppression (unchanged)
+│   ├── engine.py               # current_value, _last_prices, _update_current_value, unlimited max_open_trades
 │   ├── executor.py             # Unchanged
 │   ├── config.py               # Unchanged
 │   ├── position_manager.py     # Unchanged
 │   └── news_checker.py         # Unchanged
-├── core/                       # Unchanged (all 5 strategies)
-├── data/ohlcv.py               # Unchanged
+├── core/                       # Unchanged (all 5 strategies + backtest_engine + metrics)
+├── data/ohlcv.py               # Fixed: cache date range bound check (start + end)
 ├── exchange/connector.py       # Unchanged
 ├── .env.example                # API key template
 ├── requirements.txt            # pip deps
 ├── SETUP_TERMUX.md             # Android guide
 ├── config.json                 # gitignored
 ├── .env                        # gitignored
-├── main.py                     # PyQt6 (not Termux-compatible)
-├── main_window.py              # PyQt6 (not Termux-compatible)
-└── widgets/                    # PyQt6 (not Termux-compatible)
+└── main.py + main_window.py + widgets/  # PyQt6 (not Termux-compatible)
 ```
 
 ---
 
 ## What to Continue With Next
 
-1. **CSV cache fallback in `ohlcv.py`** — try/except on `import pyarrow`; fall back to `.csv.gz` so Termux users still get disk caching
-2. **Streamlit equity persistence** — save last backtest results to `st.session_state` so they survive page reruns
-3. **Multi-symbol backtest in CLI** — allow comma-separated symbols or batch mode in `backtest_cli.py`
-4. **HTTPS proxy support** — SOCKS5 proxy option in `.env` for restricted mobile networks
-5. **Configurable heartbeat interval** — make Telegram heartbeat configurable via `config.json` instead of hardcoded in `engine.py`
+1. **CSV cache fallback in `ohlcv.py`** — try/except on `import pyarrow`; fall
+   back to `.csv.gz` so Termux users still get disk caching
+2. **Streamlit equity persistence** — save last backtest results to
+   `st.session_state` so they survive page reruns
+3. **HTTPS proxy support** — SOCKS5 proxy option in `.env` for restricted mobile
+   networks
+4. **Configurable heartbeat interval** — make Telegram heartbeat configurable
+   via `config.json` instead of hardcoded in `engine.py`
+5. **Per-symbol `max_concurrent`** — currently global slider only; could allow
+   per-symbol limits in portfolio backtest

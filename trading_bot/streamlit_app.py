@@ -359,7 +359,7 @@ def _render_single_result(result, metrics):
 
     fig = _plot_equity_curve(result)
     if fig:
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width="stretch")
 
     # Trade log
     if result.trades:
@@ -375,7 +375,7 @@ def _render_single_result(result, metrics):
                     "PnL": f"${t.pnl:+.2f}" if t.pnl is not None else "—",
                     "Reason": t.exit_reason,
                 })
-            st.dataframe(pd.DataFrame(rows), use_container_width=True, hide_index=True)
+            st.dataframe(pd.DataFrame(rows), width="stretch", hide_index=True)
 
     # Monthly returns
     if "monthly_returns" in metrics and not metrics["monthly_returns"].empty:
@@ -392,7 +392,7 @@ def _render_single_result(result, metrics):
             fig_m.update_layout(height=300, margin=dict(l=0, r=0, t=10, b=0),
                                 template="plotly_dark",
                                 xaxis_title="", yaxis_title="Return %")
-            st.plotly_chart(fig_m, use_container_width=True)
+            st.plotly_chart(fig_m, width="stretch")
 
     # Detailed stats
     with st.expander("Detailed Statistics", expanded=False):
@@ -451,7 +451,7 @@ def main():
         st.caption(f"Timeframe: {spec['tf']}")
         strat_params = _strategy_params_ui(spec)
         run_label = f"Run Comparison ({len(selected_symbols)} symbols)" if compare_mode else "Run Backtest"
-        run = st.button(run_label, type="primary", use_container_width=True)
+        run = st.button(run_label, type="primary", width="stretch")
 
     if not run:
         st.info("Configure settings in the sidebar and click **Run Backtest**.")
@@ -573,7 +573,7 @@ def main():
         fig = _plot_equity_curve(result)
         if fig:
             fig.update_layout(title="Portfolio Equity Curve")
-            st.plotly_chart(fig, use_container_width=True)
+            st.plotly_chart(fig, width="stretch")
 
         # ── Per-symbol breakdown ──
         st.subheader("Per-Symbol Breakdown")
@@ -587,7 +587,7 @@ def main():
                 "Avg P&L": f"${ps['avg_pnl']:+.2f}",
             })
         if sym_rows:
-            st.dataframe(pd.DataFrame(sym_rows), use_container_width=True, hide_index=True)
+            st.dataframe(pd.DataFrame(sym_rows), width="stretch", hide_index=True)
 
         # ── Trade log ──
         if result.trades:
@@ -604,7 +604,7 @@ def main():
                         "PnL": f"${t.pnl:+.2f}" if t.pnl is not None else "—",
                         "Reason": t.exit_reason,
                     })
-                st.dataframe(pd.DataFrame(rows), use_container_width=True, hide_index=True)
+                st.dataframe(pd.DataFrame(rows), width="stretch", hide_index=True)
 
         # Monthly returns
         if "monthly_returns" in metrics and not metrics["monthly_returns"].empty:
@@ -621,7 +621,7 @@ def main():
                 fig_m.update_layout(height=300, margin=dict(l=0, r=0, t=10, b=0),
                                     template="plotly_dark",
                                     xaxis_title="", yaxis_title="Return %")
-                st.plotly_chart(fig_m, use_container_width=True)
+                st.plotly_chart(fig_m, width="stretch")
 
         # ── Detailed stats ──
         with st.expander("Detailed Statistics", expanded=False):

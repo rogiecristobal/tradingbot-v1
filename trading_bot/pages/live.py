@@ -121,11 +121,11 @@ st.subheader("Controls")
 ctrl_col1, ctrl_col2, ctrl_col3 = st.columns(3)
 with ctrl_col1:
     if _bot_running():
-        if st.button("Stop Bot", type="primary", use_container_width=True):
+        if st.button("Stop Bot", type="primary", width="stretch"):
             stop_bot()
             st.rerun()
     else:
-        if st.button("Start Bot", type="primary", use_container_width=True):
+        if st.button("Start Bot", type="primary", width="stretch"):
             start_bot()
             st.rerun()
 
@@ -133,18 +133,18 @@ with ctrl_col2:
     if config and _bot_running():
         paused = config.get("_paused", False)
         if paused:
-            if st.button("▶ Resume", use_container_width=True):
+            if st.button("▶ Resume", width="stretch"):
                 config["_paused"] = False
                 _save_config(config)
                 st.rerun()
         else:
-            if st.button("⏸ Pause", use_container_width=True):
+            if st.button("⏸ Pause", width="stretch"):
                 config["_paused"] = True
                 _save_config(config)
                 st.rerun()
 
 with ctrl_col3:
-    if st.button("🔄 Refresh", use_container_width=True):
+    if st.button("🔄 Refresh", width="stretch"):
         st.rerun()
 
 # ── Positions ──
@@ -164,7 +164,7 @@ if config:
                 "TP": f"${pos['tp_price']:.2f}",
                 "Entry Time": pos.get("entry_time", "—"),
             })
-        st.dataframe(pd.DataFrame(rows), use_container_width=True, hide_index=True)
+        st.dataframe(pd.DataFrame(rows), width="stretch", hide_index=True)
 
 # ── Logs ──
 st.subheader("Logs")
