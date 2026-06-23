@@ -26,7 +26,8 @@ def parse_args():
     p.add_argument("--symbols", help="Comma-separated symbols (overrides --symbol)")
     p.add_argument(
         "--strategy", default="atr-breakout",
-        choices=["atr-breakout", "trend-pullback", "ny-range", "ibr", "slc"],
+        choices=["atr-breakout", "trend-pullback", "ny-range", "ibr", "slc",
+                 "ma-crossover", "scalper", "breakout", "sweep-reversal", "sweep-ict", "trend-breakout"],
         help="Strategy to test",
     )
     p.add_argument("--lookback", type=int, default=90, help="Days of history")
@@ -64,6 +65,24 @@ def parse_args():
     p.add_argument("--fib-min", type=float, default=0.382)
     p.add_argument("--fib-max", type=float, default=0.618)
 
+    # MA Crossover params
+    p.add_argument("--fast-ema", type=int, default=10)
+    p.add_argument("--slow-ema", type=int, default=30)
+
+    # Breakout params
+    p.add_argument("--range-period", type=int, default=20)
+    p.add_argument("--range-max-pct", type=float, default=15.0)
+
+    # Sweep Reversal / Sweep ICT params
+    p.add_argument("--rsi-oversold", type=int, default=35)
+    p.add_argument("--rsi-overbought", type=int, default=65)
+    p.add_argument("--sweep-sl-mult", type=float, default=0.5)
+    p.add_argument("--ict-lookback", type=int, default=10)
+
+    # Trend Breakout params
+    p.add_argument("--breakout-period", type=int, default=10)
+    p.add_argument("--trail-pct", type=float, default=3.0)
+
     return p.parse_args()
 
 
@@ -84,13 +103,16 @@ def main():
 
     strategy = args.strategy
 
-    # Determine timeframe
     if strategy == "atr-breakout":
         tf, tf_label = "4h", "4-hour"
     elif strategy in ("ibr", "slc"):
         tf, tf_label = "15m", "15-minute"
+    elif strategy == "scalper":
+        tf, tf_label = "1m", "1-minute"
+    elif strategy in ("ma-crossover", "sweep-reversal", "trend-breakout"):
+        tf, tf_label = "1h", "1-hour"
     else:
-        tf, tf_label = "5m", "5-minute"
+        tf, tf_label = "15m", "15-minute"
 
     if not multi:
         print(f"┌──────────────────────────────────────────────┐")
@@ -156,6 +178,65 @@ def main():
             impulse_mult=args.impulse_mult, zone_buffer_atr=args.zone_buffer_atr,
         )
         strategy_fn = run_slc
+        trail_act = trail_off = 0
+
+    elif strategy == "ma-crossover":
+        from core.strategy_ma_crossover import run_ma_crossover
+        params.update(
+            fast_ema=args.fast_ema, slow_ema=args.slow_ema,
+            atr_period=args.atr_period,
+        )
+        strategy_fn = run_ma_crossover
+        trail_act = trail_off = 0
+
+    elif strategy == "scalper":
+        from core.strategy_scalper import run_scalper
+        params.update(
+            ema_length=args.ema_length, rsi_length=args.rsi_length,
+            rsi_buy=args.rsi_buy, rsi_sell=args.rsi_sell,
+        )
+        strategy_fn = run_scalper
+        trail_act = trail_off = 0
+
+    elif strategy == "breakout":
+        from core.strategy_breakout import run_breakout
+        params.update(
+            range_period=args.range_period, range_max_pct=args.range_max_pct,
+            vol_sma_period=args.volume_sma_period, vol_mult=args.vol_mult,
+            atr_period=args.atr_period,
+        )
+        strategy_fn = run_breakout
+        trail_act = trail_off = 0
+
+    elif strategy == "sweep-reversal":
+        from core.strategy_sweep_reversal import run_sweep_reversal
+        params.update(
+            range_period=args.range_period, rsi_length=args.rsi_length,
+            rsi_oversold=args.rsi_oversold, rsi_overbought=args.rsi_overbought,
+            atr_period=args.atr_period, atr_sl_mult=args.sweep_sl_mult,
+        )
+        strategy_fn = run_sweep_reversal
+        trail_act = trail_off = 0
+
+    elif strategy == "sweep-ict":
+        from core.strategy_sweep_ict import run_sweep_ict
+        params.update(
+            lookback=args.ict_lookback, rsi_length=args.rsi_length,
+            rsi_oversold=args.rsi_oversold, rsi_overbought=args.rsi_overbought,
+            atr_period=args.atr_period, atr_sl_mult=args.sweep_sl_mult,
+        )
+        strategy_fn = run_sweep_ict
+        trail_act = trail_off = 0
+
+    elif strategy == "trend-breakout":
+        from core.strategy_trend_breakout import run_trend_breakout
+        params.update(
+            ema_length=args.ema_length, breakout_period=args.breakout_period,
+            vol_sma_period=args.volume_sma_period, vol_mult=args.vol_mult,
+            atr_period=args.atr_period, atr_sl_mult=args.atr_sl_mult,
+            trail_pct=args.trail_pct,
+        )
+        strategy_fn = run_trend_breakout
         trail_act = trail_off = 0
 
     else:

@@ -78,6 +78,83 @@ STRATEGIES = {
         },
         "has_trail": False,
     },
+    "MA Crossover": {
+        "tf_options": ["5m", "15m", "30m", "1h", "2h", "4h"],
+        "tf_default": "1h",
+        "module": "core.strategy_ma_crossover", "func": "run_ma_crossover",
+        "params": {
+            "fast_ema": {"label": "Fast EMA", "default": 10, "min": 2, "max": 100, "int": True},
+            "slow_ema": {"label": "Slow EMA", "default": 30, "min": 5, "max": 200, "int": True},
+            "atr_period": {"label": "ATR Period", "default": 14, "min": 5, "max": 50, "int": True},
+        },
+        "has_trail": False,
+    },
+    "1M Scalper": {
+        "tf": "1m", "module": "core.strategy_scalper", "func": "run_scalper",
+        "params": {
+            "ema_length": {"label": "EMA Length", "default": 20, "min": 5, "max": 100, "int": True},
+            "rsi_length": {"label": "RSI Length", "default": 14, "min": 2, "max": 50, "int": True},
+            "rsi_buy": {"label": "RSI Buy Threshold", "default": 40, "min": 10, "max": 50, "int": True},
+            "rsi_sell": {"label": "RSI Sell Threshold", "default": 60, "min": 50, "max": 90, "int": True},
+        },
+        "has_trail": False,
+    },
+    "Breakout Strategy": {
+        "tf_options": ["5m", "15m", "30m", "1h", "2h", "4h"],
+        "tf_default": "15m",
+        "module": "core.strategy_breakout", "func": "run_breakout",
+        "params": {
+            "range_period": {"label": "Range Lookback", "default": 20, "min": 5, "max": 100, "int": True},
+            "range_max_pct": {"label": "Max Range %", "default": 15.0, "min": 1.0, "max": 50.0, "step": 0.5},
+            "vol_sma_period": {"label": "Volume SMA", "default": 20, "min": 5, "max": 100, "int": True},
+            "vol_mult": {"label": "Volume Surge Min", "default": 1.8, "min": 1.0, "max": 5.0, "step": 0.1},
+            "atr_period": {"label": "ATR Period", "default": 14, "min": 5, "max": 50, "int": True},
+        },
+        "has_trail": False,
+    },
+    "Sweep & Reversal": {
+        "tf_options": ["5m", "15m", "30m", "1h", "2h", "4h"],
+        "tf_default": "1h",
+        "module": "core.strategy_sweep_reversal", "func": "run_sweep_reversal",
+        "params": {
+            "range_period": {"label": "Range Period", "default": 20, "min": 5, "max": 100, "int": True},
+            "rsi_length": {"label": "RSI Length", "default": 14, "min": 2, "max": 50, "int": True},
+            "rsi_oversold": {"label": "RSI Oversold", "default": 35, "min": 10, "max": 50, "int": True},
+            "rsi_overbought": {"label": "RSI Overbought", "default": 65, "min": 50, "max": 90, "int": True},
+            "atr_period": {"label": "ATR Period", "default": 14, "min": 5, "max": 50, "int": True},
+            "atr_sl_mult": {"label": "ATR SL Multiplier", "default": 0.5, "min": 0.1, "max": 3.0, "step": 0.1},
+        },
+        "has_trail": False,
+    },
+    "Simple Sweep ICT": {
+        "tf_options": ["5m", "15m", "30m", "1h", "2h", "4h"],
+        "tf_default": "15m",
+        "module": "core.strategy_sweep_ict", "func": "run_sweep_ict",
+        "params": {
+            "lookback": {"label": "Swing Lookback", "default": 10, "min": 3, "max": 50, "int": True},
+            "rsi_length": {"label": "RSI Length", "default": 14, "min": 2, "max": 50, "int": True},
+            "rsi_oversold": {"label": "RSI Oversold", "default": 35, "min": 10, "max": 50, "int": True},
+            "rsi_overbought": {"label": "RSI Overbought", "default": 65, "min": 50, "max": 90, "int": True},
+            "atr_period": {"label": "ATR Period", "default": 14, "min": 5, "max": 50, "int": True},
+            "atr_sl_mult": {"label": "ATR SL Multiplier", "default": 0.5, "min": 0.1, "max": 3.0, "step": 0.1},
+        },
+        "has_trail": False,
+    },
+    "Trend-Following Breakout": {
+        "tf_options": ["5m", "15m", "30m", "1h", "2h", "4h"],
+        "tf_default": "1h",
+        "module": "core.strategy_trend_breakout", "func": "run_trend_breakout",
+        "params": {
+            "ema_length": {"label": "EMA Length", "default": 20, "min": 5, "max": 200, "int": True},
+            "breakout_period": {"label": "Breakout Period", "default": 10, "min": 3, "max": 50, "int": True},
+            "vol_sma_period": {"label": "Volume SMA", "default": 20, "min": 5, "max": 100, "int": True},
+            "vol_mult": {"label": "Volume Surge Min", "default": 1.5, "min": 1.0, "max": 5.0, "step": 0.1},
+            "atr_period": {"label": "ATR Period", "default": 14, "min": 5, "max": 50, "int": True},
+            "atr_sl_mult": {"label": "ATR SL Multiplier", "default": 0.3, "min": 0.1, "max": 3.0, "step": 0.1},
+            "trail_pct": {"label": "Trail Stop %", "default": 3.0, "min": 0.5, "max": 10.0, "step": 0.1},
+        },
+        "has_trail": True,
+    },
 }
 
 

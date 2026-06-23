@@ -24,6 +24,12 @@ STRATEGIES = [
     "ATR Trend-Breakout",
     "IBR (Institutional Breakout Retest)",
     "SLC (Structure-Level-Confirmation)",
+    "MA Crossover",
+    "1M Scalper",
+    "Breakout Strategy",
+    "Sweep & Reversal",
+    "Simple Sweep ICT",
+    "Trend-Following Breakout",
 ]
 
 
@@ -51,17 +57,26 @@ class BacktestWorker(QObject):
             end_date = datetime.now().strftime("%Y-%m-%d")
             start_date = (datetime.now() - timedelta(days=self.lookback_days)).strftime("%Y-%m-%d")
 
-            # Use 4H data for the ATR breakout, 5M for everything else, 15M for IBR
             is_ny_range = self.strategy_name == "4H NY Range Re-Entry"
             is_atr = self.strategy_name == "ATR Trend-Breakout"
             is_ibr = self.strategy_name == "IBR (Institutional Breakout Retest)"
             is_slc = self.strategy_name == "SLC (Structure-Level-Confirmation)"
+            is_ma_crossover = self.strategy_name == "MA Crossover"
+            is_scalper = self.strategy_name == "1M Scalper"
+            is_breakout = self.strategy_name == "Breakout Strategy"
+            is_sweep_rev = self.strategy_name == "Sweep & Reversal"
+            is_sweep_ict = self.strategy_name == "Simple Sweep ICT"
+            is_trend_bo = self.strategy_name == "Trend-Following Breakout"
             if is_atr:
                 tf, tf_label = "4h", "4-hour"
             elif is_ibr or is_slc:
                 tf, tf_label = "15m", "15-minute"
+            elif is_scalper:
+                tf, tf_label = "1m", "1-minute"
+            elif is_ma_crossover or is_sweep_rev or is_trend_bo:
+                tf, tf_label = "1h", "1-hour"
             else:
-                tf, tf_label = "5m", "5-minute"
+                tf, tf_label = "15m", "15-minute"
 
             self.status.emit(f"Fetching {self.symbol} {tf_label} data...")
             df_ohlcv = fetch_ohlcv(
@@ -148,6 +163,58 @@ class BacktestWorker(QObject):
                     rr=params["rr"],
                     risk_percent=params["risk_percent"],
                     fee_rate=params.get("fee_rate", 0.001),
+                )
+            elif is_ma_crossover:
+                from core.strategy_ma_crossover import run_ma_crossover
+                df_signals = run_ma_crossover(
+                    df_ohlcv,
+                    fast_ema=params["fast_ema"], slow_ema=params["slow_ema"],
+                    atr_period=params["atr_period"],
+                    rr=params["rr"], risk_percent=params["risk_percent"],
+                )
+            elif is_scalper:
+                from core.strategy_scalper import run_scalper
+                df_signals = run_scalper(
+                    df_ohlcv,
+                    ema_length=params["ema_length"], rsi_length=params["rsi_length"],
+                    rsi_buy=params["rsi_buy"], rsi_sell=params["rsi_sell"],
+                    rr=params["rr"], risk_percent=params["risk_percent"],
+                )
+            elif is_breakout:
+                from core.strategy_breakout import run_breakout
+                df_signals = run_breakout(
+                    df_ohlcv,
+                    range_period=params["range_period"], range_max_pct=params["range_max_pct"],
+                    vol_sma_period=params["vol_sma_period"], vol_mult=params["vol_mult"],
+                    atr_period=params["atr_period"],
+                    rr=params["rr"], risk_percent=params["risk_percent"],
+                )
+            elif is_sweep_rev:
+                from core.strategy_sweep_reversal import run_sweep_reversal
+                df_signals = run_sweep_reversal(
+                    df_ohlcv,
+                    range_period=params["range_period"], rsi_length=params["rsi_length"],
+                    rsi_oversold=params["rsi_oversold"], rsi_overbought=params["rsi_overbought"],
+                    atr_period=params["atr_period"], atr_sl_mult=params["atr_sl_mult"],
+                    rr=params["rr"], risk_percent=params["risk_percent"],
+                )
+            elif is_sweep_ict:
+                from core.strategy_sweep_ict import run_sweep_ict
+                df_signals = run_sweep_ict(
+                    df_ohlcv,
+                    lookback=params["lookback"], rsi_length=params["rsi_length"],
+                    rsi_oversold=params["rsi_oversold"], rsi_overbought=params["rsi_overbought"],
+                    atr_period=params["atr_period"], atr_sl_mult=params["atr_sl_mult"],
+                    rr=params["rr"], risk_percent=params["risk_percent"],
+                )
+            elif is_trend_bo:
+                from core.strategy_trend_breakout import run_trend_breakout
+                df_signals = run_trend_breakout(
+                    df_ohlcv,
+                    ema_length=params["ema_length"], breakout_period=params["breakout_period"],
+                    vol_sma_period=params["vol_sma_period"], vol_mult=params["vol_mult"],
+                    atr_period=params["atr_period"], atr_sl_mult=params["atr_sl_mult"],
+                    trail_pct=params["trail_pct"], risk_percent=params["risk_percent"],
                 )
             else:
                 self.error.emit(f"Unknown strategy: {self.strategy_name}")
@@ -349,6 +416,66 @@ class BacktestPanel(QWidget):
             self._add_param("impulse_mult", "Impulse ATR Multiplier", 1.5, 1.0, 5.0, 0.1)
             self._add_param("zone_buffer_atr", "Zone Buffer (ATR)", 0.3, 0.1, 1.0, 0.1)
             self._add_param("rr", "Risk:Reward", 2.0, 0.5, 10.0, 0.1)
+            self._add_param("risk_percent", "Risk per trade (%)", 1.0, 0.1, 10.0, 0.1)
+            self._add_param("fee_rate", "Fee rate (%)", self.state.fee_rate * 100, 0.0, 1.0, 0.01, 3)
+
+        elif name == "MA Crossover":
+            self._add_param("fast_ema", "Fast EMA", 10, 2, 100, 1, is_int=True)
+            self._add_param("slow_ema", "Slow EMA", 30, 5, 200, 1, is_int=True)
+            self._add_param("atr_period", "ATR Period", 14, 5, 50, 1, is_int=True)
+            self._add_param("rr", "Risk:Reward", 2.0, 0.5, 10.0, 0.1)
+            self._add_param("risk_percent", "Risk per trade (%)", 1.0, 0.1, 10.0, 0.1)
+            self._add_param("fee_rate", "Fee rate (%)", self.state.fee_rate * 100, 0.0, 1.0, 0.01, 3)
+
+        elif name == "1M Scalper":
+            self._add_param("ema_length", "EMA Length", 20, 5, 100, 1, is_int=True)
+            self._add_param("rsi_length", "RSI Length", 14, 2, 50, 1, is_int=True)
+            self._add_param("rsi_buy", "RSI Buy Threshold", 40, 10, 50, 1, is_int=True)
+            self._add_param("rsi_sell", "RSI Sell Threshold", 60, 50, 90, 1, is_int=True)
+            self._add_param("rr", "Risk:Reward", 2.0, 0.5, 10.0, 0.1)
+            self._add_param("risk_percent", "Risk per trade (%)", 100.0, 0.1, 100.0, 1.0)
+            self._add_param("fee_rate", "Fee rate (%)", self.state.fee_rate * 100, 0.0, 1.0, 0.01, 3)
+
+        elif name == "Breakout Strategy":
+            self._add_param("range_period", "Range Lookback", 20, 5, 100, 1, is_int=True)
+            self._add_param("range_max_pct", "Max Range %", 15.0, 1.0, 50.0, 0.5)
+            self._add_param("vol_sma_period", "Volume SMA", 20, 5, 100, 1, is_int=True)
+            self._add_param("vol_mult", "Volume Surge Min", 1.8, 1.0, 5.0, 0.1)
+            self._add_param("atr_period", "ATR Period", 14, 5, 50, 1, is_int=True)
+            self._add_param("rr", "Risk:Reward", 2.5, 0.5, 10.0, 0.1)
+            self._add_param("risk_percent", "Risk per trade (%)", 1.0, 0.1, 10.0, 0.1)
+            self._add_param("fee_rate", "Fee rate (%)", self.state.fee_rate * 100, 0.0, 1.0, 0.01, 3)
+
+        elif name == "Sweep & Reversal":
+            self._add_param("range_period", "Range Period", 20, 5, 100, 1, is_int=True)
+            self._add_param("rsi_length", "RSI Length", 14, 2, 50, 1, is_int=True)
+            self._add_param("rsi_oversold", "RSI Oversold", 35, 10, 50, 1, is_int=True)
+            self._add_param("rsi_overbought", "RSI Overbought", 65, 50, 90, 1, is_int=True)
+            self._add_param("atr_period", "ATR Period", 14, 5, 50, 1, is_int=True)
+            self._add_param("atr_sl_mult", "ATR SL Multiplier", 0.5, 0.1, 3.0, 0.1)
+            self._add_param("rr", "Risk:Reward", 2.0, 0.5, 10.0, 0.1)
+            self._add_param("risk_percent", "Risk per trade (%)", 1.0, 0.1, 10.0, 0.1)
+            self._add_param("fee_rate", "Fee rate (%)", self.state.fee_rate * 100, 0.0, 1.0, 0.01, 3)
+
+        elif name == "Simple Sweep ICT":
+            self._add_param("lookback", "Swing Lookback", 10, 3, 50, 1, is_int=True)
+            self._add_param("rsi_length", "RSI Length", 14, 2, 50, 1, is_int=True)
+            self._add_param("rsi_oversold", "RSI Oversold", 35, 10, 50, 1, is_int=True)
+            self._add_param("rsi_overbought", "RSI Overbought", 65, 50, 90, 1, is_int=True)
+            self._add_param("atr_period", "ATR Period", 14, 5, 50, 1, is_int=True)
+            self._add_param("atr_sl_mult", "ATR SL Multiplier", 0.5, 0.1, 3.0, 0.1)
+            self._add_param("rr", "Risk:Reward", 2.0, 0.5, 10.0, 0.1)
+            self._add_param("risk_percent", "Risk per trade (%)", 1.0, 0.1, 10.0, 0.1)
+            self._add_param("fee_rate", "Fee rate (%)", self.state.fee_rate * 100, 0.0, 1.0, 0.01, 3)
+
+        elif name == "Trend-Following Breakout":
+            self._add_param("ema_length", "EMA Length", 20, 5, 200, 1, is_int=True)
+            self._add_param("breakout_period", "Breakout Period", 10, 3, 50, 1, is_int=True)
+            self._add_param("vol_sma_period", "Volume SMA", 20, 5, 100, 1, is_int=True)
+            self._add_param("vol_mult", "Volume Surge Min", 1.5, 1.0, 5.0, 0.1)
+            self._add_param("atr_period", "ATR Period", 14, 5, 50, 1, is_int=True)
+            self._add_param("atr_sl_mult", "ATR SL Multiplier", 0.3, 0.1, 3.0, 0.1)
+            self._add_param("trail_pct", "Trail Stop %", 3.0, 0.5, 10.0, 0.1)
             self._add_param("risk_percent", "Risk per trade (%)", 1.0, 0.1, 10.0, 0.1)
             self._add_param("fee_rate", "Fee rate (%)", self.state.fee_rate * 100, 0.0, 1.0, 0.01, 3)
 

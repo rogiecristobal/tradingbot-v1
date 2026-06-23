@@ -48,6 +48,7 @@ def run_backtest(
     max_hold_bars: int = 0,
     trail_activation_atr: float = 0.0,
     trail_offset_atr: float = 0.0,
+    max_concurrent_trades: int = 18,
 ) -> BacktestResult:
     if df_signals.empty or "signal" not in df_signals.columns:
         return BacktestResult(initial_capital=initial_capital)
@@ -57,23 +58,27 @@ def run_backtest(
     trades: List[Trade] = []
     equity_curve = []
 
-    open_trade: Optional[Trade] = None
-    entry_bar_idx: Optional[int] = None
+    open_trades: List[Trade] = []
+    entry_bar_indices: List[int] = []
 
     for i in range(len(df)):
         idx = df.index[i]
         row = df.iloc[i]
 
-        if open_trade is not None and entry_bar_idx is not None and i >= entry_bar_idx:
+        for j in range(len(open_trades) - 1, -1, -1):
+            ot = open_trades[j]
+            ebi = entry_bar_indices[j]
+            if i < ebi:
+                continue
+
             low = row["low"]
             high = row["high"]
             close = row["close"]
 
-            is_long = open_trade.side == 1
-            is_short = open_trade.side == -1
-            sl = open_trade.sl_price
-            tp = open_trade.tp_price
-            entry = open_trade.entry_price
+            is_long = ot.side == 1
+            sl = ot.sl_price
+            tp = ot.tp_price
+            entry = ot.entry_price
 
             exit_price = None
             exit_reason = None
@@ -94,59 +99,58 @@ def run_backtest(
                     exit_reason = "tp"
 
             if exit_price is None and max_hold_bars > 0:
-                bars_in_trade = i - entry_bar_idx + 1
+                bars_in_trade = i - ebi + 1
                 if bars_in_trade >= max_hold_bars:
                     exit_price = close
                     exit_reason = "max_hold"
 
-            # Trailing stop
-            if exit_price is None and open_trade.atr_at_entry > 0 and trail_activation_atr > 0:
-                atr_val = open_trade.atr_at_entry
+            if exit_price is None and ot.atr_at_entry > 0 and trail_activation_atr > 0:
+                atr_val = ot.atr_at_entry
                 if is_long:
-                    if high > open_trade.highest_price:
-                        open_trade.highest_price = high
-                    if not open_trade.trail_activated:
+                    if high > ot.highest_price:
+                        ot.highest_price = high
+                    if not ot.trail_activated:
                         if high - entry >= trail_activation_atr * atr_val:
-                            open_trade.trail_activated = True
-                    if open_trade.trail_activated:
-                        new_sl = open_trade.highest_price - trail_offset_atr * atr_val
-                        if new_sl > open_trade.sl_price:
-                            open_trade.sl_price = new_sl
+                            ot.trail_activated = True
+                    if ot.trail_activated:
+                        new_sl = ot.highest_price - trail_offset_atr * atr_val
+                        if new_sl > ot.sl_price:
+                            ot.sl_price = new_sl
                             sl = new_sl
                             if low <= new_sl:
                                 exit_price = new_sl
                                 exit_reason = "trail"
                 else:
-                    if low < open_trade.lowest_price:
-                        open_trade.lowest_price = low
-                    if not open_trade.trail_activated:
+                    if low < ot.lowest_price:
+                        ot.lowest_price = low
+                    if not ot.trail_activated:
                         if entry - low >= trail_activation_atr * atr_val:
-                            open_trade.trail_activated = True
-                    if open_trade.trail_activated:
-                        new_sl = open_trade.lowest_price + trail_offset_atr * atr_val
-                        if new_sl < open_trade.sl_price:
-                            open_trade.sl_price = new_sl
+                            ot.trail_activated = True
+                    if ot.trail_activated:
+                        new_sl = ot.lowest_price + trail_offset_atr * atr_val
+                        if new_sl < ot.sl_price:
+                            ot.sl_price = new_sl
                             sl = new_sl
                             if high >= new_sl:
                                 exit_price = new_sl
                                 exit_reason = "trail"
 
             if exit_price is not None:
-                open_trade.exit_time = idx
-                open_trade.exit_price = exit_price
-                pnl = (exit_price - entry) * open_trade.quantity * open_trade.side
-                pnl -= entry * open_trade.quantity * fee_rate
-                pnl -= exit_price * open_trade.quantity * fee_rate
-                open_trade.pnl = pnl
-                open_trade.pnl_pct = (pnl / (entry * open_trade.quantity) * 100) if open_trade.quantity > 0 else 0
-                open_trade.duration = idx - open_trade.entry_time
-                open_trade.exit_reason = exit_reason
-                trades.append(open_trade)
+                ot.exit_time = idx
+                ot.exit_price = exit_price
+                pnl = (exit_price - entry) * ot.quantity * ot.side
+                pnl -= entry * ot.quantity * fee_rate
+                pnl -= exit_price * ot.quantity * fee_rate
+                ot.pnl = pnl
+                ot.pnl_pct = (pnl / (entry * ot.quantity) * 100) if ot.quantity > 0 else 0
+                ot.duration = idx - ot.entry_time
+                ot.exit_reason = exit_reason
+                trades.append(ot)
                 equity += pnl
-                open_trade = None
-                entry_bar_idx = None
+                open_trades.pop(j)
+                entry_bar_indices.pop(j)
 
-        if open_trade is None and i > 0:
+        if len(open_trades) < max_concurrent_trades and i > 0:
             prev_idx = df.index[i - 1]
             prev_signal = df.loc[prev_idx, "signal"]
             prev_entry = df.loc[prev_idx, "entry_price"]
@@ -174,7 +178,7 @@ def run_backtest(
                 else:
                     quantity = 0
 
-                open_trade = Trade(
+                new_trade = Trade(
                     entry_time=idx,
                     exit_time=None,
                     side=prev_signal,
@@ -188,26 +192,28 @@ def run_backtest(
                 if "atr" in df.columns:
                     atr_val = df.loc[prev_idx, "atr"]
                     if not pd.isna(atr_val):
-                        open_trade.atr_at_entry = atr_val
-                        open_trade.highest_price = entry_price
-                        open_trade.lowest_price = entry_price
+                        new_trade.atr_at_entry = atr_val
+                        new_trade.highest_price = entry_price
+                        new_trade.lowest_price = entry_price
+                open_trades.append(new_trade)
+                entry_bar_indices.append(i)
 
         equity_curve.append({"time": idx, "equity": equity})
 
-    if open_trade is not None and open_trade.exit_time is None:
+    for ot in open_trades:
         last_idx = df.index[-1]
         last_close = df.iloc[-1]["close"]
-        entry = open_trade.entry_price
-        pnl = (last_close - entry) * open_trade.quantity * open_trade.side
-        pnl -= entry * open_trade.quantity * fee_rate
-        pnl -= last_close * open_trade.quantity * fee_rate
-        open_trade.exit_time = last_idx
-        open_trade.exit_price = last_close
-        open_trade.pnl = pnl
-        open_trade.pnl_pct = (pnl / (entry * open_trade.quantity) * 100) if open_trade.quantity > 0 else 0
-        open_trade.duration = last_idx - open_trade.entry_time
-        open_trade.exit_reason = "end_of_data"
-        trades.append(open_trade)
+        entry = ot.entry_price
+        pnl = (last_close - entry) * ot.quantity * ot.side
+        pnl -= entry * ot.quantity * fee_rate
+        pnl -= last_close * ot.quantity * fee_rate
+        ot.exit_time = last_idx
+        ot.exit_price = last_close
+        ot.pnl = pnl
+        ot.pnl_pct = (pnl / (entry * ot.quantity) * 100) if ot.quantity > 0 else 0
+        ot.duration = last_idx - ot.entry_time
+        ot.exit_reason = "end_of_data"
+        trades.append(ot)
         equity += pnl
 
     eq_df = pd.DataFrame(equity_curve)
