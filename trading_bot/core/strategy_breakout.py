@@ -27,6 +27,7 @@ def run_breakout(
     atr_period: int = 14,
     rr: float = 2.5,
     risk_percent: float = 1.0,
+    fee_rate: float = 0.001,
 ) -> pd.DataFrame:
     if df.empty or len(df) < max(range_period, vol_sma_period, atr_period) + 5:
         return pd.DataFrame()

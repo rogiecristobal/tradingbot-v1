@@ -29,6 +29,7 @@ def run_ma_crossover(
     atr_period: int = 14,
     rr: float = 2.0,
     risk_percent: float = 1.0,
+    fee_rate: float = 0.001,
 ) -> pd.DataFrame:
     if df.empty or len(df) < slow_ema + 5:
         return pd.DataFrame()

@@ -30,8 +30,8 @@ def run_trend_breakout(
     vol_mult: float = 1.5,
     atr_period: int = 14,
     atr_sl_mult: float = 0.3,
-    trail_pct: float = 3.0,
     risk_percent: float = 1.0,
+    fee_rate: float = 0.001,
 ) -> pd.DataFrame:
     if df.empty or len(df) < max(ema_length, breakout_period, vol_sma_period, atr_period) + 5:
         return pd.DataFrame()

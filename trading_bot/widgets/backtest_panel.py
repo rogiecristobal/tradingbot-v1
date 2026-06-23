@@ -214,7 +214,7 @@ class BacktestWorker(QObject):
                     ema_length=params["ema_length"], breakout_period=params["breakout_period"],
                     vol_sma_period=params["vol_sma_period"], vol_mult=params["vol_mult"],
                     atr_period=params["atr_period"], atr_sl_mult=params["atr_sl_mult"],
-                    trail_pct=params["trail_pct"], risk_percent=params["risk_percent"],
+                    risk_percent=params["risk_percent"],
                 )
             else:
                 self.error.emit(f"Unknown strategy: {self.strategy_name}")
@@ -475,7 +475,6 @@ class BacktestPanel(QWidget):
             self._add_param("vol_mult", "Volume Surge Min", 1.5, 1.0, 5.0, 0.1)
             self._add_param("atr_period", "ATR Period", 14, 5, 50, 1, is_int=True)
             self._add_param("atr_sl_mult", "ATR SL Multiplier", 0.3, 0.1, 3.0, 0.1)
-            self._add_param("trail_pct", "Trail Stop %", 3.0, 0.5, 10.0, 0.1)
             self._add_param("risk_percent", "Risk per trade (%)", 1.0, 0.1, 10.0, 0.1)
             self._add_param("fee_rate", "Fee rate (%)", self.state.fee_rate * 100, 0.0, 1.0, 0.01, 3)
 

@@ -25,6 +25,7 @@ def run_scalper(
     rsi_sell: int = 60,
     rr: float = 2.0,
     risk_percent: float = 100.0,
+    fee_rate: float = 0.001,
 ) -> pd.DataFrame:
     if df.empty or len(df) < max(ema_length, rsi_length, 50):
         return pd.DataFrame()

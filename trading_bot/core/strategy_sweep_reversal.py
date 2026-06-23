@@ -55,6 +55,7 @@ def run_sweep_reversal(
     atr_sl_mult: float = 0.5,
     rr: float = 2.0,
     risk_percent: float = 1.0,
+    fee_rate: float = 0.001,
 ) -> pd.DataFrame:
     if df.empty or len(df) < max(range_period, rsi_length, atr_period, 50):
         return pd.DataFrame()

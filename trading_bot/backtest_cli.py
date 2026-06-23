@@ -81,7 +81,6 @@ def parse_args():
 
     # Trend Breakout params
     p.add_argument("--breakout-period", type=int, default=10)
-    p.add_argument("--trail-pct", type=float, default=3.0)
 
     return p.parse_args()
 
@@ -234,7 +233,6 @@ def main():
             ema_length=args.ema_length, breakout_period=args.breakout_period,
             vol_sma_period=args.volume_sma_period, vol_mult=args.vol_mult,
             atr_period=args.atr_period, atr_sl_mult=args.atr_sl_mult,
-            trail_pct=args.trail_pct,
         )
         strategy_fn = run_trend_breakout
         trail_act = trail_off = 0

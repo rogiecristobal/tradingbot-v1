@@ -151,9 +151,8 @@ STRATEGIES = {
             "vol_mult": {"label": "Volume Surge Min", "default": 1.5, "min": 1.0, "max": 5.0, "step": 0.1},
             "atr_period": {"label": "ATR Period", "default": 14, "min": 5, "max": 50, "int": True},
             "atr_sl_mult": {"label": "ATR SL Multiplier", "default": 0.3, "min": 0.1, "max": 3.0, "step": 0.1},
-            "trail_pct": {"label": "Trail Stop %", "default": 3.0, "min": 0.5, "max": 10.0, "step": 0.1},
         },
-        "has_trail": True,
+        "has_trail": False,
     },
 }
 
