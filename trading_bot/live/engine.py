@@ -171,7 +171,17 @@ class LiveEngine:
                     logger.warning(f"{sym}: could not fetch price")
                 self._reconcile_position(sym)
 
-        # ── 2. Heartbeat every 5 minutes ──
+        # ── 2. Sync equity with exchange balance (live mode) ──
+        if mode == "live" and self.exchange:
+            try:
+                balance = self.exchange.fetch_balance()
+                usdt_total = float(balance.get("USDT", {}).get("total", 0))
+                if usdt_total > 0:
+                    self.executor.equity = usdt_total
+            except Exception as e:
+                logger.warning(f"Failed to fetch balance: {e}")
+
+        # ── 3. Heartbeat every 5 minutes ──
         self._tick_count += 1
         if self._tick_count % 5 == 0:
             open_count = sum(1 for p in self.positions.values() if p is not None)
@@ -193,16 +203,16 @@ class LiveEngine:
                     )
                     self.telegram.send(hb_msg)
 
-        # ── 3. Process each symbol ──
+        # ── 4. Process each symbol ──
         for sym in self.symbols:
             self._process_symbol(sym, prices.get(sym) if mode == "live" else None)
 
         self._update_current_value()
 
-        # ── 4. Safety checks ──
+        # ── 5. Safety checks ──
         self._check_safety()
 
-        # ── 5. Save state ──
+        # ── 6. Save state ──
         self._save_state()
 
     def _process_symbol(self, symbol: str, current_price: Optional[float]):
